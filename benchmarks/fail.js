@@ -61,7 +61,7 @@ function getLineAndColumn (offset) {
 function pastInput ({ offset }) {
   const start = Math.max(0, offset - 20)
   const previous = inputSource.substr(start, offset - start)
-  return (offset > 20 ? '...' : '') + previous.replace(/\n/g, '')
+  return (offset > 20 ? '...' : '') + previous.replace(/\r?\n/g, '')
 }
 
 function upcomingInput ({ offset }) {
@@ -69,7 +69,7 @@ function upcomingInput ({ offset }) {
   start += offset - start
   const rest = inputSource.length - start
   const next = inputSource.substr(start, Math.min(20, rest))
-  return next.replace(/\n/g, '') + (rest > 20 ? '...' : '')
+  return next.replace(/\r?\n/g, '') + (rest > 20 ? '...' : '')
 }
 
 function showPosition ({ offset }) {
