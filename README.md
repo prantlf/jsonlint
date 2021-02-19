@@ -7,9 +7,9 @@
 [![devDependency Status](https://david-dm.org/prantlf/jsonlint/dev-status.svg)](https://david-dm.org/prantlf/jsonlint#info=devDependencies)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-A [JSON]/CJSON/[JSON5] parser, validator and pretty-printer with a command-line client. A [pure JavaScript version] of the service provided at [jsonlint.com].
+A [JSON]/CJSON/[JSON5] parser, validator and pretty-printer with a command-line client. See it in action at https://prantlf.github.io/jsonlint/
 
-This is a fork of the original package with the following enhancements:
+This is a fork of the original package [zaach/jsonlint](https://github.com/zaach/jsonlint) with the following enhancements:
 
 * Handles multiple files on the command line (by Greg Inman).
 * Walks directories recursively (by Paul Vollmer).
