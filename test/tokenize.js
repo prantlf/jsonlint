@@ -1,9 +1,9 @@
 /* eslint-disable node/no-deprecated-api */
 /* globals it */
 
-var assert = require('assert')
-var exported = require('../lib/jsonlint')
-var tokenize = exported.tokenize
+const assert = require('assert')
+const exported = require('../lib/jsonlint')
+const tokenize = exported.tokenize
 
 function addTest (description, test) {
   if (typeof describe === 'function') {
@@ -15,13 +15,13 @@ function addTest (description, test) {
 
 function addDataTest (input, tokens) {
   function test () {
-    var result = tokenize(input, {
+    const result = tokenize(input, {
       mode: 'json5',
       rawTokens: true,
       tokenLocations: true,
       tokenPaths: true
     })
-    var output = result
+    const output = result
       .map(function (token) {
         return token.raw
       })
@@ -118,7 +118,7 @@ addDataTest('[1,2,[[],[1]],{},{1:2},{q:{q:{}}},]',
     { type: 'symbol', raw: ']', value: ']' }])
 
 addTest('without raw input, location and path properties', function () {
-  var result = tokenize('{q:123,  w : /*zz*/\n\r "ab" } ', { mode: 'json5' })
+  const result = tokenize('{q:123,  w : /*zz*/\n\r "ab" } ', { mode: 'json5' })
   result.forEach(function (item) {
     assert.equal(typeof item, 'object')
     assert.equal(typeof item.raw, 'undefined')
@@ -128,7 +128,7 @@ addTest('without raw input, location and path properties', function () {
 })
 
 addTest('does not enforce tokenization in the input options', function () {
-  var options = {}
+  const options = {}
   tokenize('{}', options)
   assert.equal(options.tokenize, undefined)
 })

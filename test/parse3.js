@@ -1,11 +1,11 @@
 /* eslint-disable node/no-deprecated-api */
 /* globals it */
 
-var assert = require('assert')
-var parse = require('..').parse
+const assert = require('assert')
+const parse = require('..').parse
 
 function addTest (arg, row, col, errRegExp) {
-  var fn = function () {
+  const fn = function () {
     try {
       parse(arg, { mode: 'json5' })
     } catch (err) {
@@ -60,7 +60,7 @@ exports['test many nested object scopes'] = function () {
   try {
     parse('{{{{{{{{{', { mode: 'json5' })
   } catch (err) {
-    var x = err.stack.match(/parseObject/g)
+    const x = err.stack.match(/parseObject/g)
     assert(x.length === 4, "shouldn't blow up the stack with internal calls")
   }
 }

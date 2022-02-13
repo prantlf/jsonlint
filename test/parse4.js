@@ -1,7 +1,7 @@
 /* eslint-disable node/no-deprecated-api */
 
-var assert = require('assert')
-var parse = require('..').parse
+const assert = require('assert')
+const parse = require('..').parse
 
 // plain json
 assert.deepEqual(parse('{ "c": 123 }', { legacy: true }), { c: 123 })

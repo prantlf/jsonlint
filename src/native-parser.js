@@ -1,9 +1,9 @@
 function getLineAndColumn (input, offset) {
-  var lines = input
+  const lines = input
     .substr(0, offset)
     .split(/\r?\n/)
-  var line = lines.length
-  var column = lines[line - 1].length + 1
+  const line = lines.length
+  const column = lines[line - 1].length + 1
   return {
     line: line,
     column: column
@@ -11,23 +11,23 @@ function getLineAndColumn (input, offset) {
 }
 
 function pastInput (input, offset) {
-  var start = Math.max(0, offset - 20)
-  var previous = input.substr(start, offset - start)
+  const start = Math.max(0, offset - 20)
+  const previous = input.substr(start, offset - start)
   return (offset > 20 ? '...' : '') + previous.replace(/\r?\n/g, '')
 }
 
 function upcomingInput (input, offset) {
-  var start = Math.max(0, offset - 20)
+  let start = Math.max(0, offset - 20)
   start += offset - start
-  var rest = input.length - start
-  var next = input.substr(start, Math.min(20, rest))
+  const rest = input.length - start
+  const next = input.substr(start, Math.min(20, rest))
   return next.replace(/\r?\n/g, '') + (rest > 20 ? '...' : '')
 }
 
 function getPositionContext (input, offset) {
-  var past = pastInput(input, offset)
-  var upcoming = upcomingInput(input, offset)
-  var pointer = new Array(past.length + 1).join('-') + '^'
+  const past = pastInput(input, offset)
+  const upcoming = upcomingInput(input, offset)
+  const pointer = new Array(past.length + 1).join('-') + '^'
   return {
     excerpt: past + upcoming,
     pointer: pointer
@@ -35,10 +35,10 @@ function getPositionContext (input, offset) {
 }
 
 function getReason (error) {
-  var message = error.message
+  let message = error.message
     .replace('JSON.parse: ', '') // SpiderMonkey
     .replace('JSON Parse error: ', '') // SquirrelFish
-  var firstCharacter = message.charAt(0)
+  const firstCharacter = message.charAt(0)
   if (firstCharacter >= 'a') {
     message = firstCharacter.toUpperCase() + message.substr(1)
   }
@@ -46,10 +46,10 @@ function getReason (error) {
 }
 
 function getLocationOnV8 (input, reason) {
-  var match = / in JSON at position (\d+)$/.exec(reason)
+  const match = / in JSON at position (\d+)$/.exec(reason)
   if (match) {
-    var offset = +match[1]
-    var location = getLineAndColumn(input, offset)
+    const offset = +match[1]
+    const location = getLineAndColumn(input, offset)
     return {
       offset: offset,
       line: location.line,
@@ -60,10 +60,10 @@ function getLocationOnV8 (input, reason) {
 }
 
 function checkUnexpectedEndOnV8 (input, reason) {
-  var match = / end of JSON input$/.exec(reason)
+  const match = / end of JSON input$/.exec(reason)
   if (match) {
-    var offset = input.length
-    var location = getLineAndColumn(input, offset)
+    const offset = input.length
+    const location = getLineAndColumn(input, offset)
     return {
       offset: offset,
       line: location.line,
@@ -74,11 +74,11 @@ function checkUnexpectedEndOnV8 (input, reason) {
 }
 
 function getLocationOnSpiderMonkey (input, reason) {
-  var match = / at line (\d+) column (\d+) of the JSON data$/.exec(reason)
+  const match = / at line (\d+) column (\d+) of the JSON data$/.exec(reason)
   if (match) {
-    var line = +match[1]
-    var column = +match[2]
-    var offset = getOffset(input, line, column) // eslint-disable-line no-undef
+    const line = +match[1]
+    const column = +match[2]
+    const offset = getOffset(input, line, column) // eslint-disable-line no-undef
     return {
       offset: offset,
       line: line,
@@ -89,9 +89,9 @@ function getLocationOnSpiderMonkey (input, reason) {
 }
 
 function getTexts (reason, input, offset, line, column) {
-  var position = getPositionContext(input, offset)
-  var excerpt = position.excerpt
-  var message, pointer
+  const position = getPositionContext(input, offset)
+  const excerpt = position.excerpt
+  let message, pointer
   if (typeof line === 'number') {
     pointer = position.pointer
     message = 'Parse error on line ' + line + ', column ' +
@@ -107,11 +107,11 @@ function getTexts (reason, input, offset, line, column) {
 }
 
 function improveNativeError (input, error) {
-  var reason = getReason(error)
-  var location = getLocationOnV8(input, reason) ||
+  let reason = getReason(error)
+  const location = getLocationOnV8(input, reason) ||
     checkUnexpectedEndOnV8(input, reason) ||
     getLocationOnSpiderMonkey(input, reason)
-  var offset, line, column
+  let offset, line, column
   if (location) {
     offset = location.offset
     line = location.line
@@ -121,7 +121,7 @@ function improveNativeError (input, error) {
     offset = 0
   }
   error.reason = reason
-  var texts = getTexts(reason, input, offset, line, column)
+  const texts = getTexts(reason, input, offset, line, column)
   error.message = texts.message
   error.excerpt = texts.excerpt
   if (texts.pointer) {

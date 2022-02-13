@@ -1,21 +1,23 @@
 /* eslint-disable node/no-deprecated-api, no-eval */
 /* globals it */
 
-var assert = require('assert')
-var exported = require('..')
-var parse = exported.parse
-var parseNative = exported.parseNative
-var parseCustom = exported.parseCustom
+const assert = require('assert')
+const exported = require('..')
+const parse = exported.parse
+const parseNative = exported.parseNative
+const parseCustom = exported.parseCustom
 
 function addTest (arg, bulk, json5) {
   function testJSON5 () {
+    let x
     try {
-      var x = parse(arg, { mode: 'json5' })
+      x = parse(arg, { mode: 'json5' })
     } catch (err) {
       x = 'fail'
     }
+    let z
     try {
-      var z = eval('(function(){"use strict"\nreturn (' + String(arg) + '\n)\n})()')
+      z = eval('(function(){"use strict"\nreturn (' + String(arg) + '\n)\n})()')
     } catch (err) {
       z = 'fail'
     }
@@ -23,13 +25,15 @@ function addTest (arg, bulk, json5) {
   }
 
   function testNativeJSON () {
+    let x
     try {
-      var x = parseNative(arg)
+      x = parseNative(arg)
     } catch (err) {
       x = 'fail'
     }
+    let z
     try {
-      var z = JSON.parse(arg)
+      z = JSON.parse(arg)
     } catch (err) {
       z = 'fail'
     }
@@ -37,13 +41,15 @@ function addTest (arg, bulk, json5) {
   }
 
   function testStrictJSON () {
+    let x
     try {
-      var x = parseCustom(arg)
+      x = parseCustom(arg)
     } catch (err) {
       x = 'fail'
     }
+    let z
     try {
-      var z = JSON.parse(arg)
+      z = JSON.parse(arg)
     } catch (err) {
       z = 'fail'
     }
@@ -110,7 +116,7 @@ addTest('{-3e3:1}')
 addTest('{+3e3:1}')
 addTest('{.3e3:1}')
 
-for (var i = 0; i < 200; i++) {
+for (let i = 0; i < 200; i++) {
   addTest('"' + String.fromCharCode(i) + '"', true)
 }
 
@@ -142,7 +148,7 @@ addTest('[1,\r\n2,\r3,\n]')
   // Do not test additional Unicode line separators, which are accepted
   // as a usual whitespace by JavaScript parser, but JJU rejects them
   // as line breaks, which must not appear inside a string value.
-  var json5 = x === '\u2028' || x === '\u2029' ? false : undefined
+  const json5 = x === '\u2028' || x === '\u2029' ? false : undefined
   addTest('"' + x + '"' + x, undefined, json5)
 })
 '\u000A\u000D\u2028\u2029'.split('').forEach(function (x) {
@@ -157,26 +163,29 @@ assert.throws(function () {
   parse('{ "key": 1, "key": 2}', { allowDuplicateObjectKeys: false })
 })
 
-for (i = 0; i < 100; ++i) {
-  var str = '-01.e'.split('')
+for (let i = 0; i < 100; ++i) {
+  const str = '-01.e'.split('')
 
-  var rnd = [1, 2, 3, 4, 5].map(function (x) {
+  const rnd = [1, 2, 3, 4, 5].map(function (x) {
     x = ~~(Math.random() * str.length)
     return str[x]
   }).join('')
 
+  let x
   try {
-    var x = parse(rnd, { mode: 'json5' })
+    x = parse(rnd, { mode: 'json5' })
   } catch (err) {
     x = 'fail'
   }
+  let y
   try {
-    var y = JSON.parse(rnd, { mode: 'json5' })
+    y = JSON.parse(rnd, { mode: 'json5' })
   } catch (err) {
     y = 'fail'
   }
+  let z
   try {
-    var z = eval(rnd)
+    z = eval(rnd)
   } catch (err) {
     z = 'fail'
   }
