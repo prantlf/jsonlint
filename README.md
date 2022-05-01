@@ -95,6 +95,7 @@ By default, `jsonlint` will either report a syntax error with details or pretty-
       -V, --validate [file]        JSON schema file to use for validation
       -e, --environment [env]      which specification of JSON Schema the
                                    validation file uses
+      -l, --log-files              print only the parsed file names to stdout
       -q, --quiet                  do not print the parsed json to stdout
       -p, --pretty-print           prettify the input instead of stringifying
                                    the parsed object
