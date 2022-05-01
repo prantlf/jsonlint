@@ -5,9 +5,9 @@
 ](https://www.npmjs.com/package/@prantlf/jsonlint)
 [![Code coverage](https://codecov.io/gh/prantlf/jsonlint/branch/master/graph/badge.svg)](https://codecov.io/gh/prantlf/jsonlint)
 
-A [JSON]/CJSON/[JSON5] parser, validator and pretty-printer with a command-line client. A [pure JavaScript version] of the service provided at [jsonlint.com].
+A [JSON]/CJSON/[JSON5] parser, validator and pretty-printer with a command-line client. See it in action at https://prantlf.github.io/jsonlint/.
 
-This is a fork of the original package with the following enhancements:
+This is a fork of the original project ([zaach/jsonlint](https://github.com/zaach/jsonlint)) with the following enhancements:
 
 * Handles multiple files on the command line (by Greg Inman).
 * Walks directories recursively (by Paul Vollmer).
