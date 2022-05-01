@@ -1,3 +1,23 @@
+# [11.1.0](https://github.com/prantlf/jsonlint/compare/v11.0.0...v11.1.0) (2022-05-01)
+
+### Bug Fixes
+
+* Merge remote-tracking branch 'xmedeko/patch-1' ([da3e1dc](https://github.com/prantlf/jsonlint/commit/da3e1dca6ce6efcd8d5bd775d75bad06d8c46223))
+
+### Features
+
+* Optionally ensure a line break at the end of the output ([226019e](https://github.com/prantlf/jsonlint/commit/226019eb75c675eab1dca817ff0dc42e0223d197))
+
+# [11.0.0](https://github.com/prantlf/jsonlint/compare/v10.2.0...v11.0.0) (2022-05-01)
+
+### Bug Fixes
+
+* Upgrade dependencies ([0d35969](https://github.com/prantlf/jsonlint/commit/0d359690aa19884a6d17990c476cf780b39663c0))
+
+### BREAKING CHANGES
+
+* The minimum supported version has become Node.js 12 instead of the previous Node.js 6. At least `commander` needs the new version.
+
 # [10.2.0](https://github.com/prantlf/jsonlint/compare/v10.1.1...v10.2.0) (2019-12-28)
 
 ### Features
