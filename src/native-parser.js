@@ -10,6 +10,19 @@ function getLineAndColumn (input, offset) {
   }
 }
 
+function getOffset(input, line, column) {
+  if (line > 1) {
+    var breaks = /\r?\n/g;
+    var match;
+    while (match = breaks.exec(input)) { // eslint-disable-line no-cond-assign
+      if (--line === 1) {
+        return match.index + column;
+      }
+    }
+  }
+  return column - 1;
+}
+
 function pastInput (input, offset) {
   const start = Math.max(0, offset - 20)
   const previous = input.substr(start, offset - start)
