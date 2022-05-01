@@ -10,17 +10,17 @@ function getLineAndColumn (input, offset) {
   }
 }
 
-function getOffset(input, line, column) {
+function getOffset (input, line, column) {
   if (line > 1) {
-    var breaks = /\r?\n/g;
-    var match;
+    const breaks = /\r?\n/g
+    let match
     while (match = breaks.exec(input)) { // eslint-disable-line no-cond-assign
       if (--line === 1) {
-        return match.index + column;
+        return match.index + column
       }
     }
   }
-  return column - 1;
+  return column - 1
 }
 
 function pastInput (input, offset) {

@@ -146,7 +146,7 @@ testInvalid('"Garbage""After string"')
 
 testInvalid('1); throw "foo"; (1')
 
-let x = 0 // eslint-disable-line no-unused-vars
+let x = 0 // eslint-disable-line no-unused-vars, prefer-const
 eval('(1); x++; (1)')
 testInvalid('1); x++; (1')
 
