@@ -324,7 +324,6 @@ Licensed under the [MIT License].
 
 [MIT License]: http://en.wikipedia.org/wiki/MIT_License
 [pure JavaScript version]: http://prantlf.github.com/jsonlint/
-[jsonlint.com]: http://jsonlint.com
 [JSON]: https://tools.ietf.org/html/rfc8259
 [JSON5]: https://spec.json5.org
 [JSON Schema]: https://json-schema.org
