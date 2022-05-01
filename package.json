@@ -4,6 +4,7 @@
   "description": "JSON/CJSON/JSON5 parser, syntax and schema validator and pretty-printer.",
   "author": "Ferdinand Prantl <prantlf@gmail.com> (http://prantl.tk)",
   "contributors": [
+    "Ondrej Medek <xmedeko@gmail.com>",
     "Greg Inman <ginman@itriagehealth.com>",
     "Paul Vollmer <mail@paulvollmer.net> (http://paulvollmer.net)",
     "Zach Carter <zach@carter.name> (http://zaa.ch)"
