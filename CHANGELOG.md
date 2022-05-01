@@ -1,3 +1,10 @@
+## [11.1.1](https://github.com/prantlf/jsonlint/compare/v11.1.0...v11.1.1) (2022-05-01)
+
+
+### Bug Fixes
+
+* Retain the original last line break in the processed file ([54fd5ab](https://github.com/prantlf/jsonlint/commit/54fd5ab0349300c7bd11dfa6baf4e787e40bead9))
+
 # [11.1.0](https://github.com/prantlf/jsonlint/compare/v11.0.0...v11.1.0) (2022-05-01)
 
 ### Bug Fixes
