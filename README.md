@@ -74,7 +74,7 @@ By default, `jsonlint` will either report a syntax error with details or pretty-
 
     $ jsonlint -h
 
-    Usage: jsonlint [options] [<file or directory> ...]
+    Usage: jsonlint [options] [<file, directory, pattern> ...]
 
     JSON parser, syntax and schema validator and pretty-printer.
 
@@ -97,6 +97,7 @@ By default, `jsonlint` will either report a syntax error with details or pretty-
                                    validation file uses
       -l, --log-files              print only the parsed file names to stdout
       -q, --quiet                  do not print the parsed json to stdout
+      -n, --continue               continue with other files if an error occurs
       -p, --pretty-print           prettify the input instead of stringifying
                                    the parsed object
       -P, --pretty-print-invalid   force pretty-printing even for invalid input
@@ -112,6 +113,10 @@ By default, `jsonlint` will either report a syntax error with details or pretty-
                                    (JSON5)
       -v, --version                output the version number
       -h, --help                   output usage information
+
+    You can use BASH patterns for including and excluding files (only files).
+    Patterns are case-sensitive and have to use slashes as a path separators.
+    A pattern to exclude from processing starts with "!".
 
     Parsing mode can be "cjson" or "json5" to enable other flags automatically.
     If no files or directories are specified, stdin will be parsed. Environments
