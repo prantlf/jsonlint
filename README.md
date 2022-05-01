@@ -100,6 +100,7 @@ By default, `jsonlint` will either report a syntax error with details or pretty-
                                    the parsed object
       -P, --pretty-print-invalid   force pretty-printing even for invalid input
       -r, --trailing-newline       ensure a line break at the end of the output
+      -R, --no-trailing-newline    ensure no line break at the end of the output
       --prune-comments             omit comments from the prettified output
       --strip-object-keys          strip quotes from object keys if possible
                                    (JSON5)
