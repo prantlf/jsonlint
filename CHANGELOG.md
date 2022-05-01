@@ -1,3 +1,12 @@
+# [11.2.0](https://github.com/prantlf/jsonlint/compare/v11.1.1...v11.2.0) (2022-05-01)
+
+
+### Features
+
+* Allow logging only the name of processed files ([91346d9](https://github.com/prantlf/jsonlint/commit/91346d95459f5b516ae71233050262534f197fbf))
+* Allow to continue processing in case of error ([e5318eb](https://github.com/prantlf/jsonlint/commit/e5318ebb75f90459ff4164ec6e84efcc34a9bf4c))
+* Support BASH patterns to specify input files ([31d162f](https://github.com/prantlf/jsonlint/commit/31d162fa9578bd6888d01c3cd0175960b5740d86))
+
 ## [11.1.1](https://github.com/prantlf/jsonlint/compare/v11.1.0...v11.1.1) (2022-05-01)
 
 
