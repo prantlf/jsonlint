@@ -76,7 +76,8 @@
   },
   "dependencies": {
     "ajv": "6.12.6",
-    "commander": "9.2.0"
+    "commander": "9.2.0",
+    "fast-glob": "3.2.11"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.1",
