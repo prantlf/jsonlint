@@ -1,6 +1,6 @@
 {
   "name": "@prantlf/jsonlint",
-  "version": "0.0.0-development",
+  "version": "10.2.0",
   "description": "JSON/CJSON/JSON5 parser, syntax and schema validator and pretty-printer.",
   "author": "Ferdinand Prantl <prantlf@gmail.com> (http://prantl.tk)",
   "contributors": [
@@ -29,16 +29,20 @@
   "bin": {
     "jsonlint": "lib/cli.js"
   },
+  "files": [
+    "lib",
+    "web"
+  ],
   "engines": {
-    "node": ">= 6"
+    "node": ">= 12"
   },
   "scripts": {
     "prepare": "npm run lint && npm run build",
     "lint": "npm run lint:js && npm run lint:ts",
-    "lint:js": "standard --fix -v",
-    "lint:ts": "tslint --fix -t stylish lib/*.ts test/*.ts",
+    "lint:js": "eslint --fix lib scripts src test",
+    "lint:ts": "eslint -c .tslintrc.yml --fix lib/*.ts test/*.ts",
     "build": "npm run compile && npm run compile:tests",
-    "compile": "node scripts/bundle-jsonlint && uglifyjs -o web/jsonlint.min.js --source-map \"filename='jsonlint.js',url='jsonlint.min.js.map',includeSources=true\" lib/jsonlint.js && uglifyjs -o web/validator.min.js --source-map \"filename='validator.js',url='validator.min.js.map',includeSources=true\" lib/validator.js && uglifyjs -o web/formatter.min.js --source-map \"filename='formatter.js',url='formatter.min.js.map',includeSources=true\" lib/formatter.js && uglifyjs -o web/sorter.min.js --source-map \"filename='sorter.js',url='sorter.min.js.map',includeSources=true\" lib/sorter.js && uglifyjs -o web/printer.min.js --source-map \"filename='printer.js',url='printer.min.js.map',includeSources=true\" lib/printer.js && node scripts/bundle-schema-drafts && uglifyjs -o web/schema-drafts.min.js --source-map \"filename='schema-drafts.js',url='schema-drafts.min.js.map',includeSources=true\" lib/schema-drafts.js && uglifyjs -o web/ajv.min.js --source-map \"filename='ajv.js',url='ajv.min.js.map',includeSources=true\" node_modules/ajv/dist/ajv.bundle.js",
+    "compile": "node scripts/bundle-jsonlint && terser -o web/jsonlint.min.js --source-map \"filename='jsonlint.js',url='jsonlint.min.js.map',includeSources=true\" lib/jsonlint.js && terser -o web/validator.min.js --source-map \"filename='validator.js',url='validator.min.js.map',includeSources=true\" lib/validator.js && terser -o web/formatter.min.js --source-map \"filename='formatter.js',url='formatter.min.js.map',includeSources=true\" lib/formatter.js && terser -o web/sorter.min.js --source-map \"filename='sorter.js',url='sorter.min.js.map',includeSources=true\" lib/sorter.js && terser -o web/printer.min.js --source-map \"filename='printer.js',url='printer.min.js.map',includeSources=true\" lib/printer.js && node scripts/bundle-schema-drafts && terser -o web/schema-drafts.min.js --source-map \"filename='schema-drafts.js',url='schema-drafts.min.js.map',includeSources=true\" lib/schema-drafts.js && terser -o web/ajv.min.js --source-map \"filename='ajv.js',url='ajv.min.js.map',includeSources=true\" node_modules/ajv/dist/ajv.bundle.js",
     "compile:tests": "tsc --lib es6 test/typings.test.ts",
     "test": "nyc --silent node test/typings.test.js && nyc --silent --no-clean node test/parse1 && nyc --silent --no-clean node test/parse1 --native-parser && nyc --silent --no-clean node test/parse2 && nyc --silent --no-clean node test/parse3 && nyc --silent --no-clean node test/parse4 && nyc --silent --no-clean node test/parse5 && nyc --silent --no-clean node test/portable && nyc --silent --no-clean node test/tokenize && nyc --silent --no-clean node test/print && nyc --silent --no-clean node lib/cli package.json test/recursive && nyc --silent --no-clean node lib/cli -sq test/passes/hasOwnProperty.json && nyc --silent --no-clean node lib/cli -s -e json-schema-draft-04 -V test/passes/3.schema.json test/passes/3.json && nyc --silent --no-clean node lib/cli -C test/passes/comments.txt && nyc --silent --no-clean node lib/cli -pS test/passes/strings.txt && nyc --silent --no-clean node lib/cli -M json5 test/passes/json5.text && nyc --silent --no-clean node lib/cli -v && nyc --silent --no-clean node lib/cli -h && nyc --silent --no-clean node lib/cli -Pc test/fails/10.json || nyc report",
     "start": "http-server -c 5",
@@ -47,6 +51,12 @@
     "web:pull": "cd ../jsonlint-pages && git pull",
     "web:sync": "cp web/*.min.* ../jsonlint-pages/ && cp web/jsonlint.html ../jsonlint-pages/index.html",
     "web:deploy": "cd ../jsonlint-pages && git commit -a -m 'Deploy site updates' && git push origin gh-pages"
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ]
   },
   "standard": {
     "ignore": [
@@ -66,19 +76,23 @@
     "jsonlint"
   ],
   "dependencies": {
-    "ajv": "6.10.2",
-    "commander": "4.0.1"
+    "ajv": "6.12.6",
+    "commander": "9.2.0"
   },
   "devDependencies": {
-    "@types/node": "13.1.1",
-    "http-server": "0.12.0",
-    "js-yaml": "3.13.1",
-    "nyc": "15.0.0",
-    "standard": "14.3.1",
+    "@types/node": "17.0.30",
+    "@typescript-eslint/eslint-plugin": "5.21.0",
+    "@typescript-eslint/parser": "5.21.0",
+    "eslint": "8.14.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.0",
+    "eslint-plugin-promise": "6.0.0",
+    "http-server": "14.1.0",
+    "js-yaml": "4.1.0",
+    "nyc": "15.1.0",
+    "terser": "5.13.1",
     "test": "0.6.0",
-    "tslint": "5.20.1",
-    "tslint-config-standard": "9.0.0",
-    "typescript": "3.7.4",
-    "uglify-js": "3.7.3"
+    "typescript": "4.6.4"
   }
 }

@@ -1,9 +1,8 @@
-/* eslint-disable node/no-deprecated-api */
 /* globals it */
 
-var assert = require('assert')
-var exported = require('../lib/printer')
-var print = exported.print
+const assert = require('assert')
+const exported = require('../lib/printer')
+const print = exported.print
 
 function addTest (description, test) {
   if (typeof describe === 'function') {
@@ -13,7 +12,7 @@ function addTest (description, test) {
   }
 }
 
-var mixedTokens = [ // '/* start */{ "a":1, // c\n"0b": [ 2,3 ]}'
+const mixedTokens = [ // '/* start */{ "a":1, // c\n"0b": [ 2,3 ]}'
   { type: 'comment', raw: '/* start */' },
   { type: 'symbol', raw: '{', value: '{' },
   { type: 'whitespace', raw: ' ' },
@@ -45,7 +44,7 @@ var mixedTokens = [ // '/* start */{ "a":1, // c\n"0b": [ 2,3 ]}'
 // // test
 // }// test
 // // test`
-var commentTokens = [
+const commentTokens = [
   { type: 'comment', raw: '// test' },
   { type: 'whitespace', raw: '\n' },
   { type: 'symbol', raw: '{', value: '{' },
@@ -77,7 +76,7 @@ var commentTokens = [
 // // String parameter
 // "key": 'value',
 // }`
-var stringTokens = [
+const stringTokens = [
   { type: 'symbol', raw: '{', value: '{' },
   { type: 'whitespace', raw: '\n' },
   { type: 'comment', raw: '// String parameter' },
@@ -92,37 +91,37 @@ var stringTokens = [
 ]
 
 addTest('concatenate tokens', function () {
-  var output = print(mixedTokens)
+  const output = print(mixedTokens)
   assert.equal(output, '/* start */{ "a":1, // c\n"0b": [ 2,3 ]}')
 })
 
 addTest('omit whitespace', function () {
-  var output = print(mixedTokens, {})
+  const output = print(mixedTokens, {})
   assert.equal(output, '/* start */{"a":1,/* c */"0b":[2,3]}')
 })
 
 addTest('introduce line breaks', function () {
-  var output = print(mixedTokens, { indent: '' })
+  const output = print(mixedTokens, { indent: '' })
   assert.equal(output, '/* start */\n{\n"a": 1, // c\n"0b": [\n2,\n3\n]\n}')
 })
 
 addTest('apply indent', function () {
-  var output = print(mixedTokens, { indent: 2 })
+  const output = print(mixedTokens, { indent: 2 })
   assert.equal(output, '/* start */\n{\n  "a": 1, // c\n  "0b": [\n    2,\n    3\n  ]\n}')
 })
 
 addTest('omit comments', function () {
-  var output = print(mixedTokens, { pruneComments: true })
+  const output = print(mixedTokens, { pruneComments: true })
   assert.equal(output, '{"a":1,"0b":[2,3]}')
 })
 
 addTest('strip quotes from object keys', function () {
-  var output = print(mixedTokens, { stripObjectKeys: true })
+  const output = print(mixedTokens, { stripObjectKeys: true })
   assert.equal(output, '/* start */{a:1,/* c */"0b":[2,3]}')
 })
 
 addTest('keep comment locations', function () {
-  var output = print(commentTokens, { indent: '  ' })
+  const output = print(commentTokens, { indent: '  ' })
   assert.equal(output, '// test\n{ // test\n  // test\n  a: /* test */ 1, // test\n  b: 2 // test\n  // test\n} // test\n// test')
   // `// test
   // { // test
@@ -135,7 +134,7 @@ addTest('keep comment locations', function () {
 })
 
 addTest('keep comment after opening an object scope indented', function () {
-  var output = print(stringTokens, { indent: '  ' })
+  const output = print(stringTokens, { indent: '  ' })
   assert.equal(output, '{\n  // String parameter\n  "key": \'value\',\n  \n}')
   // `{
   // // String parameter
@@ -144,17 +143,17 @@ addTest('keep comment after opening an object scope indented', function () {
 })
 
 addTest('enforce double quotes', function () {
-  var output = print(stringTokens, { enforceDoubleQuotes: true })
+  const output = print(stringTokens, { enforceDoubleQuotes: true })
   assert.equal(output, '{/* String parameter */"key":"value",}')
 })
 
 addTest('enforce single quotes', function () {
-  var output = print(stringTokens, { enforceSingleQuotes: true })
+  const output = print(stringTokens, { enforceSingleQuotes: true })
   assert.equal(output, '{/* String parameter */\'key\':\'value\',}')
 })
 
 addTest('enforce double quotes, but strip quotes from object keys', function () {
-  var output = print(stringTokens, {
+  const output = print(stringTokens, {
     stripObjectKeys: true,
     enforceDoubleQuotes: true
   })
@@ -162,7 +161,7 @@ addTest('enforce double quotes, but strip quotes from object keys', function () 
 })
 
 addTest('trim trailing commas', function () {
-  var output = print(stringTokens, { trimTrailingCommas: true })
+  const output = print(stringTokens, { trimTrailingCommas: true })
   assert.equal(output, '{/* String parameter */"key":\'value\'}')
 })
 

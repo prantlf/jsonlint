@@ -71,4 +71,5 @@ addTest('print', () => {
   assert.ok(true)
 })
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 if (require.main === module) { require('test').run(exports) }

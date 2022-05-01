@@ -1,21 +1,22 @@
-/* eslint-disable node/no-deprecated-api, no-eval */
+/* eslint-disable no-eval */
 
-var assert = require('assert')
-var fs = require('fs')
-var path = require('path')
-var parse = require('..').parse
+const assert = require('assert')
+const fs = require('fs')
+const path = require('path')
+const parse = require('..').parse
 
-var root = path.resolve(__dirname, 'v8')
-var directories = fs.readdirSync(root)
+const root = path.resolve(__dirname, 'v8')
+const directories = fs.readdirSync(root)
 
 function addTest (arg, filePath) {
+  let x, z
   try {
-    var x = parse(arg, { mode: 'json5' })
+    x = parse(arg, { mode: 'json5' })
   } catch (err) {
     x = 'fail'
   }
   try {
-    var z = eval('(function(){"use strict"\nreturn (' + String(arg) + '\n)\n})()')
+    z = eval('(function(){"use strict"\nreturn (' + String(arg) + '\n)\n})()')
   } catch (err) {
     z = 'fail'
   }
@@ -30,8 +31,8 @@ function addTest (arg, filePath) {
 }
 
 function createTest (fileName, directory) {
-  var filePath = path.join(root, directory, fileName)
-  var source = fs.readFileSync(filePath, 'utf8')
+  const filePath = path.join(root, directory, fileName)
+  const source = fs.readFileSync(filePath, 'utf8')
   addTest(source, filePath)
 }
 

@@ -1,11 +1,10 @@
-/* eslint-disable node/no-deprecated-api */
 /* globals it */
 
-var assert = require('assert')
-var fs = require('fs')
-var path = require('path')
-var YAML = require('js-yaml')
-var parse = require('..').parse
+const assert = require('assert')
+const fs = require('fs')
+const path = require('path')
+const YAML = require('js-yaml')
+const parse = require('..').parse
 
 function addTest (name, fn) {
   if (typeof (describe) === 'function') {
@@ -15,7 +14,7 @@ function addTest (name, fn) {
   }
 }
 
-var schema = YAML.Schema.create([
+const schema = YAML.DEFAULT_SCHEMA.extend([
   new YAML.Type('!error', {
     kind: 'scalar',
     resolve: function (state) {
@@ -25,9 +24,9 @@ var schema = YAML.Schema.create([
   })
 ])
 
-var tests = YAML.safeLoad(fs.readFileSync(
+const tests = YAML.load(fs.readFileSync(
   path.join(__dirname, '/portable.yaml'), 'utf8'), {
-  schema: schema
+  schema
 })
 
 if (!Object.is) {
@@ -44,11 +43,12 @@ if (!Object.is) {
   })
 }
 
-for (var k in tests) {
+for (const k in tests) {
   (function (k) {
     addTest(k, function () {
+      let result
       try {
-        var result = parse(tests[k].input, { mode: 'json5' })
+        result = parse(tests[k].input, { mode: 'json5' })
       } catch (err) {
         result = null
       }

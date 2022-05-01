@@ -1,6 +1,6 @@
 // Modified from https://github.com/rlidwka/jju/blob/master/lib/parse.js
 
-var Uni = require('./unicode')
+const Uni = require('./unicode')
 
 function isHexDigit (x) {
   return (x >= '0' && x <= '9') ||
@@ -16,7 +16,7 @@ function isDecDigit (x) {
   return x >= '0' && x <= '9'
 }
 
-var unescapeMap = {
+const unescapeMap = {
   '\'': '\'',
   '"': '"',
   '\\': '\\',
@@ -30,15 +30,15 @@ var unescapeMap = {
 }
 
 function formatError (input, message, position, lineNumber, column, json5) {
-  var result = message + ' at ' + (lineNumber + 1) + ':' + (column + 1)
+  const result = message + ' at ' + (lineNumber + 1) + ':' + (column + 1)
 
-  var startPosition = position - column - 1
+  let startPosition = position - column - 1
 
-  var sourceLine = ''
+  let sourceLine = ''
 
-  var underline = ''
+  let underline = ''
 
-  var isLineTerminator = json5 ? Uni.isLineTerminator : Uni.isLineTerminatorJSON
+  const isLineTerminator = json5 ? Uni.isLineTerminator : Uni.isLineTerminatorJSON
 
   // output no more than 70 characters before the wrong ones
   if (startPosition < position - 70) {
@@ -46,7 +46,7 @@ function formatError (input, message, position, lineNumber, column, json5) {
   }
 
   while (1) {
-    var chr = input[++startPosition]
+    const chr = input[++startPosition]
 
     if (isLineTerminator(chr) || startPosition === input.length) {
       if (position >= startPosition) {
@@ -72,8 +72,8 @@ function formatError (input, message, position, lineNumber, column, json5) {
 
 function parse (input, options) {
   // parse as a standard JSON mode
-  var json5 = false
-  var cjson = false
+  let json5 = false
+  let cjson = false
 
   if (options.legacy || options.mode === 'json') {
     // use json
@@ -86,32 +86,32 @@ function parse (input, options) {
     json5 = true
   }
 
-  var isLineTerminator = json5 ? Uni.isLineTerminator : Uni.isLineTerminatorJSON
-  var isWhiteSpace = json5 ? Uni.isWhiteSpace : Uni.isWhiteSpaceJSON
+  const isLineTerminator = json5 ? Uni.isLineTerminator : Uni.isLineTerminatorJSON
+  const isWhiteSpace = json5 ? Uni.isWhiteSpace : Uni.isWhiteSpaceJSON
 
-  var length = input.length
+  const length = input.length
 
-  var lineNumber = 0
-  var lineStart = 0
-  var position = 0
+  let lineNumber = 0
+  let lineStart = 0
+  let position = 0
 
-  var stack = []
+  const stack = []
 
-  var startToken = function () {}
-  var endToken = function (v) { return v }
+  let startToken = function () {}
+  let endToken = function (v) { return v }
 
-  var tokenize = options.tokenize
+  const tokenize = options.tokenize
   if (tokenize) {
-    var tokenStart = null
+    let tokenStart = null
     startToken = function () {
       if (tokenStart !== null) throw Error('internal error, token overlap')
       tokenStart = position
     }
     endToken = function (v, type) {
       if (tokenStart !== position) {
-        var hash = {
+        const hash = {
           raw: input.substr(tokenStart, position - tokenStart),
-          type: type,
+          type,
           stack: stack.slice(0)
         }
         if (v !== undefined) hash.value = v
@@ -123,11 +123,11 @@ function parse (input, options) {
   }
 
   function fail (message) {
-    var column = position - lineStart
+    const column = position - lineStart
 
     if (!message) {
       if (position < length) {
-        var token = '\'' +
+        const token = '\'' +
           JSON
             .stringify(input[position])
             .replace(/^"|"$/g, '')
@@ -141,7 +141,7 @@ function parse (input, options) {
       }
     }
 
-    var error = SyntaxError(formatError(input, message, position, lineNumber, column, json5))
+    const error = SyntaxError(formatError(input, message, position, lineNumber, column, json5))
     error.row = lineNumber + 1
     error.column = column + 1
     throw error
@@ -157,7 +157,7 @@ function parse (input, options) {
   function parseGeneric () {
     while (position < length) {
       startToken()
-      var chr = input[position++]
+      const chr = input[position++]
 
       if (chr === '"' || (chr === '\'' && json5)) {
         return endToken(parseString(chr), 'literal')
@@ -191,11 +191,11 @@ function parse (input, options) {
   }
 
   function parseKey () {
-    var result
+    let result
 
     while (position < length) {
       startToken()
-      var chr = input[position++]
+      const chr = input[position++]
 
       if (chr === '"' || (chr === '\'' && json5)) {
         return endToken(parseString(chr), 'key')
@@ -211,7 +211,7 @@ function parse (input, options) {
       } else if ((json5 && Uni.isIdentifierStart(chr)) ||
                  (chr === '\\' && input[position] === 'u')) {
         // unicode char or a unicode sequence
-        var rollback = position - 1
+        const rollback = position - 1
         result = parseIdentifier()
 
         if (result === undefined) {
@@ -230,7 +230,7 @@ function parse (input, options) {
   function skipWhiteSpace () {
     startToken()
     while (position < length) {
-      var chr = input[position++]
+      const chr = input[position++]
 
       if (isLineTerminator(chr)) {
         position--
@@ -264,7 +264,7 @@ function parse (input, options) {
 
   function skipComment (multi) {
     while (position < length) {
-      var chr = input[position++]
+      const chr = input[position++]
 
       if (isLineTerminator(chr)) {
         // LineTerminator is an end of singleline comment
@@ -293,9 +293,9 @@ function parse (input, options) {
 
   function parseKeyword (keyword) {
     // keyword[0] is not checked because it should've checked earlier
-    var startPosition = position
-    var len = keyword.length
-    for (var i = 1; i < len; i++) {
+    const startPosition = position
+    const len = keyword.length
+    for (let i = 1; i < len; i++) {
       if (position >= length || keyword[i] !== input[position]) {
         position = startPosition - 1
         fail()
@@ -305,16 +305,16 @@ function parse (input, options) {
   }
 
   function parseObject () {
-    var result = options.null_prototype ? Object.create(null) : {}
-    var emptyObject = {}
-    var isNotEmpty = false
+    const result = options.null_prototype ? Object.create(null) : {}
+    const emptyObject = {}
+    let isNotEmpty = false
 
     while (position < length) {
       skipWhiteSpace()
-      var key = parseKey()
+      const key = parseKey()
       skipWhiteSpace()
       startToken()
-      var chr = input[position++]
+      let chr = input[position++]
       endToken(undefined, 'separator')
 
       if (chr === '}' && key === undefined) {
@@ -326,7 +326,7 @@ function parse (input, options) {
       } else if (chr === ':' && key !== undefined) {
         skipWhiteSpace()
         stack.push(key)
-        var value = parseGeneric()
+        let value = parseGeneric()
         stack.pop()
 
         if (value === undefined) fail('No value found for key ' + key)
@@ -350,7 +350,7 @@ function parse (input, options) {
           if (value !== undefined) {
             isNotEmpty = true
             Object.defineProperty(result, key, {
-              value: value,
+              value,
               enumerable: true,
               configurable: true,
               writable: true
@@ -381,16 +381,16 @@ function parse (input, options) {
   }
 
   function parseArray () {
-    var result = []
+    const result = []
 
     while (position < length) {
       skipWhiteSpace()
       stack.push(result.length)
-      var item = parseGeneric()
+      let item = parseGeneric()
       stack.pop()
       skipWhiteSpace()
       startToken()
-      var chr = input[position++]
+      const chr = input[position++]
       endToken(undefined, 'separator')
 
       if (item !== undefined) {
@@ -426,13 +426,13 @@ function parse (input, options) {
     // rewind because we don't know first char
     position--
 
-    var start = position
+    let start = position
 
-    var chr = input[position++]
+    let chr = input[position++]
 
-    var toNumber = function (isOctal) {
-      var str = input.substr(start, position - start)
-      var result
+    const toNumber = function (isOctal) {
+      const str = input.substr(start, position - start)
+      let result
 
       if (isOctal) {
         result = parseInt(str.replace(/^0o?/, ''), 8)
@@ -480,15 +480,15 @@ function parse (input, options) {
       chr = input[position++]
 
       //             new syntax, "0o777"           old syntax, "0777"
-      var isOctal = chr === 'o' || chr === 'O' || isOctDigit(chr)
-      var isHex = chr === 'x' || chr === 'X'
+      const isOctal = chr === 'o' || chr === 'O' || isOctDigit(chr)
+      const isHex = chr === 'x' || chr === 'X'
 
       if (json5 && (isOctal || isHex)) {
         while (position < length &&
            (isHex ? isHexDigit : isOctDigit)(input[position])
         ) position++
 
-        var sign = 1
+        let sign = 1
         if (input[start] === '-') {
           sign = -1
           start++
@@ -525,10 +525,10 @@ function parse (input, options) {
     // rewind because we don't know first char
     position--
 
-    var result = ''
+    let result = ''
 
     while (position < length) {
-      var chr = input[position++]
+      let chr = input[position++]
 
       if (chr === '\\' &&
       input[position] === 'u' &&
@@ -564,10 +564,10 @@ function parse (input, options) {
 
   function parseString (endChar) {
     // 7.8.4 of ES262 spec
-    var result = ''
+    let result = ''
 
     while (position < length) {
-      var chr = input[position++]
+      let chr = input[position++]
 
       if (chr === endChar) {
         return result
@@ -582,10 +582,10 @@ function parse (input, options) {
           newLine(chr)
         } else if (chr === 'u' || (chr === 'x' && json5)) {
           // unicode/character escape sequence
-          var off = chr === 'u' ? 4 : 2
+          const off = chr === 'u' ? 4 : 2
 
           // validation for \uXXXX
-          for (var i = 0; i < off; i++) {
+          for (let i = 0; i < off; i++) {
             if (position >= length) fail()
             if (!isHexDigit(input[position])) fail('Bad escape sequence')
             position++
@@ -635,7 +635,7 @@ function parse (input, options) {
   }
 
   skipWhiteSpace()
-  var returnValue = parseGeneric()
+  let returnValue = parseGeneric()
   if (returnValue !== undefined || position < length) {
     skipWhiteSpace()
 
@@ -692,7 +692,7 @@ exports.parse = function parseJSON (input, options) {
     //
     // this catch is used to skip all those internal calls
     if (error instanceof SyntaxError && error.row != null && error.column != null) {
-      var syntaxError = SyntaxError(error.message)
+      const syntaxError = SyntaxError(error.message)
       syntaxError.column = error.column
       syntaxError.row = error.row
       throw syntaxError

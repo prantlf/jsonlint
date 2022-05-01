@@ -1,7 +1,7 @@
 /* globals navigator, process, parseCustom, parseNative */
 
-var isSafari = typeof navigator !== 'undefined' && /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor)
-var oldNode = typeof process !== 'undefined' && process.version.startsWith('v4.')
+const isSafari = typeof navigator !== 'undefined' && /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor)
+const oldNode = typeof process !== 'undefined' && process.version.startsWith('v4.')
 
 function needsCustomParser (options) {
   return options.ignoreComments || options.ignoreTrailingCommas ||

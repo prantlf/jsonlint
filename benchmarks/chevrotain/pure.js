@@ -1,34 +1,34 @@
-var chevrotain = require('chevrotain')
+const chevrotain = require('chevrotain')
 
 // ----------------- lexer -----------------
-var createToken = chevrotain.createToken
-var Lexer = chevrotain.Lexer
-var Parser = chevrotain.Parser
+const createToken = chevrotain.createToken
+const Lexer = chevrotain.Lexer
+const Parser = chevrotain.CstParser
 
-var True = createToken({ name: 'True', pattern: /true/ })
-var False = createToken({ name: 'False', pattern: /false/ })
-var Null = createToken({ name: 'Null', pattern: /null/ })
-var LCurly = createToken({ name: 'LCurly', pattern: /{/ })
-var RCurly = createToken({ name: 'RCurly', pattern: /}/ })
-var LSquare = createToken({ name: 'LSquare', pattern: /\[/ })
-var RSquare = createToken({ name: 'RSquare', pattern: /]/ })
-var Comma = createToken({ name: 'Comma', pattern: /,/ })
-var Colon = createToken({ name: 'Colon', pattern: /:/ })
-var StringLiteral = createToken({
+const True = createToken({ name: 'True', pattern: /true/ })
+const False = createToken({ name: 'False', pattern: /false/ })
+const Null = createToken({ name: 'Null', pattern: /null/ })
+const LCurly = createToken({ name: 'LCurly', pattern: /{/ })
+const RCurly = createToken({ name: 'RCurly', pattern: /}/ })
+const LSquare = createToken({ name: 'LSquare', pattern: /\[/ })
+const RSquare = createToken({ name: 'RSquare', pattern: /]/ })
+const Comma = createToken({ name: 'Comma', pattern: /,/ })
+const Colon = createToken({ name: 'Colon', pattern: /:/ })
+const StringLiteral = createToken({
   name: 'StringLiteral',
   pattern: /"(?:[^\\"]|\\(?:[bfnrtv"\\/]|u[0-9a-fA-F]{4}))*"/
 })
-var NumberLiteral = createToken({
+const NumberLiteral = createToken({
   name: 'NumberLiteral',
   pattern: /-?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?/
 })
-var WhiteSpace = createToken({
+const WhiteSpace = createToken({
   name: 'WhiteSpace',
   pattern: /[ \t\n\r]+/,
   group: Lexer.SKIPPED
 })
 
-var allTokens = [
+const allTokens = [
   WhiteSpace,
   NumberLiteral,
   StringLiteral,
@@ -42,7 +42,7 @@ var allTokens = [
   False,
   Null
 ]
-var JsonLexer = new Lexer(allTokens)
+const JsonLexer = new Lexer(allTokens)
 
 // ----------------- parser -----------------
 function JsonParserES5 () {
@@ -50,7 +50,7 @@ function JsonParserES5 () {
   Parser.call(this, allTokens)
 
   // not mandatory, using <$> (or any other sign) to reduce verbosity (this. this. this. this. .......)
-  var $ = this
+  const $ = this
 
   this.RULE('json', function () {
     // prettier-ignore
@@ -114,19 +114,19 @@ JsonParserES5.prototype.constructor = JsonParserES5
 // ----------------- wrapping it all together -----------------
 
 // reuse the same parser instance.
-var parser = new JsonParserES5()
+const parser = new JsonParserES5()
 
 module.exports = function (text) {
-  var lexResult = JsonLexer.tokenize(text)
+  const lexResult = JsonLexer.tokenize(text)
 
   // setting a new input will RESET the parser instance's state.
   parser.input = lexResult.tokens
 
   // any top level rule may be used as an entry point
-  var cst = parser.json()
+  const cst = parser.json()
 
   return {
-    cst: cst,
+    cst,
     lexErrors: lexResult.errors,
     parseErrors: parser.errors
   }

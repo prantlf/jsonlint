@@ -1,7 +1,7 @@
-/* eslint-disable node/no-deprecated-api, no-eval */
+/* eslint-disable no-eval */
 
-var assert = require('assert')
-var parse = require('..').parseCustom
+const assert = require('assert')
+const parse = require('..').parseCustom
 
 assert.deepEqual({}, parse('{}'))
 assert.deepEqual({ 42: 37 }, parse('{"42":37}'))
@@ -50,12 +50,12 @@ function getFilter (name) {
   return filter
 }
 
-var pointJson = '{"x": 1, "y": 2}'
+const pointJson = '{"x": 1, "y": 2}'
 assert.deepEqual({ x: 1, y: 2 }, parse(pointJson))
 assert.deepEqual({ x: 1 }, parse(pointJson, getFilter('y')))
 assert.deepEqual({ y: 2 }, parse(pointJson, getFilter('x')))
 assert.deepEqual([1, 2, 3], parse('[1, 2, 3]'))
-var arrayWithHole = [1]
+let arrayWithHole = [1]
 ++arrayWithHole.length
 arrayWithHole.push(3)
 assert.deepEqual(arrayWithHole, parse('[1, 2, 3]', getFilter(1)))
@@ -67,7 +67,7 @@ function DoubleNumbers (key, value) {
   return (typeof value === 'number') ? 2 * value : value
 }
 
-var deepObject = '{"a": {"b": 1, "c": 2}, "d": {"e": {"f": 3}}}'
+const deepObject = '{"a": {"b": 1, "c": 2}, "d": {"e": {"f": 3}}}'
 assert.deepEqual({ a: { b: 1, c: 2 }, d: { e: { f: 3 } } },
   parse(deepObject))
 assert.deepEqual({ a: { b: 2, c: 4 }, d: { e: { f: 6 } } },
@@ -146,16 +146,16 @@ testInvalid('"Garbage""After string"')
 
 testInvalid('1); throw "foo"; (1')
 
-var x = 0 // eslint-disable-line no-unused-vars
+let x = 0 // eslint-disable-line no-unused-vars
 eval('(1); x++; (1)')
 testInvalid('1); x++; (1')
 
 // Test string conversion of argument.
-var o = { toString: function () { return '42' } }
+const o = { toString: function () { return '42' } }
 assert.deepEqual(42, parse(o))
 
-var str = '[1]'
-for (var i = 0; i < 100000; i++) {
+let str = '[1]'
+for (let i = 0; i < 100000; i++) {
   str = '[1,' + str + ']'
 }
 

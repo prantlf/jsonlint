@@ -5,7 +5,7 @@
 
 // ECMAScript 5.1/Unicode v6.3.0 NonAsciiIdentifierStart:
 
-var Uni = module.exports
+const Uni = module.exports
 
 exports.isWhiteSpace = function isWhiteSpace (x) {
   // section 7.2, table 2

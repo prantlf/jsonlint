@@ -3,7 +3,7 @@
 
 /* eslint-disable no-unmodified-loop-condition */
 
-var parse = (function () {
+const parse = (function () {
   'use strict'
 
   // This is a function that can parse a JSON text, producing a JavaScript
@@ -14,9 +14,9 @@ var parse = (function () {
   // We are defining the function inside of another function to avoid creating
   // global variables.
 
-  var at // The index of the current character
-  var ch // The current character
-  var escapee = {
+  let at // The index of the current character
+  let ch // The current character
+  const escapee = {
     '"': '"',
     '\'': '\'',
     '\\': '\\',
@@ -27,18 +27,18 @@ var parse = (function () {
     r: '\r',
     t: '\t'
   }
-  var text
+  let text
 
-  var error = function (m) {
+  const error = function (m) {
     // Call error when something is wrong.
 
-    var error = new SyntaxError(m)
+    const error = new SyntaxError(m)
     error.at = at
     error.text = text
     throw error
   }
 
-  var next = function (c) {
+  const next = function (c) {
     // If a c parameter is provided, verify that it matches the current character.
 
     if (c && c !== ch) {
@@ -53,10 +53,10 @@ var parse = (function () {
     return ch
   }
 
-  var number = function () {
+  const number = function () {
     // Parse a number value.
 
-    var numString = ''
+    let numString = ''
 
     if (ch === '-') {
       numString = '-'
@@ -87,14 +87,14 @@ var parse = (function () {
     return numString
   }
 
-  var string = function () {
+  const string = function () {
     // Parse a string value.
 
-    var hex
-    var i
-    var value = ''
-    var uffff
-    var quote
+    let hex
+    let i
+    let value = ''
+    let uffff
+    let quote
 
     // When parsing for string values, we must look for " and \ characters.
 
@@ -130,7 +130,7 @@ var parse = (function () {
     error('Bad string')
   }
 
-  var space = function () {
+  const space = function () {
     // Skip whitespace.
 
     while (ch && ch <= ' ') {
@@ -138,10 +138,10 @@ var parse = (function () {
     }
   }
 
-  var comment = function () {
+  const comment = function () {
     // Skip whitespace.
 
-    var prev
+    let prev
 
     if (ch && ch === '/') {
       next()
@@ -173,7 +173,7 @@ var parse = (function () {
     }
   }
 
-  var white = function () {
+  const white = function () {
     // Skip whitespace and comments.
 
     do {
@@ -182,7 +182,7 @@ var parse = (function () {
     } while (ch && (ch <= ' ' || ch === '/'))
   }
 
-  var word = function () {
+  const word = function () {
     // true, false, or null.
 
     switch (ch) {
@@ -209,9 +209,9 @@ var parse = (function () {
     error("Unexpected '" + ch + "'")
   }
 
-  var value // Place holder for the value function.
+  let value // Place holder for the value function.
 
-  var array = function () {
+  const array = function () {
     // Parse an array value.
 
     if (ch === '[') {
@@ -235,7 +235,7 @@ var parse = (function () {
     error('Bad array')
   }
 
-  var object = function () {
+  const object = function () {
     // Parse an object value.
 
     if (ch === '{') {
@@ -287,7 +287,7 @@ var parse = (function () {
   // functions and variables.
 
   return function (source) {
-    var result
+    let result
 
     text = source
     at = 0

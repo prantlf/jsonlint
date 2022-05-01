@@ -22,7 +22,7 @@ require('./myna/pure')(myna)
 const mynaParse = myna.parsers.json
 const { Parser: NearleyParser, Grammar: NearleyGrammar } = require('nearley')
 const nearleyJsonGrammar = require('./nearley/pure')
-const nearleyParser = new NearleyParser(NearleyGrammar.fromCompiled(nearleyJsonGrammar));
+const nearleyParser = new NearleyParser(NearleyGrammar.fromCompiled(nearleyJsonGrammar))
 const nearleyOrigin = nearleyParser.save()
 
 const pkg = require('../package')

@@ -1,11 +1,9 @@
 # JSON Lint
 
-[![NPM version](https://badge.fury.io/js/%40prantlf%2Fjsonlint.svg)](https://badge.fury.io/js/%40prantlf%2Fjsonlint)
-[![Build Status](https://travis-ci.com/prantlf/jsonlint.svg?branch=master)](https://travis-ci.com/prantlf/jsonlint)
-[![codecov](https://codecov.io/gh/prantlf/jsonlint/branch/master/graph/badge.svg)](https://codecov.io/gh/prantlf/jsonlint)
-[![Dependency Status](https://david-dm.org/prantlf/jsonlint.svg)](https://david-dm.org/prantlf/jsonlint)
-[![devDependency Status](https://david-dm.org/prantlf/jsonlint/dev-status.svg)](https://david-dm.org/prantlf/jsonlint#info=devDependencies)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Latest version](https://img.shields.io/npm/v/@prantlf/jsonlint)
+ ![Dependency status](https://img.shields.io/librariesio/release/npm/@prantlf/jsonlint)
+](https://www.npmjs.com/package/@prantlf/jsonlint)
+[![Code coverage](https://codecov.io/gh/prantlf/jsonlint/branch/master/graph/badge.svg)](https://codecov.io/gh/prantlf/jsonlint)
 
 A [JSON]/CJSON/[JSON5] parser, validator and pretty-printer with a command-line client. A [pure JavaScript version] of the service provided at [jsonlint.com].
 
@@ -319,7 +317,7 @@ ${reason}`)
 
 ## License
 
-Copyright (C) 2012-2019 Zachary Carter, Ferdinand Prantl
+Copyright (C) 2012-2022 Zachary Carter, Ferdinand Prantl
 
 Licensed under the [MIT License].
 
