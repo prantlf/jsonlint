@@ -70,6 +70,11 @@ or process all `.json` files in a directory:
 
 By default, `jsonlint` will either report a syntax error with details or pretty-print the source if it is valid.
 
+A more complex example: check all JSON files in a Node.js project, except for dependencies in `node_modules`, allow comments (CJSON) and trailing commas, forbid duplicated object keys, print processed files names on the console, print errors on a single line and if an error occurs, continue with other files:
+
+    jsonlint --comments --trailing-commas --no-duplicate-keys \
+      --log-files --compact --continue '**/*.json' '!**/node_modules'
+
 ### Options
 
     $ jsonlint -h
