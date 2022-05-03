@@ -14,6 +14,7 @@ This is a fork of the original project ([zaach/jsonlint](https://github.com/zaac
 * Provides 100% compatible interface to the native `JSON.parse` method.
 * Optionally recognizes JavaScript-style comments (CJSON) and single quoted strings (JSON5).
 * Optionally ignores trailing commas and reports duplicate object keys as an error.
+* Optionally checks that also the expected format matches, including sorted object keys.
 * Supports [JSON Schema] drafts 04, 06 and 07.
 * Offers pretty-printing including comment-stripping and object keys without quotes (JSON5).
 * Prefers the native JSON parser if possible to run [7x faster than the custom parser].
@@ -92,6 +93,23 @@ The same parameters can be passed from a configuration file:
 }
 ```
 
+The input can be checked not only to be a valid JSON, but also to be formatted according to the coding standard. For example, check that there is a trailing li break in each JSON file, in addition to alphabetically sorted keys and no duplicate keys:
+
+    $ jsonlint -ksDr *.json
+
+    File: package.json
+    Formatted output differs
+    ===================================================================
+    --- package.json.orig
+    +++ package.json
+    @@ -105,4 +105,4 @@
+        "lint",
+        "jsonlint"
+      ]
+    -}
+    +}
+    \ No newline at end of file
+
 ### Usage
 
 Usage: `jsonlint [options] [<file, directory, pattern> ...]`
@@ -104,6 +122,7 @@ Usage: `jsonlint [options] [<file, directory, pattern> ...]`
     -E, --extensions [ext]       file extensions to process for directory walk
                                   (default: ["json","JSON"])
     -i, --in-place               overwrite the input files
+    -k, --check                  check that the input is equal to the output
     -t, --indent [num|char]      number of spaces or specific characters
                                   to use for indentation (default: 2)
     -c, --compact                compact error display

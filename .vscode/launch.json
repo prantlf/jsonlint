@@ -2,23 +2,22 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "cli",
       "type": "node",
       "request": "launch",
-      "name": "cli",
       "program": "${workspaceRoot}/lib/cli.js",
       "args": [
-        "-M",
-        "json5",
-        "test/passes/json5.txt"
+        "-k",
+        "package.json"
       ],
       "skipFiles": [
         "<node_internals>/**/*.js"
       ]
     },
     {
+      "name": "test",
       "type": "node",
       "request": "launch",
-      "name": "test",
       "program": "${workspaceRoot}/test/parse2.js",
       "args": [
         "--native-parser"
@@ -28,9 +27,9 @@
       ]
     },
     {
+      "name": "fail",
       "type": "node",
       "request": "launch",
-      "name": "fail",
       "program": "${workspaceRoot}/benchmarks/fail",
       "skipFiles": [
         "<node_internals>/**/*.js"
