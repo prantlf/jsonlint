@@ -1,3 +1,10 @@
+## [11.2.1](https://github.com/prantlf/jsonlint/compare/v11.2.0...v11.2.1) (2022-05-03)
+
+
+### Bug Fixes
+
+* Fix the regex splitting input by line breaks ([71fc338](https://github.com/prantlf/jsonlint/commit/71fc338a32d11be12aebe4cb95fbabc797b6e96b))
+
 # [11.2.0](https://github.com/prantlf/jsonlint/compare/v11.1.1...v11.2.0) (2022-05-01)
 
 
