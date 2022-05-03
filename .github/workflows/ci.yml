@@ -29,7 +29,7 @@ jobs:
       uses: cycjimmy/semantic-release-action@v2
       with:
         semantic_version: 18
-        branches: master
+        branches: v11.1.x
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
