@@ -1,3 +1,10 @@
+# [11.4.0](https://github.com/prantlf/jsonlint/compare/v11.3.0...v11.4.0) (2022-05-03)
+
+
+### Features
+
+* Introduce a check that the formatted output is the same as the input ([75167f7](https://github.com/prantlf/jsonlint/commit/75167f76c4bbd13551ca7e20824cc05095fc6be0))
+
 # [11.3.0](https://github.com/prantlf/jsonlint/compare/v11.2.0...v11.3.0) (2022-05-03)
 
 
