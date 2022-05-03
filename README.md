@@ -122,6 +122,7 @@ Usage: `jsonlint [options] [<file, directory, pattern> ...]`
     -E, --extensions [ext]       file extensions to process for directory walk
                                   (default: ["json","JSON"])
     -i, --in-place               overwrite the input files
+    -j, --diff                   print difference instead of writing the output
     -k, --check                  check that the input is equal to the output
     -t, --indent [num|char]      number of spaces or specific characters
                                   to use for indentation (default: 2)
@@ -187,6 +188,8 @@ The configuration is an object with the following properties, described above, w
 | sort-keys | sortKeys |
 | extensions | |
 | in-place | inPlace |
+| diff | |
+| check | |
 | indent | |
 | compact | |
 | mode | |
