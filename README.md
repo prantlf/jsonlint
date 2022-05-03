@@ -17,10 +17,11 @@ This is a fork of the original project ([zaach/jsonlint](https://github.com/zaac
 * Supports [JSON Schema] drafts 04, 06 and 07.
 * Offers pretty-printing including comment-stripping and object keys without quotes (JSON5).
 * Prefers the native JSON parser if possible to run [7x faster than the custom parser].
-* Reports errors with rich additional information. From the schema validation too.
-* Implements JavaScript modules using [UMD] to work everywhere.
+* Reports errors with rich additional information. From the JSON Schema validation too.
+* Consumes configuration from both command line and [configuration files](configuration).
+* Implements JavaScript modules using [UMD] to work in Node.js, in a browser, everywhere.
 * Depends on up-to-date npm modules with no installation warnings.
-* Small size - 18.2 kB minified, 6.3 kB gzipped.
+* Small size - 18.7 kB minified, 6.54 kB gzipped, 5.16 kB brotlied.
 
 **Note:** In comparison with the original project, this package exports only the `parse` method; not the `Parser` object.
 
@@ -52,9 +53,11 @@ Example of an error message:
 
 ## Command-line Interface
 
-Install `jsonlint` with `npm`` globally to be able to use the command-line interface in any directory:
+Install `jsonlint` with `npm`, `pnpm`  or `yarn` globally to be able to use the command-line interface in any directory:
 
-    npm i @prantlf/jsonlint -g
+    npm i -g @prantlf/jsonlint
+    pnpm i -g @prantlf/jsonlint
+    yarn add --global @prantlf/jsonlint
 
 Validate a single file:
 
@@ -64,9 +67,9 @@ or pipe the JSON input into `stdin`:
 
     cat myfile.json | jsonlint
 
-or process all `.json` files in a directory:
+or process all `.json` files in a directory and rewriting them with the pretty-printed output:
 
-    jsonlint mydir
+    jsonlint --in-place --pretty-print mydir
 
 By default, `jsonlint` will either report a syntax error with details or pretty-print the source if it is valid.
 
@@ -75,58 +78,118 @@ A more complex example: check all JSON files in a Node.js project, except for de
     jsonlint --comments --trailing-commas --no-duplicate-keys \
       --log-files --compact --continue '**/*.json' '!**/node_modules'
 
-### Options
+The same parameters can be passed from a configuration file:
 
-    $ jsonlint -h
+```json
+{
+  "comments": true,
+  "trailing-commas": true,
+  "duplicate-keys": false,
+  "log-files": true,
+  "compact": true,
+  "continue": true,
+  "patterns": ["**/*.json", "!**/node_modules"]
+}
+```
 
-    Usage: jsonlint [options] [<file, directory, pattern> ...]
+### Usage
 
-    JSON parser, syntax and schema validator and pretty-printer.
+Usage: `jsonlint [options] [<file, directory, pattern> ...]`
 
-    Options:
-      -s, --sort-keys              sort object keys (not when prettifying)
-      -E, --extensions [ext]       file extensions to process for directory walk
-                                   (default: ["json","JSON"])
-      -i, --in-place               overwrite the input files
-      -t, --indent [num|char]      number of spaces or specific characters
-                                   to use for indentation (default: 2)
-      -c, --compact                compact error display
-      -M, --mode [mode]            set other parsing flags according to a format
-                                   type (default: "json")
-      -C, --comments               recognize and ignore JavaScript-style comments
-      -S, --single-quoted-strings  support single quotes as string delimiters
-      -T, --trailing-commas        ignore trailing commas in objects and arrays
-      -D, --no-duplicate-keys      report duplicate object keys as an error
-      -V, --validate [file]        JSON schema file to use for validation
-      -e, --environment [env]      which specification of JSON Schema the
-                                   validation file uses
-      -l, --log-files              print only the parsed file names to stdout
-      -q, --quiet                  do not print the parsed json to stdout
-      -n, --continue               continue with other files if an error occurs
-      -p, --pretty-print           prettify the input instead of stringifying
-                                   the parsed object
-      -P, --pretty-print-invalid   force pretty-printing even for invalid input
-      -r, --trailing-newline       ensure a line break at the end of the output
-      -R, --no-trailing-newline    ensure no line break at the end of the output
-      --prune-comments             omit comments from the prettified output
-      --strip-object-keys          strip quotes from object keys if possible
-                                   (JSON5)
-      --enforce-double-quotes      surrounds all strings with double quotes
-      --enforce-single-quotes      surrounds all strings with single quotes
-                                   (JSON5)
-      --trim-trailing-commas       omit trailing commas from objects and arrays
-                                   (JSON5)
-      -v, --version                output the version number
-      -h, --help                   output usage information
+#### Options
 
-    You can use BASH patterns for including and excluding files (only files).
-    Patterns are case-sensitive and have to use slashes as a path separators.
-    A pattern to exclude from processing starts with "!".
+    -f, --config [file]          read options from a custom configuration file
+    -F, --no-config              disable searching for configuration file
+    -s, --sort-keys              sort object keys (not when prettifying)
+    -E, --extensions [ext]       file extensions to process for directory walk
+                                  (default: ["json","JSON"])
+    -i, --in-place               overwrite the input files
+    -t, --indent [num|char]      number of spaces or specific characters
+                                  to use for indentation (default: 2)
+    -c, --compact                compact error display
+    -M, --mode [mode]            set other parsing flags according to a format
+                                  type (default: "json")
+    -C, --comments               recognize and ignore JavaScript-style comments
+    -S, --single-quoted-strings  support single quotes as string delimiters
+    -T, --trailing-commas        ignore trailing commas in objects and arrays
+    -D, --no-duplicate-keys      report duplicate object keys as an error
+    -V, --validate [file]        JSON schema file to use for validation
+    -e, --environment [env]      which specification of JSON Schema the
+                                  validation file uses
+    -l, --log-files              print only the parsed file names to stdout
+    -q, --quiet                  do not print the parsed json to stdout
+    -n, --continue               continue with other files if an error occurs
+    -p, --pretty-print           prettify the input instead of stringifying
+                                  the parsed object
+    -P, --pretty-print-invalid   force pretty-printing even for invalid input
+    -r, --trailing-newline       ensure a line break at the end of the output
+    -R, --no-trailing-newline    ensure no line break at the end of the output
+    --prune-comments             omit comments from the prettified output
+    --strip-object-keys          strip quotes from object keys if possible
+                                  (JSON5)
+    --enforce-double-quotes      surrounds all strings with double quotes
+    --enforce-single-quotes      surrounds all strings with single quotes
+                                  (JSON5)
+    --trim-trailing-commas       omit trailing commas from objects and arrays
+                                  (JSON5)
+    -v, --version                output the version number
+    -h, --help                   output usage information
 
-    Parsing mode can be "cjson" or "json5" to enable other flags automatically.
-    If no files or directories are specified, stdin will be parsed. Environments
-    for JSON schema validation are "json-schema-draft-04", "json-schema-draft-06"
-    or "json-schema-draft-07". If not specified, it will be auto-detected.
+You can use BASH patterns for including and excluding files (only files).
+Patterns are case-sensitive and have to use slashes as a path separators.
+A pattern to exclude from processing starts with "!".
+
+Parsing mode can be "cjson" or "json5" to enable other flags automatically.
+If no files or directories are specified, stdin will be parsed. Environments
+for JSON schema validation are "json-schema-draft-04", "json-schema-draft-06"
+or "json-schema-draft-07". If not specified, it will be auto-detected.
+
+### Configuration
+
+In addition to the command line parameters, the options can be supplied from the following files:
+
+    package.json, key jsonlint
+    .jsonlintrc
+    .jsonlintrc.json
+    .jsonlintrc.yaml
+    .jsonlintrc.yml
+    .jsonlintrc.js
+    .jsonlintrc.cjs
+    jsonlint.config.js
+    jsonlint.config.cjs
+
+The automatic search for one of the following locations above can be disabled by the command-line parameter `-F|--no-config`. A concrete configuration file can be specified by the command-line parameter `-f|--config [file]`. Parameters from the command line will have higher priority than parameters from a configuration file.
+
+The configuration is an object with the following properties, described above, which can be entered either in the kebab-case or in the camel-case:
+
+| Parameter | Alias |
+| --------- | ----- |
+| patterns | |
+| sort-keys | sortKeys |
+| extensions | |
+| in-place | inPlace |
+| indent | |
+| compact | |
+| mode | |
+| comments | |
+| single-quoted-strings | singleQuotedStrings |
+| trailing-commas | trailingCommas |
+| duplicate-keys | duplicateKeys |
+| validate | |
+| environment | |
+| log-files | logFiles |
+| quiet | |
+| continue | |
+| pretty-print | prettyPrint |
+| pretty-print-invalid | prettyPrintInvalid |
+| trailing-newline | trailingNewline'
+| prune-comments | pruneComments |
+| strip-object-keys | stripObjectKeys |
+| enforce-double-quotes | enforceDoubleQuotes |
+| enforce-single-quotes | enforceSingleQuotes |
+| trim-trailing-commas | trimTrailingCommas |
+
+The parameter `config` will be ignored in configuration files. The extra parameter `patterns` can be set to an array of strings with paths or patterns instead of putting them to the command line.
 
 ## Module Interface
 
