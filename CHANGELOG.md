@@ -1,3 +1,15 @@
+# [11.5.0](https://github.com/prantlf/jsonlint/compare/v11.4.0...v11.5.0) (2022-05-03)
+
+
+### Bug Fixes
+
+* Do not print file names twice in the compact mode ([86691cc](https://github.com/prantlf/jsonlint/commit/86691cc5fea760a437cae5aff71f0acc987c4e05))
+
+
+### Features
+
+* Add option "diff" to print the difference instead of the output ([cb3826c](https://github.com/prantlf/jsonlint/commit/cb3826c7610aae8d23623da3693e45cbf942223e))
+
 # [11.4.0](https://github.com/prantlf/jsonlint/compare/v11.3.0...v11.4.0) (2022-05-03)
 
 
