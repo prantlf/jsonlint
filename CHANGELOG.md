@@ -1,3 +1,15 @@
+# [11.6.0](https://github.com/prantlf/jsonlint/compare/v11.5.0...v11.6.0) (2022-05-04)
+
+
+### Bug Fixes
+
+* Do not generate text diff if not needed ([0423a4b](https://github.com/prantlf/jsonlint/commit/0423a4b1fbc10cb6a201fe79e29a2b0e0101f3d0))
+
+
+### Features
+
+* Allow setting the line count as diff context ([9b22843](https://github.com/prantlf/jsonlint/commit/9b22843a93ec47c0e18b1833618072083989b431))
+
 # [11.5.0](https://github.com/prantlf/jsonlint/compare/v11.4.0...v11.5.0) (2022-05-03)
 
 
