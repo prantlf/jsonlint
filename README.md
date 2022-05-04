@@ -136,6 +136,7 @@ Usage: `jsonlint [options] [<file, directory, pattern> ...]`
     -V, --validate [file]        JSON schema file to use for validation
     -e, --environment [env]      which specification of JSON Schema the
                                   validation file uses
+    -x, --context [num]          line count used as the diff context (default: 3)
     -l, --log-files              print only the parsed file names to stdout
     -q, --quiet                  do not print the parsed json to stdout
     -n, --continue               continue with other files if an error occurs
