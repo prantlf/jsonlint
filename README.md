@@ -157,7 +157,7 @@ Usage: `jsonlint [options] [<file, directory, pattern> ...]`
     -h, --help                   output usage information
 
 You can use BASH patterns for including and excluding files (only files).
-Patterns are case-sensitive and have to use slashes as a path separators.
+Patterns are case-sensitive and have to use slashes as directory separators.
 A pattern to exclude from processing starts with "!".
 
 Parsing mode can be "cjson" or "json5" to enable other flags automatically.
