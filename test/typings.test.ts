@@ -22,6 +22,7 @@ addTest('parse', () => {
   parse('{}', { mode: 'cjson' })
   parse('{}', { mode: 'json5' })
   parse('{}', {
+    ignoreBOM: true,
     ignoreComments: true,
     ignoreTrailingCommas: true,
     allowSingleQuotedStrings: true,
@@ -45,6 +46,7 @@ addTest('compile', () => {
   compile('{}', { environment: 'json-schema-draft-06' })
   compile('{}', { environment: 'json-schema-draft-07' })
   compile('{}', {
+    ignoreBOM: true,
     ignoreComments: true,
     ignoreTrailingCommas: true,
     allowSingleQuotedStrings: true,

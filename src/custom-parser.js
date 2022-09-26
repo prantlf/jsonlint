@@ -16,6 +16,12 @@ function isDecDigit (x) {
   return x >= '0' && x <= '9'
 }
 
+function isBOM (x) {
+  // This catches EFBBBF (UTF-8 BOM) because the buffer-to-string
+  // conversion in `fs.readFileSync()` translates it to FEFF (UTF-16 BOM).
+  return x.charCodeAt(0) === 0xFEFF
+}
+
 const unescapeMap = {
   '\'': '\'',
   '"': '"',
@@ -35,6 +41,7 @@ function parseInternal (input, options) {
   }
 
   const json5 = options.mode === 'json5'
+  const ignoreBOM = options.ignoreBOM
   const ignoreComments = options.ignoreComments || options.mode === 'cjson' || json5
   const ignoreTrailingCommas = options.ignoreTrailingCommas || json5
   const allowSingleQuotedStrings = options.allowSingleQuotedStrings || json5
@@ -218,6 +225,14 @@ function parseInternal (input, options) {
         endToken && endToken()
         return undefined
       }
+    }
+  }
+
+  function skipBOM () {
+    if (isBOM(input)) {
+      startToken && startToken()
+      ++position
+      endToken && endToken('bom')
     }
   }
 
@@ -615,6 +630,9 @@ function parseInternal (input, options) {
     fail()
   }
 
+  if (ignoreBOM) {
+    skipBOM()
+  }
   skipWhiteSpace()
   let returnValue = parseGeneric()
   if (returnValue !== undefined || position < inputLength) {

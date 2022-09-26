@@ -12,6 +12,7 @@ This is a fork of the original project ([zaach/jsonlint](https://github.com/zaac
 * Handles multiple files on the command line (by Greg Inman).
 * Walks directories recursively (by Paul Vollmer).
 * Provides 100% compatible interface to the native `JSON.parse` method.
+* Optionally ignores the leading UTF-8 byte-order mark (BOM).
 * Optionally recognizes JavaScript-style comments (CJSON) and single quoted strings (JSON5).
 * Optionally ignores trailing commas and reports duplicate object keys as an error.
 * Optionally checks that also the expected format matches, including sorted object keys.
@@ -129,6 +130,7 @@ Usage: `jsonlint [options] [<file, directory, pattern> ...]`
     -c, --compact                compact error display
     -M, --mode [mode]            set other parsing flags according to a format
                                   type (default: "json")
+    -B, --bom                    ignore the leading UTF-8 byte-order mark
     -C, --comments               recognize and ignore JavaScript-style comments
     -S, --single-quoted-strings  support single quotes as string delimiters
     -T, --trailing-commas        ignore trailing commas in objects and arrays
@@ -194,6 +196,7 @@ The configuration is an object with the following properties, described above, w
 | indent | |
 | compact | |
 | mode | |
+| bom | |
 | comments | |
 | single-quoted-strings | singleQuotedStrings |
 | trailing-commas | trailingCommas |
@@ -251,6 +254,7 @@ The `parse` method offers more detailed [error information](#error-handling), th
 
 | Option                     | Description                                 |
 | -------------------------- | ------------------------------------------- |
+| `ignoreBOM`                | ignores the leading UTF-8 byte-order mark (boolean) |
 | `ignoreComments`           | ignores single-line and multi-line JavaScript-style comments during parsing as another "whitespace" (boolean) |
 | `ignoreTrailingCommas`     | ignores trailing commas in objects and arrays (boolean)      |
 | `allowSingleQuotedStrings` | accepts strings delimited by single-quotes too (boolean)     |

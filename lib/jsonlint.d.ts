@@ -1,6 +1,7 @@
 type ParseMode = 'json' | 'cjson' | 'json5'
 
 interface ParseOptions {
+  ignoreBOM?: boolean
   ignoreComments?: boolean
   ignoreTrailingCommas?: boolean
   allowSingleQuotedStrings?: boolean
@@ -27,6 +28,7 @@ interface ParseOptions {
 declare function parse (input: string, reviverOrOptions?: Function | ParseOptions): object
 
 interface TokenizeOptions {
+  ignoreBOM?: boolean
   ignoreComments?: boolean
   ignoreTrailingCommas?: boolean
   allowSingleQuotedStrings?: boolean
@@ -58,6 +60,7 @@ declare module '@prantlf/jsonlint/lib/validator' {
   type Environment = 'json-schema-draft-04' | 'json-schema-draft-06' | 'json-schema-draft-07'
 
   interface CompileOptions {
+    ignoreBOM?: boolean
     ignoreComments?: boolean
     ignoreTrailingCommas?: boolean
     allowSingleQuotedStrings?: boolean

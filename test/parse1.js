@@ -255,6 +255,18 @@ exports['test extra brace'] = function () {
   assert.throws(function () { parse(json) }, 'should throw error')
 }
 
+exports['test failing with bom'] = function () {
+  const json = fs.readFileSync(path.join(__dirname, '/fails/bom.json')).toString()
+  assert.throws(function () { parse(json) }, 'should throw error')
+}
+
+if (!nativeParser) {
+  exports['test ignoring bom'] = function () {
+    const json = fs.readFileSync(path.join(__dirname, '/fails/bom.json')).toString()
+    assert.deepEqual(parse(json, { ignoreBOM: true }), { bom: 'utf8' })
+  }
+}
+
 if (!oldNode) {
   exports['test error location with Windows line breaks using the native parser'] = function () {
     const json = '{\r\n"foo": {\r\n      "bar":\r\n    }\r\n  \r\n  }'
