@@ -1,3 +1,15 @@
+# [11.7.0](https://github.com/prantlf/jsonlint/compare/v11.6.0...v11.7.0) (2022-09-26)
+
+
+### Bug Fixes
+
+* Upgrade npm dependencies ([81526ce](https://github.com/prantlf/jsonlint/commit/81526ce034cf52623dbca986cf9d450287fb104a))
+
+
+### Features
+
+* Ignore the leading UTF-8 byte-order mark (BOM) ([311c6df](https://github.com/prantlf/jsonlint/commit/311c6df75963a5b6da3984ba85541b800d751939))
+
 # [11.6.0](https://github.com/prantlf/jsonlint/compare/v11.5.0...v11.6.0) (2022-05-04)
 
 
