@@ -420,7 +420,7 @@ ${reason}`)
 
 ## License
 
-Copyright (C) 2012-2022 Zachary Carter, Ferdinand Prantl
+Copyright (C) 2012-2023 Zachary Carter, Ferdinand Prantl
 
 Licensed under the [MIT License].
 
