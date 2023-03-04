@@ -5,7 +5,8 @@ function escapePointerToken (token) {
     .replace(/\//g, '~1')
 }
 
-function pathToPointer (tokens) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+function pathToPointer (tokens) {
   if (tokens.length === 0) {
     return ''
   }
@@ -20,7 +21,8 @@ function unescapePointerToken (token) {
     .replace(/~0/g, '~')
 }
 
-function pointerToPath (pointer) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+function pointerToPath (pointer) {
   if (pointer === '') {
     return []
   }

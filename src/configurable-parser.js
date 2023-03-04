@@ -17,7 +17,8 @@ function getReviver (options) {
   }
 }
 
-function parse (input, options) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+function parse (input, options) {
   options || (options = {})
   return needsCustomParser(options)
     ? parseCustom(input, options)

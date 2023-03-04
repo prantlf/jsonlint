@@ -1,19 +1,10 @@
-/* globals it */
-
+const test = require('tehanu')(__filename)
 const assert = require('assert')
-const exported = require('../lib/jsonlint')
-const tokenize = exported.tokenize
 
-function addTest (description, test) {
-  if (typeof describe === 'function') {
-    it(description, test)
-  } else {
-    exports['test tokenize: ' + description] = test
-  }
-}
+const { tokenize } = require('../lib/jsonlint')
 
-function addDataTest (input, tokens) {
-  function test () {
+function addTest (input, tokens) {
+  test(JSON.stringify(input), function () {
     const result = tokenize(input, {
       mode: 'json5',
       rawTokens: true,
@@ -38,13 +29,12 @@ function addDataTest (input, tokens) {
       delete item.path
     })
     assert.deepEqual(result, tokens)
-  }
-  addTest(JSON.stringify(input), test)
+  })
 }
 
-addDataTest('123', [{ type: 'literal', raw: '123', value: 123 }])
+addTest('123', [{ type: 'literal', raw: '123', value: 123 }])
 
-addDataTest(' /* zz */\r\n true /* zz */\n',
+addTest(' /* zz */\r\n true /* zz */\n',
   [{ type: 'whitespace', raw: ' ' },
     { type: 'comment', raw: '/* zz */' },
     { type: 'whitespace', raw: '\r\n ' },
@@ -53,7 +43,7 @@ addDataTest(' /* zz */\r\n true /* zz */\n',
     { type: 'comment', raw: '/* zz */' },
     { type: 'whitespace', raw: '\n' }])
 
-addDataTest('{q:123,  w : /*zz*/\n\r 345 } ',
+addTest('{q:123,  w : /*zz*/\n\r 345 } ',
   [{ type: 'symbol', raw: '{', value: '{' },
     { type: 'literal', raw: 'q', value: 'q' },
     { type: 'symbol', raw: ':', value: ':' },
@@ -71,7 +61,7 @@ addDataTest('{q:123,  w : /*zz*/\n\r 345 } ',
     { type: 'symbol', raw: '}', value: '}' },
     { type: 'whitespace', raw: ' ' }])
 
-addDataTest('null /* */// xxx\n//xxx',
+addTest('null /* */// xxx\n//xxx',
   [{ type: 'literal', raw: 'null', value: null },
     { type: 'whitespace', raw: ' ' },
     { type: 'comment', raw: '/* */' },
@@ -79,7 +69,7 @@ addDataTest('null /* */// xxx\n//xxx',
     { type: 'whitespace', raw: '\n' },
     { type: 'comment', raw: '//xxx' }])
 
-addDataTest('[1,2,[[],[1]],{},{1:2},{q:{q:{}}},]',
+addTest('[1,2,[[],[1]],{},{1:2},{q:{q:{}}},]',
   [{ type: 'symbol', raw: '[', value: '[' },
     { type: 'literal', raw: '1', value: 1 },
     { type: 'symbol', raw: ',', value: ',' },
@@ -116,7 +106,7 @@ addDataTest('[1,2,[[],[1]],{},{1:2},{q:{q:{}}},]',
     { type: 'symbol', raw: ',', value: ',' },
     { type: 'symbol', raw: ']', value: ']' }])
 
-addTest('without raw input, location and path properties', function () {
+test('without raw input, location and path properties', function () {
   const result = tokenize('{q:123,  w : /*zz*/\n\r "ab" } ', { mode: 'json5' })
   result.forEach(function (item) {
     assert.equal(typeof item, 'object')
@@ -126,10 +116,8 @@ addTest('without raw input, location and path properties', function () {
   })
 })
 
-addTest('does not enforce tokenization in the input options', function () {
+test('does not enforce tokenization in the input options', function () {
   const options = {}
   tokenize('{}', options)
   assert.equal(options.tokenize, undefined)
 })
-
-if (require.main === module) { require('test').run(exports) }

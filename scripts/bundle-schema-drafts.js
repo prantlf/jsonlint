@@ -1,11 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 const prefix = `(function (global, factory) {
-  // eslint-disable-next-line no-unused-expressions, multiline-ternary
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
-  // eslint-disable-next-line no-undef, multiline-ternary
     : typeof define === 'function' && define.amd ? define('jsonlintSchemaDrafts', ['exports'], factory)
-    // eslint-disable-next-line no-undef
       : (global = global || self, factory(global.jsonlintSchemaDrafts = {}));
 }(this, function (exports) { 'use strict';
 

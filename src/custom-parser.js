@@ -654,7 +654,8 @@ function parseInternal (input, options) {
   }
 }
 
-function parseCustom (input, options) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+function parseCustom (input, options) {
   if (typeof options === 'function') {
     options = {
       reviver: options
@@ -665,7 +666,8 @@ function parseCustom (input, options) { // eslint-disable-line no-unused-vars
   return parseInternal(input, options)
 }
 
-function tokenize (input, options) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+function tokenize (input, options) {
   if (!options) {
     options = {}
   }

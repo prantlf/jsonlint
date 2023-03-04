@@ -1,16 +1,7 @@
-/* globals it */
-
+const test = require('tehanu')(__filename)
 const assert = require('assert')
-const exported = require('../lib/printer')
-const print = exported.print
 
-function addTest (description, test) {
-  if (typeof describe === 'function') {
-    it(description, test)
-  } else {
-    exports['test print: ' + description] = test
-  }
-}
+const { print } = require('../lib/printer')
 
 const mixedTokens = [ // '/* start */{ "a":1, // c\n"0b": [ 2,3 ]}'
   { type: 'comment', raw: '/* start */' },
@@ -90,37 +81,37 @@ const stringTokens = [
   { type: 'symbol', raw: '}', value: '}' }
 ]
 
-addTest('concatenate tokens', function () {
+test('concatenate tokens', function () {
   const output = print(mixedTokens)
   assert.equal(output, '/* start */{ "a":1, // c\n"0b": [ 2,3 ]}')
 })
 
-addTest('omit whitespace', function () {
+test('omit whitespace', function () {
   const output = print(mixedTokens, {})
   assert.equal(output, '/* start */{"a":1,/* c */"0b":[2,3]}')
 })
 
-addTest('introduce line breaks', function () {
+test('introduce line breaks', function () {
   const output = print(mixedTokens, { indent: '' })
   assert.equal(output, '/* start */\n{\n"a": 1, // c\n"0b": [\n2,\n3\n]\n}')
 })
 
-addTest('apply indent', function () {
+test('apply indent', function () {
   const output = print(mixedTokens, { indent: 2 })
   assert.equal(output, '/* start */\n{\n  "a": 1, // c\n  "0b": [\n    2,\n    3\n  ]\n}')
 })
 
-addTest('omit comments', function () {
+test('omit comments', function () {
   const output = print(mixedTokens, { pruneComments: true })
   assert.equal(output, '{"a":1,"0b":[2,3]}')
 })
 
-addTest('strip quotes from object keys', function () {
+test('strip quotes from object keys', function () {
   const output = print(mixedTokens, { stripObjectKeys: true })
   assert.equal(output, '/* start */{a:1,/* c */"0b":[2,3]}')
 })
 
-addTest('keep comment locations', function () {
+test('keep comment locations', function () {
   const output = print(commentTokens, { indent: '  ' })
   assert.equal(output, '// test\n{ // test\n  // test\n  a: /* test */ 1, // test\n  b: 2 // test\n  // test\n} // test\n// test')
   // `// test
@@ -133,7 +124,7 @@ addTest('keep comment locations', function () {
   // // test`
 })
 
-addTest('keep comment after opening an object scope indented', function () {
+test('keep comment after opening an object scope indented', function () {
   const output = print(stringTokens, { indent: '  ' })
   assert.equal(output, '{\n  // String parameter\n  "key": \'value\',\n  \n}')
   // `{
@@ -142,17 +133,17 @@ addTest('keep comment after opening an object scope indented', function () {
   // }`
 })
 
-addTest('enforce double quotes', function () {
+test('enforce double quotes', function () {
   const output = print(stringTokens, { enforceDoubleQuotes: true })
   assert.equal(output, '{/* String parameter */"key":"value",}')
 })
 
-addTest('enforce single quotes', function () {
+test('enforce single quotes', function () {
   const output = print(stringTokens, { enforceSingleQuotes: true })
   assert.equal(output, '{/* String parameter */\'key\':\'value\',}')
 })
 
-addTest('enforce double quotes, but strip quotes from object keys', function () {
+test('enforce double quotes, but strip quotes from object keys', function () {
   const output = print(stringTokens, {
     stripObjectKeys: true,
     enforceDoubleQuotes: true
@@ -160,9 +151,7 @@ addTest('enforce double quotes, but strip quotes from object keys', function () 
   assert.equal(output, '{/* String parameter */key:"value",}')
 })
 
-addTest('trim trailing commas', function () {
+test('trim trailing commas', function () {
   const output = print(stringTokens, { trimTrailingCommas: true })
   assert.equal(output, '{/* String parameter */"key":\'value\'}')
 })
-
-if (require.main === module) { require('test').run(exports) }

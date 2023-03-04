@@ -1,0 +1,13 @@
+{
+  "files": {
+    "exclude": [
+      "benchmarks/chevrotain",
+      "benchmarks/hand-built",
+      "benchmarks/jju",
+      "benchmarks/myna"
+    ]
+  },
+  "rules": {
+    "tags": ["recommended"]
+  }
+}

@@ -5,5 +5,5 @@ test/fails
 test/passes
 test/recursive
 test/v8
-test/typings.test.js
+test/types.test.mjs
 web/*.min.*

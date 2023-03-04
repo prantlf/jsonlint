@@ -18,7 +18,7 @@
       "name": "test",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/test/parse2.js",
+      "program": "${workspaceRoot}/test/v8.js",
       "args": [
         "--native-parser"
       ],

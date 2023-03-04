@@ -1,7 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
   "files.exclude": {
-    ".nyc_output": true,
     "node_modules": true,
     "web/*.js": true,
     "web/*.map": true
@@ -14,7 +13,7 @@
     "**/test/passes": true,
     "**/test/recursive": true,
     "**/test/v8": true,
-    "**/test/typings.test.js": true
-},
+    "**/test/types.test.mjs": true
+  },
   "eslint.enable": true
 }

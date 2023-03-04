@@ -1,23 +1,21 @@
 /* eslint-disable no-eval */
-/* globals it */
 
+const test = require('tehanu')(__filename)
 const assert = require('assert')
-const exported = require('..')
-const parse = exported.parse
-const parseNative = exported.parseNative
-const parseCustom = exported.parseCustom
 
-function addTest (arg, bulk, json5) {
+const { parse, parseNative, parseCustom } = require('..')
+
+function addTest (arg, json5) {
   function testJSON5 () {
     let x, z
     try {
       x = parse(arg, { mode: 'json5' })
-    } catch (err) {
+    } catch {
       x = 'fail'
     }
     try {
       z = eval('(function(){"use strict"\nreturn (' + String(arg) + '\n)\n})()')
-    } catch (err) {
+    } catch {
       z = 'fail'
     }
     assert.deepEqual(x, z)
@@ -27,12 +25,12 @@ function addTest (arg, bulk, json5) {
     let x, z
     try {
       x = parseNative(arg)
-    } catch (err) {
+    } catch {
       x = 'fail'
     }
     try {
       z = JSON.parse(arg)
-    } catch (err) {
+    } catch {
       z = 'fail'
     }
     assert.deepEqual(x, z)
@@ -42,33 +40,23 @@ function addTest (arg, bulk, json5) {
     let x, z
     try {
       x = parseCustom(arg)
-    } catch (err) {
+    } catch {
       x = 'fail'
     }
     try {
       z = JSON.parse(arg)
-    } catch (err) {
+    } catch {
       z = 'fail'
     }
     assert.deepEqual(x, z)
   }
 
-  if (typeof (describe) === 'function' && !bulk) {
-    if (json5 !== false) {
-      it('test_parse_json5: ' + JSON.stringify(arg), testJSON5)
-    }
-    if (json5 !== true) {
-      it('test_parse_native: ' + JSON.stringify(arg), testNativeJSON)
-      it('test_parse_strict: ' + JSON.stringify(arg), testStrictJSON)
-    }
-  } else {
-    if (json5 !== false) {
-      testJSON5()
-    }
-    if (json5 !== true) {
-      testNativeJSON()
-      testStrictJSON()
-    }
+  if (json5 !== false) {
+    test('test_parse_json5: ' + JSON.stringify(arg), testJSON5)
+  }
+  if (json5 !== true) {
+    test('test_parse_native: ' + JSON.stringify(arg), testNativeJSON)
+    test('test_parse_strict: ' + JSON.stringify(arg), testStrictJSON)
   }
 }
 
@@ -114,7 +102,7 @@ addTest('{+3e3:1}')
 addTest('{.3e3:1}')
 
 for (let i = 0; i < 200; i++) {
-  addTest('"' + String.fromCharCode(i) + '"', true)
+  addTest('"' + String.fromCharCode(i) + '"')
 }
 
 // strict JSON test cases
@@ -125,17 +113,19 @@ addTest('"\\v"')
 addTest('{null: 123}')
 addTest("{'null': 123}")
 
-assert.throws(function () {
-  parse('0o', { mode: 'json5' })
+test('octal numbers', function () {
+  assert.throws(function () {
+    parse('0o', { mode: 'json5' })
+  })
+  assert.strictEqual(parse('01234567', { mode: 'json5' }), 342391)
+  assert.strictEqual(parse('0o1234567', { mode: 'json5' }), 342391)
 })
 
-assert.strictEqual(parse('01234567', { mode: 'json5' }), 342391)
-assert.strictEqual(parse('0o1234567', { mode: 'json5' }), 342391)
-
-// undefined
-// assert.strictEqual(parse(undefined, { mode: 'json5' }), undefined)
-assert.throws(function () {
-  parse(undefined, { mode: 'json5' })
+test('undefined', function () {
+  // assert.strictEqual(parse(undefined, { mode: 'json5' }), undefined)
+  assert.throws(function () {
+    parse(undefined, { mode: 'json5' })
+  })
 })
 
 // whitespaces
@@ -146,46 +136,52 @@ addTest('[1,\r\n2,\r3,\n]')
   // as a usual whitespace by JavaScript parser, but JJU rejects them
   // as line breaks, which must not appear inside a string value.
   const json5 = x === '\u2028' || x === '\u2029' ? false : undefined
-  addTest('"' + x + '"' + x, undefined, json5)
+  addTest('"' + x + '"' + x, json5)
 })
 '\u000A\u000D\u2028\u2029'.split('').forEach(function (x) {
   addTest(x + '[1,' + x + '2]' + x)
   addTest('"\\' + x + '"' + x)
 })
 
-assert.throws(parse.bind(null, '{-1:42}', { mode: 'json5' }))
-
-assert.deepEqual(parse('{ "key": 1, "key": 2}'), { key: 2 })
-assert.throws(function () {
-  parse('{ "key": 1, "key": 2}', { allowDuplicateObjectKeys: false })
+test('negative number as key', function () {
+  assert.throws(parse.bind(null, '{-1:42}', { mode: 'json5' }))
 })
 
-for (let i = 0; i < 100; ++i) {
-  const str = '-01.e'.split('')
-  let x, y, z
+test('duplicate keys', function () {
+  assert.deepEqual(parse('{ "key": 1, "key": 2}'), { key: 2 })
+  assert.throws(function () {
+    parse('{ "key": 1, "key": 2}', { allowDuplicateObjectKeys: false })
+  })
+})
 
-  const rnd = [1, 2, 3, 4, 5].map(function (x) {
-    x = ~~(Math.random() * str.length)
-    return str[x]
-  }).join('')
+test('random numbers', function () {
+  for (let i = 0; i < 100; ++i) {
+    const str = '-01.e'.split('')
+    let x, y, z
 
-  try {
-    x = parse(rnd, { mode: 'json5' })
-  } catch (err) {
-    x = 'fail'
+    const rnd = [1, 2, 3, 4, 5].map(function (x) {
+      x = ~~(Math.random() * str.length)
+      return str[x]
+    }).join('')
+
+    try {
+      x = parse(rnd, { mode: 'json5' })
+    } catch {
+      x = 'fail'
+    }
+    try {
+      y = JSON.parse(rnd, { mode: 'json5' })
+    } catch {
+      y = 'fail'
+    }
+    try {
+      z = eval(rnd)
+    } catch {
+      z = 'fail'
+    }
+    // console.log(rnd, x, y, z)
+    if (x !== y && x !== z) {
+      throw new Error('ERROR')
+    }
   }
-  try {
-    y = JSON.parse(rnd, { mode: 'json5' })
-  } catch (err) {
-    y = 'fail'
-  }
-  try {
-    z = eval(rnd)
-  } catch (err) {
-    z = 'fail'
-  }
-  // console.log(rnd, x, y, z)
-  if (x !== y && x !== z) {
-    throw new Error('ERROR')
-  }
-}
+})

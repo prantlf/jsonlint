@@ -1,5 +1,4 @@
 .DS_Store
-.nyc_output
 benchmarks/jison/*.js
 benchmarks/pegjs/*.js
 benchmarks/nearley/*.js
@@ -7,5 +6,5 @@ coverage
 node_modules
 lib/jsonlint*.js
 lib/schema-drafts.js
-test/typings.test.js
+test/types.test.mjs
 web/*.min.*

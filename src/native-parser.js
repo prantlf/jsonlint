@@ -14,7 +14,7 @@ function getOffset (input, line, column) {
   if (line > 1) {
     const breaks = /\r?\n/g
     let match
-    while (match = breaks.exec(input)) { // eslint-disable-line no-cond-assign
+    while ((match = breaks.exec(input))) {
       if (--line === 1) {
         return match.index + column
       }
@@ -150,7 +150,8 @@ function improveNativeError (input, error) {
   return error
 }
 
-function parseNative (input, reviver) { // eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+function parseNative (input, reviver) {
   try {
     return JSON.parse(input, reviver)
   } catch (error) {

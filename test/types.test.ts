@@ -1,19 +1,12 @@
+import tehanu from 'tehanu'
 import { strict as assert } from 'assert'
 import { parse } from '../lib/jsonlint'
 import { compile } from '../lib/validator'
 import { print } from '../lib/printer'
 
-declare function it (description: string, test: Function): void
+const test = tehanu(import.meta.url)
 
-function addTest (description, test) {
-  if (typeof it === 'function') {
-    it(description, test)
-  } else {
-    exports['test type declarations of ' + description] = test
-  }
-}
-
-addTest('parse', () => {
+test('parse', () => {
   const result = parse('{}')
   assert.equal(typeof result, 'object')
   parse('{}', () => undefined)
@@ -32,7 +25,7 @@ addTest('parse', () => {
   assert.ok(true)
 })
 
-addTest('compile', () => {
+test('compile', () => {
   const validate = compile('{}')
   assert.equal(typeof validate, 'function')
   compile('{}', 'json-schema-draft-04')
@@ -55,7 +48,7 @@ addTest('compile', () => {
   assert.ok(true)
 })
 
-addTest('print', () => {
+test('print', () => {
   const tokens = [
     { type: 'symbol', value: '{', raw: '{' },
     { type: 'symbol', value: '}', raw: '}' }
@@ -72,6 +65,3 @@ addTest('print', () => {
   print(tokens, { trimTrailingCommas: true })
   assert.ok(true)
 })
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-if (require.main === module) { require('test').run(exports) }

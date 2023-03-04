@@ -41,7 +41,7 @@ function getOffset (line, column) {
   if (line > 1) {
     const breaks = /\r?\n/g
     let match
-    while (match = breaks.exec(inputSource)) { // eslint-disable-line no-cond-assign
+    while ((match = breaks.exec(inputSource))) {
       if (--line === 1) {
         return match.index + column
       }

@@ -1,23 +1,16 @@
-/* globals it */
-
+const test = require('tehanu')(__filename)
 const assert = require('assert')
+
 const fs = require('fs')
 const path = require('path')
 const YAML = require('js-yaml')
-const parse = require('..').parse
 
-function addTest (name, fn) {
-  if (typeof (describe) === 'function') {
-    it(name, fn)
-  } else {
-    exports['test ' + name] = fn
-  }
-}
+const { parse } = require('..')
 
 const schema = YAML.DEFAULT_SCHEMA.extend([
   new YAML.Type('!error', {
     kind: 'scalar',
-    resolve: function (state) {
+    resolve: function (/* state */) {
       // state.result = null
       return true
     }
@@ -45,11 +38,11 @@ if (!Object.is) {
 
 for (const k in tests) {
   (function (k) {
-    addTest(k, function () {
+    test(k, function () {
       let result
       try {
         result = parse(tests[k].input, { mode: 'json5' })
-      } catch (err) {
+      } catch {
         result = null
       }
 
@@ -62,5 +55,3 @@ for (const k in tests) {
     })
   })(k)
 }
-
-if (require.main === module) { require('test').run(exports) }

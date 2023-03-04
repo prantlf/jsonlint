@@ -9,26 +9,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Sources
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Install Node
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: 'lts/*'
         registry-url: 'https://registry.npmjs.org'
     - name: Install PNPM
       uses: pnpm/action-setup@v2
       with:
-        version: '>=6'
+        version: latest
         run_install: |
-          - args: [--frozen-lockfile, --no-verify-store-integrity, --no-optional]
+          - args: [--frozen-lockfile, --no-verify-store-integrity]
     - name: Test
       run: npm test
     - name: Coverage
-      run: pnpx codecov --disable=gcov
+      uses: codecov/codecov-action@v3
     - name: Publish
       uses: cycjimmy/semantic-release-action@v2
       with:
-        semantic_version: 18
+        semantic_version: 19
         branches: master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
