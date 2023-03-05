@@ -1,3 +1,10 @@
+## [13.0.1](https://github.com/prantlf/jsonlint/compare/v13.0.0...v13.0.1) (2023-03-05)
+
+
+### Bug Fixes
+
+* Replace ajv@6 with ajv-draft-04 ([b1535a3](https://github.com/prantlf/jsonlint/commit/b1535a3ec24be7913f0005cdd617680c02086cdf))
+
 # [13.0.0](https://github.com/prantlf/jsonlint/compare/v12.0.0...v13.0.0) (2023-03-05)
 
 
