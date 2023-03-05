@@ -1,3 +1,10 @@
+## [11.7.2](https://github.com/prantlf/jsonlint/compare/v11.7.1...v11.7.2) (2023-03-05)
+
+
+### Bug Fixes
+
+* Use both typings and types in package.json ([5d00c00](https://github.com/prantlf/jsonlint/commit/5d00c00c7fd098674ee9d1f3dba14369debaa73b))
+
 ## [11.7.1](https://github.com/prantlf/jsonlint/compare/v11.7.0...v11.7.1) (2023-03-05)
 
 
