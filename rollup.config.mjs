@@ -4,11 +4,11 @@ import json from '@rollup/plugin-json'
 import { minify } from 'rollup-plugin-swc-minify'
 
 export default {
-  input: 'src/ajv7.js',
+  input: 'src/ajv.js',
   output: {
-    file: 'web/ajv7.min.js',
+    file: 'web/ajv.min.js',
     format: 'umd',
-    name: 'ajv7',
+    name: 'ajv',
     sourcemap: true,
     plugins: [minify()]
   },

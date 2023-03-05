@@ -41,7 +41,7 @@
   "scripts": {
     "build": "npm run compile:jsonlint && rollup -c && npm run minify && npm run compile:tests",
     "compile:jsonlint": "cat.js src/prefix.js.txt src/unicode.js src/custom-parser.js src/pointer.js src/native-parser.js src/configurable-parser.js src/suffix.js.txt > lib/jsonlint.js",
-    "minify": "esbuild --minify --sourcemap --outfile=web/jsonlint.min.js lib/jsonlint.js && esbuild --minify --sourcemap --outfile=web/validator.min.js lib/validator.js && esbuild --minify --sourcemap --outfile=web/formatter.min.js lib/formatter.js && esbuild --minify --sourcemap --outfile=web/sorter.min.js lib/sorter.js && esbuild --minify --sourcemap --outfile=web/printer.min.js lib/printer.js && esbuild --minify --sourcemap --outfile=web/ajv.min.js node_modules/ajv6/dist/ajv.bundle.js",
+    "minify": "esbuild --minify --sourcemap --outfile=web/jsonlint.min.js lib/jsonlint.js && esbuild --minify --sourcemap --outfile=web/validator.min.js lib/validator.js && esbuild --minify --sourcemap --outfile=web/formatter.min.js lib/formatter.js && esbuild --minify --sourcemap --outfile=web/sorter.min.js lib/sorter.js && esbuild --minify --sourcemap --outfile=web/printer.min.js lib/printer.js",
     "compile:tests": "tsc --moduleResolution node --module es2022 test/types.test.ts && mv.js test/types.test.js test/types.test.mjs",
     "test": "denolint && c8 node test/types.test.mjs && c8 --no-clean node test/parse1 && c8 --no-clean node test/parse1 --native-parser && c8 --no-clean node test/parse2 && c8 --no-clean node test/parse3 && c8 --no-clean node test/parse4 && c8 --no-clean node test/parse5 && c8 --no-clean node test/portable && c8 --no-clean node test/tokenize && c8 --no-clean node test/print && c8 --no-clean node lib/cli package.json test/recursive && c8 --no-clean node lib/cli -sq test/passes/hasOwnProperty.json && c8 --no-clean node lib/cli -s -e json-schema-draft-04 -V test/passes/schema-04.json test/passes/data-04.json && c8 --no-clean node lib/cli -s -e json-schema-draft-07 -V test/passes/schema-07.json test/passes/data-07.json && c8 --no-clean node lib/cli -C test/passes/comments.txt && c8 --no-clean node lib/cli -pS test/passes/strings.txt && c8 --no-clean node lib/cli -M json5 test/passes/json5.text && c8 --no-clean node lib/cli -v && c8 --no-clean node lib/cli -h && c8 --no-clean node lib/cli -Pc test/fails/10.json || c8 --no-clean node lib/cli -f test/.jsonrc.yml 'test/**/*.json' '!**/fails' && c8 report",
     "start": "http-server -c 5",
@@ -74,7 +74,7 @@
   },
   "dependencies": {
     "ajv": "8.12.0",
-    "ajv6": "npm:ajv@6.12.6",
+    "ajv-draft-04": "1.0.0",
     "commander": "10.0.0",
     "cosmiconfig": "8.1.0",
     "diff": "5.1.0",

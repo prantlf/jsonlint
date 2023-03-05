@@ -329,3 +329,10 @@ test('test schema validation failure', function () {
     validate(data, { ignoreComments: !nativeParser })
   }, 'should throw error')
 })
+
+test('test JSON Type Definitions validation success', function () {
+  const data = fs.readFileSync(path.join(__dirname, '/passes/data-jtd.json')).toString()
+  const schema = fs.readFileSync(path.join(__dirname, '/passes/schema-jtd.json')).toString()
+  const validate = validator.compile(schema, { environment: 'jtd' })
+  assert.doesNotThrow(function () { validate(parse(data)) }, 'should pass')
+})

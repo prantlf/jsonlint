@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "title": "Schema for 3.json",
+  "title": "Schema for data-04.json",
   "properties": {
     "JSON Test Pattern pass3": {
       "type": "object",

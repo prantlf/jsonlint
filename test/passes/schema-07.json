@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "title": "Schema for 4.json",
+  "title": "Schema for data-07.json",
   "properties": {
     "test": {
       "type": "string",
