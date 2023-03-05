@@ -1,3 +1,15 @@
+# [12.0.0](https://github.com/prantlf/jsonlint/compare/v11.7.2...v12.0.0) (2023-03-05)
+
+
+### Bug Fixes
+
+* Upgrade dependencies and require Node.js 14 ([87205c2](https://github.com/prantlf/jsonlint/commit/87205c2427a0ebe0d791a4189b2b2346506601b3))
+
+
+### BREAKING CHANGES
+
+* Dropped support for Node.js 12 . The minimum supported version is Node.js 14.
+
 ## [11.7.2](https://github.com/prantlf/jsonlint/compare/v11.7.1...v11.7.2) (2023-03-05)
 
 
