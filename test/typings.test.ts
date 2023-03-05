@@ -1,5 +1,5 @@
 import { strict as assert } from 'assert'
-import { parse } from '..'
+import { parse } from '../lib/jsonlint'
 import { compile } from '../lib/validator'
 import { print } from '../lib/printer'
 
