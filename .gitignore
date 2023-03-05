@@ -5,6 +5,5 @@ benchmarks/nearley/*.js
 coverage
 node_modules
 lib/jsonlint*.js
-lib/schema-drafts.js
 test/types.test.mjs
 web/*.min.*

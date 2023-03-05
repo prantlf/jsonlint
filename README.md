@@ -135,7 +135,7 @@ Usage: `jsonlint [options] [<file, directory, pattern> ...]`
     -S, --single-quoted-strings  support single quotes as string delimiters
     -T, --trailing-commas        ignore trailing commas in objects and arrays
     -D, --no-duplicate-keys      report duplicate object keys as an error
-    -V, --validate [file]        JSON schema file to use for validation
+    -V, --validate [file]        JSON Schema file to use for validation
     -e, --environment [env]      which specification of JSON Schema the
                                   validation file uses
     -x, --context [num]          line count used as the diff context (default: 3)
@@ -164,8 +164,10 @@ A pattern to exclude from processing starts with "!".
 
 Parsing mode can be "cjson" or "json5" to enable other flags automatically.
 If no files or directories are specified, stdin will be parsed. Environments
-for JSON schema validation are "json-schema-draft-04", "json-schema-draft-06"
-or "json-schema-draft-07". If not specified, it will be auto-detected.
+for JSON Schema validation are "draft-04", "draft-06", "draft-07",
+"draft-2019-09" or "draft-2020-12". The environment may be prefixed
+with "json-schema-". JSON Type Definition can be selected by "rfc8927",
+"json-type-definition" or "jtd". If not specified, it will be "draft-07".
 
 ### Configuration
 
@@ -272,21 +274,19 @@ The `mode` parameter (string) sets parsing options to match a common format of i
 
 ### Schema Validation
 
-You can validate the input against a JSON schema using the `lib/validator` module. The `validate` method accepts either an earlier parsed JSON data or a string with the JSON input:
+You can validate the input against a JSON Schema using the `lib/validator` module. The `validate` method accepts either an earlier parsed JSON data or a string with the JSON input:
 
 ```js
 const { compile } = require('@prantlf/jsonlint/lib/validator')
-const validate = compile('string with JSON schema')
+const validate = compile('string with JSON Schema')
 // Throws an error in case of failure.
 const parsed = validate('string with JSON data')
 ```
 
-If a string is passed to the `validate` method, the same options as for parsing JSON data can be passed as the second parameter. Compiling JSON schema supports the same options as parsing JSON data too (except for `reviver`). They can be passed as the second (object) parameter. The optional second `environment` parameter can be passed either as a string or as an additional property in the options object too:
+If a string is passed to the `validate` method, the same options as for parsing JSON data can be passed as the second parameter. Compiling JSON Schema supports the same options as parsing JSON data too (except for `reviver`). They can be passed as the second (object) parameter. The optional second `environment` parameter can be passed either as a string or as an additional property in the options object too:
 
 ```js
-const validate = compile('string with JSON schema', {
-  environment: 'json-schema-draft-04'
-})
+const validate = compile('string with JSON Schema', { environment: 'draft-2020-12' })
 ```
 
 ### Pretty-Printing

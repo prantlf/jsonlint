@@ -39,13 +39,11 @@
     "node": ">= 14"
   },
   "scripts": {
-    "prepare": "npm run build",
-    "lint": "denolint",
-    "build": "npm run compile && npm run compile:tests",
-    "compile": "npm run compile:jsonlint && esbuild --minify --sourcemap --outfile=web/jsonlint.min.js lib/jsonlint.js && esbuild --minify --sourcemap --outfile=web/validator.min.js lib/validator.js && esbuild --minify --sourcemap --outfile=web/formatter.min.js lib/formatter.js && esbuild --minify --sourcemap --outfile=web/sorter.min.js lib/sorter.js && esbuild --minify --sourcemap --outfile=web/printer.min.js lib/printer.js && node scripts/bundle-schema-drafts && esbuild --minify --sourcemap --outfile=web/schema-drafts.min.js lib/schema-drafts.js && esbuild --minify --sourcemap --outfile=web/ajv.min.js node_modules/ajv/dist/ajv.bundle.js",
+    "prepare": "npm run compile:jsonlint && rollup -c && npm run minify && npm run compile:tests",
     "compile:jsonlint": "cat.js src/prefix.js.txt src/unicode.js src/custom-parser.js src/pointer.js src/native-parser.js src/configurable-parser.js src/suffix.js.txt > lib/jsonlint.js",
+    "minify": "esbuild --minify --sourcemap --outfile=web/jsonlint.min.js lib/jsonlint.js && esbuild --minify --sourcemap --outfile=web/validator.min.js lib/validator.js && esbuild --minify --sourcemap --outfile=web/formatter.min.js lib/formatter.js && esbuild --minify --sourcemap --outfile=web/sorter.min.js lib/sorter.js && esbuild --minify --sourcemap --outfile=web/printer.min.js lib/printer.js && esbuild --minify --sourcemap --outfile=web/ajv.min.js node_modules/ajv6/dist/ajv.bundle.js",
     "compile:tests": "tsc --moduleResolution node --module es2022 test/types.test.ts && mv.js test/types.test.js test/types.test.mjs",
-    "test": "npm run lint && c8 node test/types.test.mjs && c8 --no-clean node test/parse1 && c8 --no-clean node test/parse1 --native-parser && c8 --no-clean node test/parse2 && c8 --no-clean node test/parse3 && c8 --no-clean node test/parse4 && c8 --no-clean node test/parse5 && c8 --no-clean node test/portable && c8 --no-clean node test/tokenize && c8 --no-clean node test/print && c8 --no-clean node lib/cli package.json test/recursive && c8 --no-clean node lib/cli -sq test/passes/hasOwnProperty.json && c8 --no-clean node lib/cli -s -e json-schema-draft-04 -V test/passes/3.schema.json test/passes/3.json && c8 --no-clean node lib/cli -C test/passes/comments.txt && c8 --no-clean node lib/cli -pS test/passes/strings.txt && c8 --no-clean node lib/cli -M json5 test/passes/json5.text && c8 --no-clean node lib/cli -v && c8 --no-clean node lib/cli -h && c8 --no-clean node lib/cli -Pc test/fails/10.json || c8 --no-clean node lib/cli -f test/.jsonrc.yml 'test/**/*.json' '!**/fails' && c8 report",
+    "test": "denolint && c8 node test/types.test.mjs && c8 --no-clean node test/parse1 && c8 --no-clean node test/parse1 --native-parser && c8 --no-clean node test/parse2 && c8 --no-clean node test/parse3 && c8 --no-clean node test/parse4 && c8 --no-clean node test/parse5 && c8 --no-clean node test/portable && c8 --no-clean node test/tokenize && c8 --no-clean node test/print && c8 --no-clean node lib/cli package.json test/recursive && c8 --no-clean node lib/cli -sq test/passes/hasOwnProperty.json && c8 --no-clean node lib/cli -s -e json-schema-draft-04 -V test/passes/schema-04.json test/passes/data-04.json && c8 --no-clean node lib/cli -s -e json-schema-draft-07 -V test/passes/schema-07.json test/passes/data-07.json && c8 --no-clean node lib/cli -C test/passes/comments.txt && c8 --no-clean node lib/cli -pS test/passes/strings.txt && c8 --no-clean node lib/cli -M json5 test/passes/json5.text && c8 --no-clean node lib/cli -v && c8 --no-clean node lib/cli -h && c8 --no-clean node lib/cli -Pc test/fails/10.json || c8 --no-clean node lib/cli -f test/.jsonrc.yml 'test/**/*.json' '!**/fails' && c8 report",
     "start": "http-server -c 5",
     "web": "npm run web:sync && npm run web:deploy",
     "web:clone": "test ! -d ../jsonlint-pages && git clone --single-branch --branch gh-pages `git remote get-url origin` ../jsonlint-pages",
@@ -75,13 +73,17 @@
     ]
   },
   "dependencies": {
-    "ajv": "6.12.6",
+    "ajv": "8.12.0",
+    "ajv6": "npm:ajv@6.12.6",
     "commander": "10.0.0",
     "cosmiconfig": "8.1.0",
     "diff": "5.1.0",
     "fast-glob": "3.2.12"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "24.0.1",
+    "@rollup/plugin-json": "6.0.0",
+    "@rollup/plugin-node-resolve": "15.0.1",
     "@semantic-release/changelog": "6.0.2",
     "@semantic-release/git": "10.0.1",
     "@types/node": "18.14.6",
@@ -92,6 +94,8 @@
     "esbuild": "0.17.11",
     "http-server": "14.1.1",
     "js-yaml": "4.1.0",
+    "rollup": "3.18.0",
+    "rollup-plugin-swc-minify": "1.0.5",
     "tehanu": "1.0.1",
     "tehanu-repo-coco": "1.0.0",
     "tehanu-teru": "1.0.0",

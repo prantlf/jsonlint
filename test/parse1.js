@@ -307,20 +307,20 @@ test('test pass-2', function () {
 })
 
 test('test pass-3', function () {
-  const json = fs.readFileSync(path.join(__dirname, '/passes/3.json')).toString()
+  const json = fs.readFileSync(path.join(__dirname, '/passes/data-04.json')).toString()
   assert.doesNotThrow(function () { parse(json) }, 'should pass')
 })
 
 test('test schema validation success', function () {
-  const data = fs.readFileSync(path.join(__dirname, '/passes/3.json')).toString()
-  const schema = fs.readFileSync(path.join(__dirname, '/passes/3.schema.json')).toString()
+  const data = fs.readFileSync(path.join(__dirname, '/passes/data-07.json')).toString()
+  const schema = fs.readFileSync(path.join(__dirname, '/passes/schema-07.json')).toString()
   const validate = validator.compile(schema)
   assert.doesNotThrow(function () { validate(parse(data)) }, 'should pass')
 })
 
 test('test schema validation failure', function () {
-  const data = fs.readFileSync(path.join(__dirname, '/passes/3.schema.json')).toString()
-  const schema = fs.readFileSync(path.join(__dirname, '/passes/3.schema.json')).toString()
+  const data = fs.readFileSync(path.join(__dirname, '/passes/schema-04.json')).toString()
+  const schema = fs.readFileSync(path.join(__dirname, '/passes/schema-04.json')).toString()
   const validate = validator.compile(schema, {
     ignoreComments: !nativeParser,
     environment: 'json-schema-draft-04'

@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "title": "Schema for 4.json",
+  "properties": {
+    "test": {
+      "type": "string",
+      "title": "Testing property"
+    }
+  },
+  "required": [
+    "test"
+  ]
+}

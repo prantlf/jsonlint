@@ -29,16 +29,24 @@ test('compile', () => {
   const validate = compile('{}')
   assert.equal(typeof validate, 'function')
   compile('{}', 'json-schema-draft-04')
+  compile('{}', 'draft-04')
   compile('{}', 'json-schema-draft-06')
+  compile('{}', 'draft-06')
   compile('{}', 'json-schema-draft-07')
+  compile('{}', 'draft-07')
+  compile('{}', 'json-schema-draft-2019-09')
+  compile('{}', 'draft-2019-09')
+  compile('{}', 'json-schema-draft-2020-12')
+  compile('{}', 'draft-2020-12')
+  compile('{}', 'json-type-definition');
+  compile('{}', 'jtd');
+  compile('{}', 'rfc8927');
   compile('{}', {})
   compile('{}', { mode: 'json' })
   compile('{}', { mode: 'cjson' })
   compile('{}', { mode: 'json5' })
-  compile('{}', { environment: 'json-schema-draft-04' })
-  compile('{}', { environment: 'json-schema-draft-06' })
-  compile('{}', { environment: 'json-schema-draft-07' })
   compile('{}', {
+    environment: 'draft-07',
     ignoreBOM: true,
     ignoreComments: true,
     ignoreTrailingCommas: true,

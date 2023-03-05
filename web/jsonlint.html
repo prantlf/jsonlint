@@ -46,6 +46,12 @@
       flex-basis: calc(50% - 1ex);
       min-width: calc(42ex - 3ex);
     }
+    #environment {
+      display: none;
+    }
+    .with-schema #environment {
+      display: inline-block;
+    }
     #options > * {
       display: flex;
       flex-wrap: wrap;
@@ -83,14 +89,14 @@
   </header>
   <main>
     <section>
-      <form aria-label="Source">
+      <form aria-label="Source" id="form">
         <div id="source">
           <div id="data-section">
             <label for="data">Data:</label>
             <textarea id="data" rows="10" cols="40"></textarea>
           </div>
           <div id="schema-section">
-            <label for="schema">Schema (only drafts 04, 06 or 07):</label>
+            <label for="schema">Schema:</label>
             <textarea id="schema" rows="10" cols="40"></textarea>
           </div>
         </div>
@@ -167,6 +173,16 @@
               <input type="checkbox" id="with-schema">
               <label for="with-schema">Use JSON Schema</label>
             </div>
+            <div>
+              <select id="environment" aria-label="JSON Schema Environment">
+                <option value="draft-04">JSON Schema draft 04</option>
+                <option value="draft-06">JSON Schema draft 06</option>
+                <option value="draft-07" selected>JSON Schema draft 07</option>
+                <option value="draft-2019-09">JSON Schema draft 2019-09</option>
+                <option value="draft-2020-12">JSON Schema draft 2020-12</option>
+                <option value="jtd">JSON Type Definition</option>
+              </select>
+            </div>
           </div>
         </div>
         <button id="validate" type="button">Validate</button>
@@ -187,7 +203,7 @@
   <script src="sorter.min.js" defer></script>
   <script src="printer.min.js" defer></script>
   <script src="ajv.min.js" defer></script>
-  <script src="schema-drafts.min.js" defer></script>
+  <script src="ajv7.min.js" defer></script>
   <script src="validator.min.js" defer></script>
   <script defer>
     window.onload = function () {
@@ -218,7 +234,7 @@
       function toggleSchemaValidation () {
         var className = document.getElementById('with-schema').checked
           ? 'with-schema' : ''
-        document.getElementById('source').className = className
+        document.getElementById('form').className = className
       }
 
       function selectParsingExtension () {
@@ -286,7 +302,10 @@
         function parseInput (source, parserOptions) {
           if (document.getElementById('with-schema').checked) {
             var schema = document.getElementById('schema').value
-            var validate = jsonlintValidator.compile(schema, parserOptions)
+            var validate = jsonlintValidator.compile(schema, {
+              environment: document.getElementById('environment').value,
+              ...parserOptions
+            })
             return validate(source, parserOptions)
           }
           return jsonlint.parse(source, parserOptions)

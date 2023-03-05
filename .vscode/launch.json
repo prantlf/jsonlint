@@ -27,6 +27,15 @@
       ]
     },
     {
+      "name": "types",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/test/types.test.mjs",
+      "skipFiles": [
+        "<node_internals>/**/*.js"
+      ]
+    },
+    {
       "name": "fail",
       "type": "node",
       "request": "launch",

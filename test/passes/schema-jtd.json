@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "id": { "type": "string" },
+    "createdAt": { "type": "timestamp" },
+    "karma": { "type": "int32" },
+    "isAdmin": { "type": "boolean" }
+  }
+}

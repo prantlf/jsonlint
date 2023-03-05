@@ -362,7 +362,11 @@ declare module '@prantlf/jsonlint/lib/validator' {
   /**
    * Identifiers of supported JSON Schema drafts and JSON Type Definition.
    */
-  type Environment = 'json-schema-draft-04' | 'json-schema-draft-06' | 'json-schema-draft-07'
+  type Environment = 'json-schema-draft-04' | 'draft-04' |
+    'json-schema-draft-06' | 'draft-06' | 'json-schema-draft-07' | 'draft-07' |
+    'json-schema-draft-2019-09' | 'draft-2019-09' |
+    'json-schema-draft-2020-12' | 'draft-2020-12' |
+    'json-type-definition' | 'jtd' | 'rfc8927'
 
   /**
    * Options to customize a JSON Schema validator.
@@ -414,7 +418,11 @@ declare module '@prantlf/jsonlint/lib/validator' {
     /**
      * Choose the JSON Schema draft or JSON Type Definition.
      *
-     * Available values: `'json-schema-draft-04' | 'json-schema-draft-06' | 'json-schema-draft-07'`
+     * Available values: `'json-schema-draft-04' | 'draft-04' |
+     *   'json-schema-draft-06' | 'draft-06' | 'json-schema-draft-07' | 'draft-07' |
+     *   'json-schema-draft-2019-09' | 'draft-2019-09' |
+     *   'json-schema-draft-2020-12' | 'draft-2020-12' |
+     *   'json-type-definition' | 'jtd' | 'rfc8927'`
      */
     environment?: Environment
   }
