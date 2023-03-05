@@ -39,7 +39,7 @@
     "node": ">= 14"
   },
   "scripts": {
-    "prepare": "npm run compile:jsonlint && rollup -c && npm run minify && npm run compile:tests",
+    "build": "npm run compile:jsonlint && rollup -c && npm run minify && npm run compile:tests",
     "compile:jsonlint": "cat.js src/prefix.js.txt src/unicode.js src/custom-parser.js src/pointer.js src/native-parser.js src/configurable-parser.js src/suffix.js.txt > lib/jsonlint.js",
     "minify": "esbuild --minify --sourcemap --outfile=web/jsonlint.min.js lib/jsonlint.js && esbuild --minify --sourcemap --outfile=web/validator.min.js lib/validator.js && esbuild --minify --sourcemap --outfile=web/formatter.min.js lib/formatter.js && esbuild --minify --sourcemap --outfile=web/sorter.min.js lib/sorter.js && esbuild --minify --sourcemap --outfile=web/printer.min.js lib/printer.js && esbuild --minify --sourcemap --outfile=web/ajv.min.js node_modules/ajv6/dist/ajv.bundle.js",
     "compile:tests": "tsc --moduleResolution node --module es2022 test/types.test.ts && mv.js test/types.test.js test/types.test.mjs",
