@@ -15,6 +15,7 @@ const handbuiltParse = require('./hand-built/pure')
 const handbuiltExtendedParse = require('./hand-built/pure')
 const astParse = require('json-to-ast')
 const JSON5 = require('json5')
+const JSON6 = require('json-6')
 const { parse: parseWithComments } = require('comment-json')
 const { parse: parseThis, tokenize: tokenizeThis } = require('..')
 const myna = require('myna-parser')
@@ -108,6 +109,10 @@ function parseJSON5 () {
   JSON5.parse(input)
 }
 
+function parseJSON6 () {
+  JSON6.parse(input)
+}
+
 function parseAST () {
   astParse(input, {
     loc: true
@@ -139,5 +144,6 @@ createSuite(`Parsing JSON data ${input.length} characters long using`)
   .add('the pure jison parser', parsePureJison)
   .add('the extended jison parser', parseExtendedJison)
   .add('the JSON5 parser', parseJSON5)
+  .add('the JSON6 parser', parseJSON6)
   .add('the Nearley parser', parseNearley)
   .start()

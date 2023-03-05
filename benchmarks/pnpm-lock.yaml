@@ -1,52 +1,54 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   benchmark: 2.1.4
-  chevrotain: 10.1.2
-  comment-json: 4.2.2
+  chevrotain: 10.4.2
+  comment-json: 4.2.3
   jison: 0.4.18
+  json-6: 1.1.4
   json-to-ast: 2.1.0
-  json5: 2.2.1
-  moo: 0.5.1
+  json5: 2.2.3
+  moo: 0.5.2
   myna-parser: 2.5.1
   nearley: 2.20.1
   pegjs: 0.10.0
 
 devDependencies:
   benchmark: 2.1.4
-  chevrotain: 10.1.2
-  comment-json: 4.2.2
+  chevrotain: 10.4.2
+  comment-json: 4.2.3
   jison: 0.4.18
+  json-6: 1.1.4
   json-to-ast: 2.1.0
-  json5: 2.2.1
-  moo: 0.5.1
+  json5: 2.2.3
+  moo: 0.5.2
   myna-parser: 2.5.1
   nearley: 2.20.1
   pegjs: 0.10.0
 
 packages:
 
-  /@chevrotain/cst-dts-gen/10.1.2:
-    resolution: {integrity: sha512-E/XrL0QlzExycPzwhOEZGVOheJ/Clr5uNv3oCds88MiNqEmg3UU1iauZk7DhjsUo3jgEW4lf0I5HRl7/HC5ZkQ==}
+  /@chevrotain/cst-dts-gen/10.4.2:
+    resolution: {integrity: sha512-0+4bNjlndNWMoVLH/+y4uHnf6GrTipsC+YTppJxelVJo+xeRVQ0s2PpkdDCVTsu7efyj+8r1gFiwVXsp6JZ0iQ==}
     dependencies:
-      '@chevrotain/gast': 10.1.2
-      '@chevrotain/types': 10.1.2
+      '@chevrotain/gast': 10.4.2
+      '@chevrotain/types': 10.4.2
       lodash: 4.17.21
     dev: true
 
-  /@chevrotain/gast/10.1.2:
-    resolution: {integrity: sha512-er+TcxUOMuGOPoiOq8CJsRm92zGE4YPIYtyxJfxoVwVgtj4AMrPNCmrHvYaK/bsbt2DaDuFdcbbAfM9bcBXW6Q==}
+  /@chevrotain/gast/10.4.2:
+    resolution: {integrity: sha512-4ZAn8/mjkmYonilSJ60gGj1tAF0cVWYUMlIGA0e4ATAc3a648aCnvpBw7zlPHDQjFp50XC13iyWEgWAKiRKTOA==}
     dependencies:
-      '@chevrotain/types': 10.1.2
+      '@chevrotain/types': 10.4.2
       lodash: 4.17.21
     dev: true
 
-  /@chevrotain/types/10.1.2:
-    resolution: {integrity: sha512-4qF9SmmWKv8AIG/3d+71VFuqLumNCQTP5GoL0CW6x7Ay2OdXm6FUgWFLTMneGUjYUk2C+MSCf7etQfdq3LEr1A==}
+  /@chevrotain/types/10.4.2:
+    resolution: {integrity: sha512-QzSCjg6G4MvIoLeIgOiMR0IgzkGEQqrNJJIr3T5ETRa7l4Av4AMIiEctV99mvDr57iXwwk0/kr3RJxiU36Nevw==}
     dev: true
 
-  /@chevrotain/utils/10.1.2:
-    resolution: {integrity: sha512-bbZIpW6fdyf7FMaeDmw3cBbkTqsecxEkwlVKgVfqqXWBPLH6azxhPA2V9F7OhoZSVrsnMYw7QuyK6qutXPjEew==}
+  /@chevrotain/utils/10.4.2:
+    resolution: {integrity: sha512-V34dacxWLwKcvcy32dx96ADJVdB7kOJLm7LyBkBQw5u5HC9WdEFw2G17zml+U3ivavGTrGPJHl8o9/UJm0PlUw==}
     dev: true
 
   /JSONSelect/0.4.0:
@@ -75,13 +77,13 @@ packages:
       platform: 1.3.6
     dev: true
 
-  /chevrotain/10.1.2:
-    resolution: {integrity: sha512-hvRiQuhhTZxkPMGD/dke+s1EGo8AkKDBU05CcufBO278qgAQSwIC4QyLdHz0CFHVtqVYWjlAS5D1KwvBbaHT+w==}
+  /chevrotain/10.4.2:
+    resolution: {integrity: sha512-gzF5GxE0Ckti5kZVuKEZycLntB5X2aj9RVY0r4/220GwQjdnljU+/t3kP74/FMWC7IzCDDEjQ9wsFUf0WCdSHg==}
     dependencies:
-      '@chevrotain/cst-dts-gen': 10.1.2
-      '@chevrotain/gast': 10.1.2
-      '@chevrotain/types': 10.1.2
-      '@chevrotain/utils': 10.1.2
+      '@chevrotain/cst-dts-gen': 10.4.2
+      '@chevrotain/gast': 10.4.2
+      '@chevrotain/types': 10.4.2
+      '@chevrotain/utils': 10.4.2
       lodash: 4.17.21
       regexp-to-ast: 0.5.0
     dev: true
@@ -107,8 +109,8 @@ packages:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
     dev: true
 
-  /comment-json/4.2.2:
-    resolution: {integrity: sha512-H8T+kl3nZesZu41zO2oNXIJWojNeK3mHxCLrsBNu6feksBXsgb+PtYz5daP5P86A0F3sz3840KVYehr04enISQ==}
+  /comment-json/4.2.3:
+    resolution: {integrity: sha512-SsxdiOf064DWoZLH799Ata6u7iV658A11PlWtZATDlXPpKGJnbJZ5Z24ybixAi+LUUqJ/GKowAejtC5GFUG7Tw==}
     engines: {node: '>= 6'}
     dependencies:
       array-timsort: 1.0.3
@@ -187,14 +189,20 @@ packages:
     engines: {node: '>=0.4'}
     hasBin: true
     dependencies:
+      JSONSelect: 0.4.0
       cjson: 0.3.0
       ebnf-parser: 0.1.10
       escodegen: 1.3.3
       esprima: 1.1.1
       jison-lex: 0.3.4
-      JSONSelect: 0.4.0
       lex-parser: 0.1.4
       nomnom: 1.5.2
+    dev: true
+
+  /json-6/1.1.4:
+    resolution: {integrity: sha512-ljsNv5ARPvSDpWmjFwja8NjzzEFkOis2OMRtvO5GRtr217DXaQseFYZO6fgVPThPPuaWpOI5/cs/fUCfqQlWiA==}
+    engines: {node: '>=10.0.0'}
+    hasBin: true
     dev: true
 
   /json-to-ast/2.1.0:
@@ -205,8 +213,8 @@ packages:
       grapheme-splitter: 1.0.4
     dev: true
 
-  /json5/2.2.1:
-    resolution: {integrity: sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==}
+  /json5/2.2.3:
+    resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
     dev: true
@@ -228,8 +236,8 @@ packages:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: true
 
-  /moo/0.5.1:
-    resolution: {integrity: sha512-I1mnb5xn4fO80BH9BLcF0yLypy2UKl+Cb01Fu0hJRkJjlCRtxZMWkTdAtDd5ZqCOxtCkhmRwyI57vWT+1iZ67w==}
+  /moo/0.5.2:
+    resolution: {integrity: sha512-iSAJLHYKnX41mKcJKjqvnAN9sf0LMDTXDEvFv+ffuRR9a1MIuXLjMNL6EsnDHSkKLTWNqQQ5uo61P4EbU4NU+Q==}
     dev: true
 
   /myna-parser/2.5.1:
@@ -241,7 +249,7 @@ packages:
     hasBin: true
     dependencies:
       commander: 2.20.3
-      moo: 0.5.1
+      moo: 0.5.2
       railroad-diagrams: 1.0.0
       randexp: 0.4.6
     dev: true
@@ -281,7 +289,7 @@ packages:
     dev: true
 
   /repeat-string/1.6.1:
-    resolution: {integrity: sha1-jcrkcOHIirwtYA//Sndihtp15jc=}
+    resolution: {integrity: sha512-PV0dzCYDNfRi1jCDbJzpW7jNNDRuCOG/jI5ctQcGKt/clZD+YcPS3yIlWuTJMmESC8aevCFmWJy5wjAFgNqN6w==}
     engines: {node: '>=0.10'}
     dev: true
 
@@ -291,7 +299,7 @@ packages:
     dev: true
 
   /source-map/0.1.43:
-    resolution: {integrity: sha1-wkvBRspRfBRx9drL4lcbK3+eM0Y=}
+    resolution: {integrity: sha512-VtCvB9SIQhk3aF6h+N85EaqIaBFIAfZ9Cu+NJHHVvc8BbEcnvDcFw6sqQ2dQrT6SlOrZq3tIvyD9+EGq/lJryQ==}
     engines: {node: '>=0.8.0'}
     requiresBuild: true
     dependencies:

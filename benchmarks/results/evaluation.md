@@ -8,7 +8,7 @@ The best parser is likely to be chosen specifically for the particular usage sce
 Universal Parser
 ----------------
 
-The most understandable messages are reported by [JJU] and [PEG.js]. The performance of the latter is not on par with the fastest parsers, but other parsers generated from a grammar specification are even slower.
+The most understandable messages are reported by [JJU] and [PEG.js]. The performance of the latter is not on par with the fastest parsers, but other parsers generated from a grammar specification are even slower. [JSON6] contains the extended information, but appended to the error message, which can make it longer and not so easy to read. 
 
 Validate Standard JSON As Fast As Possible
 ------------------------------------------
@@ -18,7 +18,7 @@ The [built-in] native JSON parser (`JSON.parse`) offers by far the best performa
 Validate Non-Standard JSON
 --------------------------
 
-Depending on extra features required, [Chevrotain] and [JJU] offer the best quality/performance ratio. Chevrotain tries harder to explain, what was wrong, which is often quite counterproductive. JJU explains the problems well-enough with a single sentence, even ended by a full-stop. Chevrotain packs additional features like recovery and reporting all errors instead of just the first one. This extra feature might make it a winner for a flexibly configurable scenario. However, the Chevrotain parser needs significantly more code, than all the others.
+Depending on extra features required, [Chevrotain], [JJU] and [JSON6] offer the best quality/performance ratio. Chevrotain tries harder to explain, what was wrong, which is often quite counterproductive. JJU explains the problems well-enough with a single sentence, even ended by a full-stop. Chevrotain packs additional features like recovery and reporting all errors instead of just the first one. This extra feature might make it a winner for a flexibly configurable scenario. However, the Chevrotain parser needs significantly more code, than all the others. JSON6 supports many extensions to JSON/JSON5 standards.
 
 [tested with a JSON grammar]: https://sap.github.io/chevrotain/performance/
 [performance]: ./performance.md
@@ -27,5 +27,4 @@ Depending on extra features required, [Chevrotain] and [JJU] offer the best qual
 [Chevrotain]: https://github.com/SAP/chevrotain
 [JJU]: http://rlidwka.github.io/jju/
 [PEG.JS]: http://pegjs.org/
-[Jison]: http://zaach.github.io/jison/
-[JSON5]: https://json5.org/
+[JSON6]: https://github.com/d3x0r/JSON6#readme

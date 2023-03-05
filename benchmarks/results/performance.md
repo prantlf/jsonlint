@@ -13,43 +13,45 @@ Code Size
 
 The size of the JavaScript code is important, when the application runs in the web browser.
 
-| File                   | Source  | Minified | Gzipped  |
-| :--------------------- | ------: | -------: | -------: |
-| hand-built/extended.js |   6.0 kB |   1.8 kB |  0.8 kB |
-| jison/extended.js      |  25.5 kB |  11.0 kB |  3.9 kB |
-| jju/extended.js        |  29.8 kB |  16.6 kB |  5.4 kB |
-| pegjs/extended.js      |  54.1 kB |  13.5 kB |  3.4 kB |
-| json5/dist/index.js    |  56.8 kB |  30.9 kB |  9.1 kB |
-| chevrotain/extended.js | 403.4 kB | 153.7 kB | 38.3 kB |
+| File                   | Source    | Minified  | Gzipped  | Brotlied |
+| :--------------------- | --------: | --------: | -------: | -------: |
+| hand-built/extended.js |   6.04 kB |   1.82 kB |   819  B |   738  B |
+| jison/extended.js      |  24.50 kB |  10.90 kB |  3.85 kB |  3.46 kB |
+| jju/extended.js        |  27.50 kB |  15.10 kB |  5.16 kB |  3.95 kB |
+| pegjs/extended.js      |  52.20 kB |  12.60 kB |  3.39 kB |  2.90 kB |
+| json5/dist/index.js    |  58.60 kB |  31.30 kB |  9.26 kB |  7.17 kB |
+| json6/dist/index.js    |  77.70 kB |  19.10 kB |  6.92 kB |  6.31 kB |
+| chevrotain/extended.js | 568.24 kB | 224.70 kB | 51.70 kB | 43.70 kB |
 
 Results
 -------
 
-This is a result of the [benchmark] run by `npm run benchmarks`. The numbers should be understood as relative ones:
+This is a result of the [benchmark] run by `node parse`. The numbers should be understood as relative ones:
 
-    Parsing JSON data 4589 characters long using:
-      the built-in parser x 97,039 ops/sec ±0.69% (92 runs sampled)
-      the pure chevrotain parser x 11,981 ops/sec ±0.86% (87 runs sampled)
-      the extended chevrotain parser x 11,183 ops/sec ±0.54% (88 runs sampled)
-      the standard jsonlint parser x 97,109 ops/sec ±0.81% (93 runs sampled)
-      the extended jsonlint parser x 7,256 ops/sec ±0.54% (90 runs sampled)
-      the tokenising jsonlint parser x 6,387 ops/sec ±0.44% (88 runs sampled)
-      the pure hand-built parser x 7,508 ops/sec ±0.49% (86 runs sampled)
-      the extended hand-built parser x 7,517 ops/sec ±0.45% (90 runs sampled)
-      the AST parser x 8,008 ops/sec ±0.90% (85 runs sampled)
-      the Myna parser x 3,124 ops/sec ±0.66% (90 runs sampled)
-      the pure jju parser x 7,505 ops/sec ±0.64% (89 runs sampled)
-      the extended jju parser x 7,352 ops/sec ±0.45% (90 runs sampled)
-      the tokenisable jju parser x 6,636 ops/sec ±0.46% (89 runs sampled)
-      the tokenising jju parser x 5,373 ops/sec ±0.54% (89 runs sampled)
-      the comments-enabled parser x 6,258 ops/sec ±0.95% (88 runs sampled)
-      the pure pegjs parser x 2,803 ops/sec ±0.58% (88 runs sampled)
-      the extended pegjs parser x 2,526 ops/sec ±0.74% (87 runs sampled)
-      the pure jison parser x 2,460 ops/sec ±0.49% (89 runs sampled)
-      the extended jison parser x 2,195 ops/sec ±0.63% (88 runs sampled)
-      the JSON5 parser x 1,660 ops/sec ±0.84% (90 runs sampled)
-      the Nearley parser x 1,408 ops/sec ±1.14% (85 runs sampled)
-    The fastest one was the built-in parser,the standard jsonlint parser.
+    Parsing JSON data 4797 characters long using:
+      the built-in parser x 78,856 ops/sec ±0.50% (92 runs sampled)
+      the pure chevrotain parser x 9,815 ops/sec ±1.29% (90 runs sampled)
+      the extended chevrotain parser x 9,512 ops/sec ±0.90% (92 runs sampled)
+      the standard jsonlint parser x 78,998 ops/sec ±0.48% (95 runs sampled)
+      the extended jsonlint parser x 7,923 ops/sec ±0.51% (93 runs sampled)
+      the tokenising jsonlint parser x 6,281 ops/sec ±0.71% (91 runs sampled)
+      the pure hand-built parser x 13,529 ops/sec ±0.62% (92 runs sampled)
+      the extended hand-built parser x 13,475 ops/sec ±0.81% (92 runs sampled)
+      the AST parser x 9,201 ops/sec ±0.74% (91 runs sampled)
+      the Myna parser x 3,089 ops/sec ±0.54% (94 runs sampled)
+      the pure jju parser x 8,596 ops/sec ±0.98% (92 runs sampled)
+      the extended jju parser x 6,966 ops/sec ±0.59% (89 runs sampled)
+      the tokenisable jju parser x 6,091 ops/sec ±0.84% (89 runs sampled)
+      the tokenising jju parser x 4,651 ops/sec ±0.54% (92 runs sampled)
+      the comments-enabled parser x 5,632 ops/sec ±0.65% (92 runs sampled)
+      the pure pegjs parser x 2,413 ops/sec ±0.69% (92 runs sampled)
+      the extended pegjs parser x 2,124 ops/sec ±0.66% (92 runs sampled)
+      the pure jison parser x 1,722 ops/sec ±1.16% (88 runs sampled)
+      the extended jison parser x 1,619 ops/sec ±0.65% (91 runs sampled)
+      the JSON5 parser x 1,283 ops/sec ±0.43% (91 runs sampled)
+      the JSON6 parser x 7,922 ops/sec ±1.78% (92 runs sampled)
+      the Nearley parser x 944 ops/sec ±0.51% (92 runs sampled)
+    The fastest one were the standard jsonlint parser and the built-in parser.
 
 I looked further at capabilities and licenses of the parsers.
 
@@ -115,13 +117,19 @@ I looked further at capabilities and licenses of the parsers.
 [JSON5]
 -------
 
-* Hand-built parser implementing the [JSON5 specification]. Extensions mentioned above were included, and even more, like trailing commas or multi-line strings. No support for pure JSON.
+* Hand-built parser implementing the [JSON6 specification]. Extensions mentioned above were included, and even more, like trailing commas or multi-line strings. No support for pure JSON.
 * Slower one.
+
+[JSON6]
+-------
+
+* Hand-built parser going beyond the [JSON5 specification]. Extensions mentioned above were included, and even more, like trailing commas or multi-line strings. No support for pure JSON.
+* Very fast one.
 
 [JSONLint]
 ----------
 
-This entry is here just to compare the current implementation to the original "contenders". Based on the [evaluation] results, the current JSONLint uses a hand-coded parser based on [JJU].
+This entry is here just to compare the current implementation to the original "contenders". Based on the [evaluation] results, the current JSONLint uses a hand-coded parser based on [JJU]. THe [JSON6] parser wasn't available at that time, otherwise it would've been a serious candidate.
 
 [tested with a JSON grammar]: https://sap.github.io/chevrotain/performance/
 [quality of error reporting]: ./errorReportingQuality.md
@@ -136,6 +144,7 @@ This entry is here just to compare the current implementation to the original "c
 [PEG.JS]: http://pegjs.org/
 [Jison]: http://zaach.github.io/jison/
 [JSON5]: https://json5.org/
+[JSON6]: https://github.com/d3x0r/JSON6#readme
 [PEG]: https://en.wikipedia.org/wiki/Parsing_expression_grammar
 [Bison]: https://en.wikipedia.org/wiki/GNU_Bison
 [JSON5 specification]: https://spec.json5.org/

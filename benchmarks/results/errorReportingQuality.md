@@ -503,7 +503,13 @@ Jison appears to return different line number of the error occurrence. If there 
 
 ### [JSON5]
 
-A short and technical message. Structured information about the error contains only the line and column, bot not the offset.
+A short and technical message. Structured information about the error contains only the line and column, but not the offset.
+
+The context information can be added using the line and column of the error.
+
+### [JSON6]
+
+A short and technical message. Extra information about the error is appended to the error message. It contains the offset, the line and column, and an excerpt of the invalid input.
 
 The context information can be added using the line and column of the error.
 
@@ -517,4 +523,5 @@ The context information can be added using the line and column of the error.
 [PEG.JS]: http://pegjs.org/
 [Jison]: http://zaach.github.io/jison/
 [JSON5]: https://json5.org/
+[JSON6]: https://github.com/d3x0r/JSON6#readme
 [original JSONLint]: https://github.com/zaach/jison

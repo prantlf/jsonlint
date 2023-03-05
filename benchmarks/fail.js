@@ -6,6 +6,7 @@ const { parse: jjuParse } = require('./jju/pure')
 const { parse: pegjsParse } = require('./pegjs/pure')
 const jisonParser = require('./jison/pure').parser
 const JSON5 = require('json5')
+const JSON6 = require('json-6')
 const { parse: parseWithComments } = require('comment-json')
 
 const inputSources = [
@@ -231,6 +232,31 @@ function parseJSON5 () {
   }
 }
 
+function improveJSON6Error (error) {
+  let { message } = error
+  message = message.replaceAll('\n', ' ')
+  let [, lineNumber, columnNumber] = / \[(\d+):(\d+)\]$/.exec(message)
+  --columnNumber
+  const cursor = `line ${lineNumber}, column ${columnNumber}`
+  const offset = getOffset(lineNumber, columnNumber)
+  const position = showPosition({ offset })
+  message = message
+    .replace(/ \[\d+:\d+\]$/, '')
+    .replace(/ \(near '.+'\)$/, '')
+    .replace(/ unexpected at \d+$/, '')
+  message = message.charAt(0).toUpperCase() + message.substr(1)
+  error.message = `Parse error on ${cursor}:\n${position}\n${message}`
+  throw error
+}
+
+function parseJSON6 () {
+  try {
+    JSON6.parse(inputSource)
+  } catch (error) {
+    improveJSON6Error(error)
+  }
+}
+
 for (const test of inputSources) {
   inputSource = test
   const formattedTest = test
@@ -246,6 +272,7 @@ for (const test of inputSources) {
     .add('the pegjs parser', parsePegjs)
     .add('the jison parser', parseJison)
     .add('the JSON5 parser', parseJSON5)
+    .add('the JSON6 parser', parseJSON6)
     .start()
   console.log()
 }
