@@ -1,3 +1,10 @@
+## [11.7.1](https://github.com/prantlf/jsonlint/compare/v11.7.0...v11.7.1) (2023-03-05)
+
+
+### Bug Fixes
+
+* Complete TypeScript types ([7064c50](https://github.com/prantlf/jsonlint/commit/7064c5041a292a5a87bccc2de7fc945a2ee7c160))
+
 # [11.7.0](https://github.com/prantlf/jsonlint/compare/v11.6.0...v11.7.0) (2022-09-26)
 
 
