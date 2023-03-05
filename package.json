@@ -26,7 +26,8 @@
   },
   "preferGlobal": true,
   "main": "lib/jsonlint.js",
-  "typings": "lib/jsonlint.d.ts",
+  "typings": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "bin": {
     "jsonlint": "lib/cli.js"
   },
