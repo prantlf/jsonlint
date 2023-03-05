@@ -1,3 +1,10 @@
+# [13.1.0](https://github.com/prantlf/jsonlint/compare/v13.0.1...v13.1.0) (2023-03-05)
+
+
+### Features
+
+* Accept multiple schemas if external definitions are used ([32d1cab](https://github.com/prantlf/jsonlint/commit/32d1cabfc5cf00f23ec8d7b6b4a5b62e66924fa3))
+
 ## [13.0.1](https://github.com/prantlf/jsonlint/compare/v13.0.0...v13.0.1) (2023-03-05)
 
 
