@@ -1,3 +1,15 @@
+# [13.0.0](https://github.com/prantlf/jsonlint/compare/v12.0.0...v13.0.0) (2023-03-05)
+
+
+### Features
+
+* Support JSON Schema drafts 2019-09 and 2020-12 and JSON Type Definition ([0b9130c](https://github.com/prantlf/jsonlint/commit/0b9130ceae5f6f27cbe3e6d65207127862ffe584))
+
+
+### BREAKING CHANGES
+
+* The default environment recognises only JSON Schema drafts 06 and 07 automatically. Not 04 any more. The environment for JSON Schema drafts 04 has to be selected explicitly. Also, JSON Schema drafts 06 and 07 are handled by AJV@8 instead of AJV@6. It shouldn't make any difference, but the implementation is new and could perform a stricter validation.
+
 # [12.0.0](https://github.com/prantlf/jsonlint/compare/v11.7.2...v12.0.0) (2023-03-05)
 
 
