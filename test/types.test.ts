@@ -40,12 +40,12 @@ test('compile', () => {
   compile('{}', 'draft-2020-12')
   compile('{}', 'json-type-definition');
   compile('{}', 'jtd');
-  compile('{}', 'rfc8927');
-  compile('{}', {})
-  compile('{}', { mode: 'json' })
-  compile('{}', { mode: 'cjson' })
-  compile('{}', { mode: 'json5' })
-  compile('{}', {
+  compile({}, 'rfc8927');
+  compile(['{}'], {})
+  compile(['{}'], { mode: 'json' })
+  compile(['{}'], { mode: 'cjson' })
+  compile(['{}'], { mode: 'json5' })
+  compile([{}], {
     environment: 'draft-07',
     ignoreBOM: true,
     ignoreComments: true,

@@ -1,8 +1,8 @@
 const test = require('tehanu')(__filename)
 const assert = require('assert')
 
-const fs = require('fs')
-const path = require('path')
+const { readFileSync } = require('fs')
+const { join } = require('path')
 const YAML = require('js-yaml')
 
 const { parse } = require('..')
@@ -17,8 +17,8 @@ const schema = YAML.DEFAULT_SCHEMA.extend([
   })
 ])
 
-const tests = YAML.load(fs.readFileSync(
-  path.join(__dirname, '/portable.yaml'), 'utf8'), {
+const tests = YAML.load(readFileSync(
+  join(__dirname, '/portable.yaml'), 'utf8'), {
   schema
 })
 

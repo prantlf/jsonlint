@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/schemas/phone",
+  "title": "Schema for a phone in data-ext-deps.json",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "string",
+      "pattern": "[-0-9]+"
+    }
+  }
+}

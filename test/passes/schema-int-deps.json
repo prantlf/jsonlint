@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "title": "Schema for data-int-deps.json",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "oneOf": [
+      {
+        "$ref": "#/$defs/string"
+      },
+      {
+        "$ref": "#/$defs/number"
+      },
+      {
+        "$ref": "#/$defs/phone"
+      }
+    ]
+  },
+  "$defs": {
+    "string": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "number": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number"
+        }
+      }
+    },
+    "phone": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "pattern": "[-0-9]+"
+        }
+      }
+    }
+  }
+}

@@ -16,14 +16,15 @@ This is a fork of the original project ([zaach/jsonlint](https://github.com/zaac
 * Optionally recognizes JavaScript-style comments (CJSON) and single quoted strings (JSON5).
 * Optionally ignores trailing commas and reports duplicate object keys as an error.
 * Optionally checks that also the expected format matches, including sorted object keys.
-* Supports [JSON Schema] drafts 04, 06 and 07.
+* Supports [JSON Schema] drafts 04, 06, 07, 2019-09 and 2020-12.
+* Supports [JSON Type Definition].
 * Offers pretty-printing including comment-stripping and object keys without quotes (JSON5).
-* Prefers the native JSON parser if possible to run [7x faster than the custom parser].
+* Prefers the native JSON parser if possible to run [10x faster than the custom parser].
 * Reports errors with rich additional information. From the JSON Schema validation too.
 * Consumes configuration from both command line and [configuration files](configuration).
 * Implements JavaScript modules using [UMD] to work in Node.js, in a browser, everywhere.
 * Depends on up-to-date npm modules with no installation warnings.
-* Small size - 18.7 kB minified, 6.54 kB gzipped, 5.16 kB brotlied.
+* Small size - 18.4 kB minified, 6.45 kB gzipped, 5.05 kB brotlied.
 
 **Note:** In comparison with the original project, this package exports only the `parse` method; not the `Parser` object.
 
@@ -113,50 +114,42 @@ The input can be checked not only to be a valid JSON, but also to be formatted a
 
 ### Usage
 
-Usage: `jsonlint [options] [<file, directory, pattern> ...]`
+Usage: `jsonlint [options] [--] [<file, directory, pattern> ...]`
 
 #### Options
 
-    -f, --config [file]          read options from a custom configuration file
-    -F, --no-config              disable searching for configuration file
+    -f, --config <file>          read options from a custom configuration file
+    -F, --no-config              disable searching for configuration files
     -s, --sort-keys              sort object keys (not when prettifying)
-    -E, --extensions [ext]       file extensions to process for directory walk
-                                  (default: ["json","JSON"])
+    -E, --extensions <ext...>    file extensions to process for directory walk (default: ["json","JSON"])
     -i, --in-place               overwrite the input files
     -j, --diff                   print difference instead of writing the output
     -k, --check                  check that the input is equal to the output
-    -t, --indent [num|char]      number of spaces or specific characters
-                                  to use for indentation (default: 2)
+    -t, --indent <num|char>      number of spaces or specific characters to use for indentation (default: 2)
     -c, --compact                compact error display
-    -M, --mode [mode]            set other parsing flags according to a format
-                                  type (default: "json")
+    -M, --mode <mode>            set other parsing flags according to a format type (default: "json")
     -B, --bom                    ignore the leading UTF-8 byte-order mark
     -C, --comments               recognize and ignore JavaScript-style comments
     -S, --single-quoted-strings  support single quotes as string delimiters
     -T, --trailing-commas        ignore trailing commas in objects and arrays
     -D, --no-duplicate-keys      report duplicate object keys as an error
-    -V, --validate [file]        JSON Schema file to use for validation
-    -e, --environment [env]      which specification of JSON Schema the
-                                  validation file uses
-    -x, --context [num]          line count used as the diff context (default: 3)
+    -V, --validate <file...>     JSON Schema file(s) to use for validation (default: [])
+    -e, --environment <env>      which specification of JSON Schema the validation file uses
+    -x, --context <num>          line count used as the diff context (default: 3)
     -l, --log-files              print only the parsed file names to stdout
     -q, --quiet                  do not print the parsed json to stdout
     -n, --continue               continue with other files if an error occurs
-    -p, --pretty-print           prettify the input instead of stringifying
-                                  the parsed object
+    -p, --pretty-print           prettify the input instead of stringifying the parsed object
     -P, --pretty-print-invalid   force pretty-printing even for invalid input
     -r, --trailing-newline       ensure a line break at the end of the output
     -R, --no-trailing-newline    ensure no line break at the end of the output
     --prune-comments             omit comments from the prettified output
-    --strip-object-keys          strip quotes from object keys if possible
-                                  (JSON5)
+    --strip-object-keys          strip quotes from object keys if possible (JSON5)
     --enforce-double-quotes      surrounds all strings with double quotes
-    --enforce-single-quotes      surrounds all strings with single quotes
-                                  (JSON5)
-    --trim-trailing-commas       omit trailing commas from objects and arrays
-                                  (JSON5)
+    --enforce-single-quotes      surrounds all strings with single quotes (JSON5)
+    --trim-trailing-commas       omit trailing commas from objects and arrays (JSON5)
     -v, --version                output the version number
-    -h, --help                   output usage information
+    -h, --help                   display help for command
 
 You can use BASH patterns for including and excluding files (only files).
 Patterns are case-sensitive and have to use slashes as directory separators.
@@ -168,6 +161,9 @@ for JSON Schema validation are "draft-04", "draft-06", "draft-07",
 "draft-2019-09" or "draft-2020-12". The environment may be prefixed
 with "json-schema-". JSON Type Definition can be selected by "rfc8927",
 "json-type-definition" or "jtd". If not specified, it will be "draft-07".
+
+If you specify schemas using the "-V" parameter, you will have to separate
+files to test with "--".
 
 ### Configuration
 
@@ -274,7 +270,7 @@ The `mode` parameter (string) sets parsing options to match a common format of i
 
 ### Schema Validation
 
-You can validate the input against a JSON Schema using the `lib/validator` module. The `validate` method accepts either an earlier parsed JSON data or a string with the JSON input:
+You can validate the input against a JSON Schema using the `lib/validator` module. The `compile` method accepts either an earlier parsed JSON Schema or a string with it:
 
 ```js
 const { compile } = require('@prantlf/jsonlint/lib/validator')
@@ -283,10 +279,16 @@ const validate = compile('string with JSON Schema')
 const parsed = validate('string with JSON data')
 ```
 
-If a string is passed to the `validate` method, the same options as for parsing JSON data can be passed as the second parameter. Compiling JSON Schema supports the same options as parsing JSON data too (except for `reviver`). They can be passed as the second (object) parameter. The optional second `environment` parameter can be passed either as a string or as an additional property in the options object too:
+If a string is passed to the `compile` method, the same options as for parsing JSON data can be passed as the second parameter. Compiling JSON Schema supports the same options as parsing JSON data too (except for `reviver`). They can be passed as the second (object) parameter. The optional second `environment` parameter (the default value is `draft-07`) ) can be passed either as a string or as an additional property in the options object too:
 
 ```js
 const validate = compile('string with JSON Schema', { environment: 'draft-2020-12' })
+```
+
+If you use external definitions in multiple schemas, you have to pass an array of all schemas to `compile`. The `$id` properties have to be set in each sub-schema according to the `$ref` references in the main schema. The main schema is usually sent as the first one to be compiled immediately, so that the errors in any sub-schema would be reported right away:
+
+```js
+const validate = compile(['string with main schema', 'string with a sub-schema'])
 ```
 
 ### Pretty-Printing
@@ -372,11 +374,11 @@ If you want to retain comments or whitespace for pretty-printing, for example, s
 
 ### Performance
 
-This is a part of an output from the [parser benchmark], when parsing a 4.2 KB formatted string ([package.json](./package.json)) with Node.js 12.14.0:
+This is a part of an output from the [parser benchmark], when parsing a 4.68 KB formatted string ([package.json](./package.json)) with Node.js 18.14.2:
 
-    jsonlint using native JSON.parse x 97,109 ops/sec ±0.81% (93 runs sampled)
-    jsonlint using hand-coded parser x 7,256 ops/sec ±0.54% (90 runs sampled)
-    jsonlint using tokenising parser x 6,387 ops/sec ±0.44% (88 runs sampled)
+    the standard jsonlint parser x 78,998 ops/sec ±0.48% (95 runs sampled)
+    the extended jsonlint parser x 7,923 ops/sec ±0.51% (93 runs sampled)
+    the tokenising jsonlint parser x 6,281 ops/sec ±0.71% (91 runs sampled)
 
 A custom JSON parser is [a lot slower] than the built-in one. However, it is more important to have a [clear error reporting] than the highest speed in scenarios like parsing configuration files. (For better error-reporting, the speed can be preserved by using the native parser initially and re-parsing with another parser only in case of failure.) Features like comments or JSON5 are also helpful in configuration files. Tokens preserve the complete input and can be used for pretty-printing without losing the comments.
 
@@ -429,6 +431,7 @@ Licensed under the [MIT License].
 [JSON]: https://tools.ietf.org/html/rfc8259
 [JSON5]: https://spec.json5.org
 [JSON Schema]: https://json-schema.org
+[JSON Type Definition]: https://jsontypedef.com/
 [UMD]: https://github.com/umdjs/umd
 [`Grunt`]: https://gruntjs.com/
 [`Gulp`]: http://gulpjs.com/

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/schemas/string",
+  "title": "Schema for a string in data-ext-deps.json",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "string"
+    }
+  }
+}

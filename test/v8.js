@@ -3,13 +3,13 @@
 const test = require('tehanu')(__filename)
 const assert = require('assert')
 
-const fs = require('fs')
-const path = require('path')
+const { readdirSync, readFileSync } = require('fs')
+const { join, resolve } = require('path')
 
 const { parse } = require('..')
 
-const root = path.resolve(__dirname, 'v8')
-const directories = fs.readdirSync(root)
+const root = resolve(__dirname, 'v8')
+const directories = readdirSync(root)
 
 function addTest (input, filePath) {
   let x, z
@@ -31,14 +31,14 @@ function addTest (input, filePath) {
 }
 
 function createTest (fileName, directory) {
-  const filePath = path.join(root, directory, fileName)
-  const source = fs.readFileSync(filePath, 'utf8')
+  const filePath = join(root, directory, fileName)
+  const source = readFileSync(filePath, 'utf8')
   test(fileName, addTest.bind(null, source, filePath))
 }
 
-directories.forEach(function (directory) {
-  // otherwise create a test for each file in this group:
-  fs.readdirSync(path.join(root, directory)).forEach(function (file) {
+for (const directory of directories) {
+  // otherwise create a test for each file in this group
+  for (const file of readdirSync(join(root, directory))) {
     createTest(file, directory)
-  })
-})
+  }
+}

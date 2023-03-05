@@ -1,0 +1,8 @@
+{
+  "$schema": "/schemas/schema-ext-deps.json",
+  "form": [
+    {
+      "value": "string"
+    }
+  ]
+}

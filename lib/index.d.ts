@@ -458,7 +458,8 @@ declare module '@prantlf/jsonlint/lib/validator' {
    *                               with multiple options
    * @returns the validator function
    */
-  function compile (schema: string, environmentOrOptions?: Environment | CompileOptions): Validator
+  function compile (schema: string | string[] | Record<string, unknown> | Record<string, unknown>[],
+    environmentOrOptions?: Environment | CompileOptions): Validator
 }
 
 declare module '@prantlf/jsonlint/lib/printer' {
