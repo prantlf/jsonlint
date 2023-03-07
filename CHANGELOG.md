@@ -1,3 +1,10 @@
+## [14.0.1](https://github.com/prantlf/jsonlint/compare/v14.0.0...v14.0.1) (2023-03-07)
+
+
+### Bug Fixes
+
+* Prevent setting a constant variable ([c7e940c](https://github.com/prantlf/jsonlint/commit/c7e940c4d59b594bca3c32ff974c91b69d44feb6))
+
 # [14.0.0](https://github.com/prantlf/jsonlint/compare/v13.1.0...v14.0.0) (2023-03-05)
 
 

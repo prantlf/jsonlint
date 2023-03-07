@@ -1,6 +1,6 @@
 {
   "name": "@prantlf/jsonlint",
-  "version": "14.0.0",
+  "version": "14.0.1",
   "description": "JSON/CJSON/JSON5 parser, syntax and schema validator and pretty-printer.",
   "author": "Ferdinand Prantl <prantlf@gmail.com> (http://prantl.tk)",
   "contributors": [
