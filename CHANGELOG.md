@@ -8,11 +8,7 @@
 
 ### BREAKING CHANGES
 
-* Although you shouldn't notice any change on the behaviour of the command line, something unexpected might've changed. Something did change
-- if you're annoyed by inserting "--" between the multi-value option and other
-arguments, you don't have to do it any more. Multi-value options can be entered
-either using the option prefix multiple times for each value, or using
-the option prefix just once and separating the values by commas.
+* Although you shouldn't notice any change on the behaviour of the command line, something unexpected might've changed. Something did change: if you're annoyed by inserting "--" between the multi-value option and other arguments, you don't have to do it any more. Multi-value options can be entered either using the option prefix multiple times for each value, or using the option prefix just once and separating the values by commas.
 
 # [13.1.0](https://github.com/prantlf/jsonlint/compare/v13.0.1...v13.1.0) (2023-03-05)
 
