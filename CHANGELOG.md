@@ -1,3 +1,10 @@
+## [14.0.2](https://github.com/prantlf/jsonlint/compare/v14.0.1...v14.0.2) (2023-03-08)
+
+
+### Bug Fixes
+
+* Recognise property "patterns" in the config file again ([2619904](https://github.com/prantlf/jsonlint/commit/2619904760c4f03fa0b93893ecaf8ccecff1d6ad)), closes [#18](https://github.com/prantlf/jsonlint/issues/18)
+
 ## [14.0.1](https://github.com/prantlf/jsonlint/compare/v14.0.0...v14.0.1) (2023-03-07)
 
 
