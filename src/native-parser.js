@@ -155,6 +155,10 @@ function parseNative (input, reviver) {
   try {
     return JSON.parse(input, reviver)
   } catch (error) {
-    throw improveNativeError(input, error)
+    const newError = improveNativeError(input, error)
+    if (error.location) throw newError
+    // If the native error didn't contain location, parse once more
+    // by the custom parser, which always provides the error location.
+    return parseCustom (input, reviver)
   }
 }
