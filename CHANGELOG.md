@@ -1,3 +1,11 @@
+## [14.0.3](https://github.com/prantlf/jsonlint/compare/v14.0.2...v14.0.3) (2023-04-27)
+
+
+### Bug Fixes
+
+* Ensure error location by custom parsing ([9757213](https://github.com/prantlf/jsonlint/commit/9757213eda5de9684099024d0c4f59e4d4f59c97))
+* Upgrade dependencies ([30f611a](https://github.com/prantlf/jsonlint/commit/30f611a1fc24a9003929a1f399d1694de65401ed))
+
 ## [14.0.2](https://github.com/prantlf/jsonlint/compare/v14.0.1...v14.0.2) (2023-03-08)
 
 
