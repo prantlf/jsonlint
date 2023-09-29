@@ -321,7 +321,7 @@ function parseInternal (input, options) {
     while (position < inputLength) {
       skipWhiteSpace()
       const key = parseKey()
-      if (allowDuplicateObjectKeys === false && result[key]) {
+      if (allowDuplicateObjectKeys === false && result.hasOwnProperty(key)) {
         fail('Duplicate key: "' + key + '"')
       }
       skipWhiteSpace()
