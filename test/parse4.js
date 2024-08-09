@@ -1,5 +1,5 @@
 const test = require('tehanu')(__filename)
-const assert = require('assert')
+const assert = require('node:assert')
 
 const { parse } = require('..')
 
@@ -31,5 +31,5 @@ test('json5', function () {
   assert.throws(function () {
     parse('{ "c": Infinity }', { mode: 'cjson' })
   }, /(?:Unexpected token "?I"?)|(?:No value found for key "c")/)
-  assert.deepEqual(parse('{ "c": Infinity }', { mode: 'json5' }), { c: Infinity })
+  assert.deepEqual(parse('{ "c": Infinity }', { mode: 'json5' }), { c: Number.POSITIVE_INFINITY })
 })

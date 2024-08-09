@@ -1,10 +1,10 @@
 /* eslint-disable no-eval */
 
 const test = require('tehanu')(__filename)
-const assert = require('assert')
+const assert = require('node:assert')
 
-const { readdirSync, readFileSync } = require('fs')
-const { join, resolve } = require('path')
+const { readdirSync, readFileSync } = require('node:fs')
+const { join, resolve } = require('node:path')
 
 const { parse } = require('..')
 
@@ -12,14 +12,15 @@ const root = resolve(__dirname, 'v8')
 const directories = readdirSync(root)
 
 function addTest (input, filePath) {
-  let x, z
+  let x
+  let z
   try {
     x = parse(input, { mode: 'json5' })
   } catch {
     x = 'fail'
   }
   try {
-    z = eval('(function(){"use strict"\nreturn (' + String(input) + '\n)\n})()')
+    z = eval(`(function(){"use strict"\nreturn (${String(input)}\n)\n})()`)
   } catch {
     z = 'fail'
   }

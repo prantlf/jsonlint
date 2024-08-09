@@ -12,7 +12,7 @@ function needsCustomParser (options) {
 function getReviver (options) {
   if (typeof options === 'function') {
     return options
-  } else if (options) {
+  }if (options) {
     return options.reviver
   }
 }

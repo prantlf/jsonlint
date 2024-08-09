@@ -108,7 +108,7 @@ function parseInternal (input, options) {
     let message
     if (position < inputLength) {
       const token = JSON.stringify(input[position])
-      message = 'Unexpected token ' + token
+      message = `Unexpected token ${token}`
     } else {
       message = 'Unexpected end of input'
     }
@@ -152,87 +152,84 @@ function parseInternal (input, options) {
 
   function parseGeneric () {
     if (position < inputLength) {
-      startToken && startToken()
+      startToken?.()
       const char = input[position++]
       if (char === '"' || (char === '\'' && allowSingleQuotedStrings)) {
         const string = parseString(char)
-        endToken && endToken('literal', string)
+        endToken?.('literal', string)
         return string
-      } else if (char === '{') {
-        endToken && endToken('symbol', '{')
+      }if (char === '{') {
+        endToken?.('symbol', '{')
         return parseObject()
-      } else if (char === '[') {
-        endToken && endToken('symbol', '[')
+      }if (char === '[') {
+        endToken?.('symbol', '[')
         return parseArray()
-      } else if (char === '-' || char === '.' || isDecDigit(char) ||
+      }if (char === '-' || char === '.' || isDecDigit(char) ||
                  (json5 && (char === '+' || char === 'I' || char === 'N'))) {
         const number = parseNumber()
-        endToken && endToken('literal', number)
+        endToken?.('literal', number)
         return number
-      } else if (char === 'n') {
+      }if (char === 'n') {
         parseKeyword('null')
-        endToken && endToken('literal', null)
+        endToken?.('literal', null)
         return null
-      } else if (char === 't') {
+      }if (char === 't') {
         parseKeyword('true')
-        endToken && endToken('literal', true)
+        endToken?.('literal', true)
         return true
-      } else if (char === 'f') {
+      }if (char === 'f') {
         parseKeyword('false')
-        endToken && endToken('literal', false)
+        endToken?.('literal', false)
         return false
-      } else {
-        --position
-        endToken && endToken()
-        return undefined
       }
+        --position
+        endToken?.()
+        return undefined
     }
   }
 
   function parseKey () {
     let result
     if (position < inputLength) {
-      startToken && startToken()
+      startToken?.()
       const char = input[position++]
       if (char === '"' || (char === '\'' && allowSingleQuotedStrings)) {
         const string = parseString(char)
-        endToken && endToken('literal', string)
+        endToken?.('literal', string)
         return string
-      } else if (char === '{') {
-        endToken && endToken('symbol', '{')
+      }if (char === '{') {
+        endToken?.('symbol', '{')
         return parseObject()
-      } else if (char === '[') {
-        endToken && endToken('symbol', '[')
+      }if (char === '[') {
+        endToken?.('symbol', '[')
         return parseArray()
-      } else if (char === '.' || isDecDigit(char)) {
+      }if (char === '.' || isDecDigit(char)) {
         const number = parseNumber(true)
-        endToken && endToken('literal', number)
+        endToken?.('literal', number)
         return number
-      } else if ((json5 && Uni.isIdentifierStart(char)) ||
+      }if ((json5 && Uni.isIdentifierStart(char)) ||
                  (char === '\\' && input[position] === 'u')) {
         const rollback = position - 1
         result = parseIdentifier()
         if (result === undefined) {
           position = rollback
-          endToken && endToken()
+          endToken?.()
           return undefined
-        } else {
-          endToken && endToken('literal', result)
-          return result
         }
-      } else {
-        --position
-        endToken && endToken()
-        return undefined
+          endToken?.('literal', result)
+          return result
       }
+        --position
+        endToken?.()
+        return undefined
     }
   }
 
   function skipBOM () {
     if (isBOM(input)) {
-      startToken && startToken()
+      startToken?.()
       ++position
-      endToken && endToken('bom')
+      endToken?.('bom')
     }
   }
 
@@ -268,7 +265,7 @@ function parseInternal (input, options) {
           ++position
         }
         skipComment(input[position++] === '*')
-        endToken && endToken('comment')
+        endToken?.('comment')
       } else {
         --position
         break
@@ -322,28 +319,28 @@ function parseInternal (input, options) {
       skipWhiteSpace()
       const key = parseKey()
       if (allowDuplicateObjectKeys === false && result[key]) {
-        fail('Duplicate key: "' + key + '"')
+        fail(`Duplicate key: "${key}"`)
       }
       skipWhiteSpace()
-      startToken && startToken()
+      startToken?.()
       let char = input[position++]
-      endToken && endToken('symbol', char)
+      endToken?.('symbol', char)
       if (char === '}' && key === undefined) {
         if (!ignoreTrailingCommas && isNotEmpty) {
           --position
           fail('Trailing comma in object')
         }
         return result
-      } else if (char === ':' && key !== undefined) {
+      }if (char === ':' && key !== undefined) {
         skipWhiteSpace()
-        tokenPath && tokenPath.push(key)
+        tokenPath?.push(key)
         let value = parseGeneric()
-        tokenPath && tokenPath.pop()
+        tokenPath?.pop()
 
-        if (value === undefined) fail('No value found for key "' + key + '"')
+        if (value === undefined) fail(`No value found for key "${key}"`)
         if (typeof key !== 'string') {
           if (!json5 || typeof key !== 'number') {
-            fail('Wrong key type: "' + key + '"')
+            fail(`Wrong key type: "${key}"`)
           }
         }
 
@@ -360,11 +357,10 @@ function parseInternal (input, options) {
         }
 
         skipWhiteSpace()
-        startToken && startToken()
+        startToken?.()
         char = input[position++]
-        endToken && endToken('symbol', char)
+        endToken?.('symbol', char)
         if (char === ',') {
-          continue
         } else if (char === '}') {
           return result
         } else {
@@ -383,13 +379,13 @@ function parseInternal (input, options) {
     const result = []
     while (position < inputLength) {
       skipWhiteSpace()
-      tokenPath && tokenPath.push(result.length)
+      tokenPath?.push(result.length)
       let item = parseGeneric()
-      tokenPath && tokenPath.pop()
+      tokenPath?.pop()
       skipWhiteSpace()
-      startToken && startToken()
+      startToken?.()
       const char = input[position++]
-      endToken && endToken('symbol', char)
+      endToken?.('symbol', char)
       if (item !== undefined) {
         if (reviver) {
           item = reviver(String(result.length), item)
@@ -430,18 +426,18 @@ function parseInternal (input, options) {
       let result
 
       if (isOctal) {
-        result = parseInt(string.replace(/^0o?/, ''), 8)
+        result = Number.parseInt(string.replace(/^0o?/, ''), 8)
       } else {
         result = Number(string)
       }
 
       if (Number.isNaN(result)) {
         --position
-        fail('Bad numeric literal - "' + input.substr(start, position - start + 1) + '"')
+        fail(`Bad numeric literal - "${input.substr(start, position - start + 1)}"`)
       } else if (!json5 && !string.match(/^-?(0|[1-9][0-9]*)(\.[0-9]+)?(e[+-]?[0-9]+)?$/i)) {
         // additional restrictions imposed by json
         --position
-        fail('Non-json numeric literal - "' + input.substr(start, position - start + 1) + '"')
+        fail(`Non-json numeric literal - "${input.substr(start, position - start + 1)}"`)
       } else {
         return result
       }
@@ -455,7 +451,7 @@ function parseInternal (input, options) {
 
     if (char === 'N' && json5) {
       parseKeyword('NaN')
-      return NaN
+      return Number.NaN
     }
 
     if (char === 'I' && json5) {
@@ -540,7 +536,7 @@ function parseInternal (input, options) {
           isHexDigit(input[position + 3]) &&
           isHexDigit(input[position + 4])) {
         // UnicodeEscapeSequence
-        char = String.fromCharCode(parseInt(input.substr(position + 1, 4), 16))
+        char = String.fromCharCode(Number.parseInt(input.substr(position + 1, 4), 16))
         position += 5
       }
 
@@ -571,7 +567,7 @@ function parseInternal (input, options) {
       let char = input[position++]
       if (char === endChar) {
         return result
-      } else if (char === '\\') {
+      }if (char === '\\') {
         if (position >= inputLength) {
           fail()
         }
@@ -594,7 +590,7 @@ function parseInternal (input, options) {
             }
             position++
           }
-          result += String.fromCharCode(parseInt(input.substr(position - count, count), 16))
+          result += String.fromCharCode(Number.parseInt(input.substr(position - count, count), 16))
         } else if (json5 && isOctDigit(char)) {
           let digits
           if (char < '4' && isOctDigit(input[position]) && isOctDigit(input[position + 1])) {
@@ -607,7 +603,7 @@ function parseInternal (input, options) {
             digits = 1
           }
           position += digits - 1
-          result += String.fromCharCode(parseInt(input.substr(position - digits, digits), 8))
+          result += String.fromCharCode(Number.parseInt(input.substr(position - digits, digits), 8))
         } else if (json5) {
           // \X -> x
           result += char
@@ -642,9 +638,8 @@ function parseInternal (input, options) {
         returnValue = reviver('', returnValue)
       }
       return tokenize ? tokens : returnValue
-    } else {
-      fail()
     }
+      fail()
   } else {
     if (position) {
       fail('No data, only a whitespace')

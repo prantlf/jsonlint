@@ -1,5 +1,5 @@
 const test = require('tehanu')(__filename)
-const assert = require('assert')
+const assert = require('node:assert')
 
 const { print } = require('../lib/printer')
 

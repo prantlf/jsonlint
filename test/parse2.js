@@ -1,20 +1,21 @@
 /* eslint-disable no-eval */
 
 const test = require('tehanu')(__filename)
-const assert = require('assert')
+const assert = require('node:assert')
 
 const { parse, parseNative, parseCustom } = require('..')
 
 function addTest (arg, json5) {
   function testJSON5 () {
-    let x, z
+    let x
+    let z
     try {
       x = parse(arg, { mode: 'json5' })
     } catch {
       x = 'fail'
     }
     try {
-      z = eval('(function(){"use strict"\nreturn (' + String(arg) + '\n)\n})()')
+      z = eval(`(function(){"use strict"\nreturn (${String(arg)}\n)\n})()`)
     } catch {
       z = 'fail'
     }
@@ -22,7 +23,8 @@ function addTest (arg, json5) {
   }
 
   function testNativeJSON () {
-    let x, z
+    let x
+    let z
     try {
       x = parseNative(arg)
     } catch {
@@ -37,7 +39,8 @@ function addTest (arg, json5) {
   }
 
   function testStrictJSON () {
-    let x, z
+    let x
+    let z
     try {
       x = parseCustom(arg)
     } catch {
@@ -52,11 +55,11 @@ function addTest (arg, json5) {
   }
 
   if (json5 !== false) {
-    test('test_parse_json5: ' + JSON.stringify(arg), testJSON5)
+    test(`test_parse_json5: ${JSON.stringify(arg)}`, testJSON5)
   }
   if (json5 !== true) {
-    test('test_parse_native: ' + JSON.stringify(arg), testNativeJSON)
-    test('test_parse_strict: ' + JSON.stringify(arg), testStrictJSON)
+    test(`test_parse_native: ${JSON.stringify(arg)}`, testNativeJSON)
+    test(`test_parse_strict: ${JSON.stringify(arg)}`, testStrictJSON)
   }
 }
 
@@ -102,7 +105,7 @@ addTest('{+3e3:1}')
 addTest('{.3e3:1}')
 
 for (let i = 0; i < 200; i++) {
-  addTest('"' + String.fromCharCode(i) + '"')
+  addTest(`"${String.fromCharCode(i)}"`)
 }
 
 // strict JSON test cases
@@ -130,18 +133,18 @@ test('undefined', function () {
 
 // whitespaces
 addTest('[1,\r\n2,\r3,\n]')
-'\x09\x0A\x0B\x0C\x0D\x20\xA0\uFEFF\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u2028\u2029\u202F\u205F\u3000'.split('').forEach(function (x) {
-  addTest(x + '[1,' + x + '2]' + x)
+for (const x of '\x09\x0A\x0B\x0C\x0D\x20\xA0\uFEFF\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u2028\u2029\u202F\u205F\u3000'.split('')) {
+  addTest(`${x}[1,${x}2]${x}`)
   // Do not test additional Unicode line separators, which are accepted
   // as a usual whitespace by JavaScript parser, but JJU rejects them
   // as line breaks, which must not appear inside a string value.
   const json5 = x === '\u2028' || x === '\u2029' ? false : undefined
-  addTest('"' + x + '"' + x, json5)
-})
-'\u000A\u000D\u2028\u2029'.split('').forEach(function (x) {
-  addTest(x + '[1,' + x + '2]' + x)
-  addTest('"\\' + x + '"' + x)
-})
+  addTest(`"${x}"${x}`, json5)
+}
+for (const x of '\u000A\u000D\u2028\u2029'.split('')) {
+  addTest(`${x}[1,${x}2]${x}`)
+  addTest(`"\\${x}"${x}`)
+}
 
 test('negative number as key', function () {
   assert.throws(parse.bind(null, '{-1:42}', { mode: 'json5' }))
@@ -157,7 +160,9 @@ test('duplicate keys', function () {
 test('random numbers', function () {
   for (let i = 0; i < 100; ++i) {
     const str = '-01.e'.split('')
-    let x, y, z
+    let x
+    let y
+    let z
 
     const rnd = [1, 2, 3, 4, 5].map(function (x) {
       x = ~~(Math.random() * str.length)

@@ -1,5 +1,5 @@
 const test = require('tehanu')(__filename)
-const assert = require('assert')
+const assert = require('node:assert')
 
 const { parse } = require('..')
 
@@ -8,8 +8,8 @@ function addTest (arg, row, col, errRegExp) {
     try {
       parse(arg, { mode: 'json5' })
     } catch (err) {
-      if (row !== undefined) assert.equal(err.location.start.line, row, 'wrong row: ' + err.location.start.line)
-      if (col !== undefined) assert.equal(err.location.start.column, col, 'wrong column: ' + err.location.start.column)
+      if (row !== undefined) assert.equal(err.location.start.line, row, `wrong row: ${err.location.start.line}`)
+      if (col !== undefined) assert.equal(err.location.start.column, col, `wrong column: ${err.location.start.column}`)
       try {
         if (errRegExp) assert(errRegExp.exec(err.message))
       } catch (error) {
@@ -22,7 +22,7 @@ function addTest (arg, row, col, errRegExp) {
     throw Error('no error')
   }
 
-  test('test errors: ' + JSON.stringify(arg), fn)
+  test(`test errors: ${JSON.stringify(arg)}`, fn)
 }
 
 // semicolon will be unexpected, so it indicates an error position

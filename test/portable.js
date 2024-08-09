@@ -1,8 +1,8 @@
 const test = require('tehanu')(__filename)
-const assert = require('assert')
+const assert = require('node:assert')
 
-const { readFileSync } = require('fs')
-const { join } = require('path')
+const { readFileSync } = require('node:fs')
+const { join } = require('node:path')
 const YAML = require('js-yaml')
 
 const { parse } = require('..')
@@ -50,7 +50,7 @@ for (const k in tests) {
       if (typeof (result) === 'object') {
         assert.deepEqual(result, tests[k].output)
       } else {
-        assert(Object.is(result, tests[k].output), String(result) + ' == ' + tests[k].output)
+        assert(Object.is(result, tests[k].output), `${String(result)} == ${tests[k].output}`)
       }
     })
   })(k)

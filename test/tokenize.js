@@ -1,5 +1,5 @@
 const test = require('tehanu')(__filename)
-const assert = require('assert')
+const assert = require('node:assert')
 
 const { tokenize } = require('../lib/jsonlint')
 
@@ -17,7 +17,7 @@ function addTest (input, tokens) {
       })
       .join('')
     assert.deepEqual(output, input)
-    result.forEach(function (item) {
+    for (const item of result) {
       assert.equal(typeof item, 'object')
       assert.equal(typeof item.location, 'object')
       assert.equal(typeof item.location.start, 'object')
@@ -27,7 +27,7 @@ function addTest (input, tokens) {
       assert.ok(Array.isArray(item.path))
       delete item.location
       delete item.path
-    })
+    }
     assert.deepEqual(result, tokens)
   })
 }
@@ -108,12 +108,12 @@ addTest('[1,2,[[],[1]],{},{1:2},{q:{q:{}}},]',
 
 test('without raw input, location and path properties', function () {
   const result = tokenize('{q:123,  w : /*zz*/\n\r "ab" } ', { mode: 'json5' })
-  result.forEach(function (item) {
+  for (const item of result) {
     assert.equal(typeof item, 'object')
     assert.equal(typeof item.raw, 'undefined')
     assert.equal(typeof item.location, 'undefined')
     assert.equal(typeof item.path, 'undefined')
-  })
+  }
 })
 
 test('does not enforce tokenization in the input options', function () {

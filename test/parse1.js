@@ -1,8 +1,8 @@
 const test = require('tehanu')(__filename)
-const assert = require('assert')
+const assert = require('node:assert')
 
-const { readFileSync } = require('fs')
-const { join } = require('path')
+const { readFileSync } = require('node:fs')
+const { join } = require('node:path')
 
 const exported = require('../lib/jsonlint')
 const validator = require('../lib/validator')
@@ -276,11 +276,11 @@ test('test error location with Windows line breaks using the native parser', fun
   } catch (error) {
     assert.equal(error.excerpt, '...      "bar":    }    }')
     assert.equal(error.pointer, '-------------------^')
-    assert.equal(error.reason, 'Unexpected token }')
+    assert.equal(error.reason, 'No value found for key "bar"')
     assert.deepEqual(error.location, {
       start: { column: 5, line: 4, offset: 31 }
     })
-    assert.equal(error.message, 'Parse error on line 4, column 5:\n...      "bar":    }    }\n-------------------^\nUnexpected token }')
+    assert.equal(error.message, 'Parse error on line 4, column 5:\n...      "bar":    }    }\n-------------------^\nNo value found for key "bar"')
   }
 })
 

@@ -1,5 +1,6 @@
-## [14.0.3](https://github.com/prantlf/jsonlint/compare/v14.0.2...v14.0.3) (2023-04-27)
+# Changes
 
+## [14.0.3](https://github.com/prantlf/jsonlint/compare/v14.0.2...v14.0.3) (2023-04-27)
 
 ### Bug Fixes
 
@@ -8,32 +9,27 @@
 
 ## [14.0.2](https://github.com/prantlf/jsonlint/compare/v14.0.1...v14.0.2) (2023-03-08)
 
-
 ### Bug Fixes
 
 * Recognise property "patterns" in the config file again ([2619904](https://github.com/prantlf/jsonlint/commit/2619904760c4f03fa0b93893ecaf8ccecff1d6ad)), closes [#18](https://github.com/prantlf/jsonlint/issues/18)
 
 ## [14.0.1](https://github.com/prantlf/jsonlint/compare/v14.0.0...v14.0.1) (2023-03-07)
 
-
 ### Bug Fixes
 
 * Prevent setting a constant variable ([c7e940c](https://github.com/prantlf/jsonlint/commit/c7e940c4d59b594bca3c32ff974c91b69d44feb6))
 
-# [14.0.0](https://github.com/prantlf/jsonlint/compare/v13.1.0...v14.0.0) (2023-03-05)
-
+## [14.0.0](https://github.com/prantlf/jsonlint/compare/v13.1.0...v14.0.0) (2023-03-05)
 
 ### Bug Fixes
 
 * Replace commander with hand-written command-line parser ([af0ea29](https://github.com/prantlf/jsonlint/commit/af0ea29c3f39ea713fc0bd72829678067a6c1fc0))
 
-
 ### BREAKING CHANGES
 
 * Although you shouldn't notice any change on the behaviour of the command line, something unexpected might've changed. Something did change: if you're annoyed by inserting "--" between the multi-value option and other arguments, you don't have to do it any more. Multi-value options can be entered either using the option prefix multiple times for each value, or using the option prefix just once and separating the values by commas.
 
-# [13.1.0](https://github.com/prantlf/jsonlint/compare/v13.0.1...v13.1.0) (2023-03-05)
-
+## [13.1.0](https://github.com/prantlf/jsonlint/compare/v13.0.1...v13.1.0) (2023-03-05)
 
 ### Features
 
@@ -41,30 +37,25 @@
 
 ## [13.0.1](https://github.com/prantlf/jsonlint/compare/v13.0.0...v13.0.1) (2023-03-05)
 
-
 ### Bug Fixes
 
 * Replace ajv@6 with ajv-draft-04 ([b1535a3](https://github.com/prantlf/jsonlint/commit/b1535a3ec24be7913f0005cdd617680c02086cdf))
 
-# [13.0.0](https://github.com/prantlf/jsonlint/compare/v12.0.0...v13.0.0) (2023-03-05)
-
+## [13.0.0](https://github.com/prantlf/jsonlint/compare/v12.0.0...v13.0.0) (2023-03-05)
 
 ### Features
 
 * Support JSON Schema drafts 2019-09 and 2020-12 and JSON Type Definition ([0b9130c](https://github.com/prantlf/jsonlint/commit/0b9130ceae5f6f27cbe3e6d65207127862ffe584))
 
-
 ### BREAKING CHANGES
 
 * The default environment recognises only JSON Schema drafts 06 and 07 automatically. Not 04 any more. The environment for JSON Schema drafts 04 has to be selected explicitly. Also, JSON Schema drafts 06 and 07 are handled by AJV@8 instead of AJV@6. It shouldn't make any difference, but the implementation is new and could perform a stricter validation.
 
-# [12.0.0](https://github.com/prantlf/jsonlint/compare/v11.7.2...v12.0.0) (2023-03-05)
-
+## [12.0.0](https://github.com/prantlf/jsonlint/compare/v11.7.2...v12.0.0) (2023-03-05)
 
 ### Bug Fixes
 
 * Upgrade dependencies and require Node.js 14 ([87205c2](https://github.com/prantlf/jsonlint/commit/87205c2427a0ebe0d791a4189b2b2346506601b3))
-
 
 ### BREAKING CHANGES
 
@@ -72,75 +63,63 @@
 
 ## [11.7.2](https://github.com/prantlf/jsonlint/compare/v11.7.1...v11.7.2) (2023-03-05)
 
-
 ### Bug Fixes
 
 * Use both typings and types in package.json ([5d00c00](https://github.com/prantlf/jsonlint/commit/5d00c00c7fd098674ee9d1f3dba14369debaa73b))
 
 ## [11.7.1](https://github.com/prantlf/jsonlint/compare/v11.7.0...v11.7.1) (2023-03-05)
 
-
 ### Bug Fixes
 
 * Complete TypeScript types ([7064c50](https://github.com/prantlf/jsonlint/commit/7064c5041a292a5a87bccc2de7fc945a2ee7c160))
 
-# [11.7.0](https://github.com/prantlf/jsonlint/compare/v11.6.0...v11.7.0) (2022-09-26)
-
+## [11.7.0](https://github.com/prantlf/jsonlint/compare/v11.6.0...v11.7.0) (2022-09-26)
 
 ### Bug Fixes
 
 * Upgrade npm dependencies ([81526ce](https://github.com/prantlf/jsonlint/commit/81526ce034cf52623dbca986cf9d450287fb104a))
 
-
 ### Features
 
 * Ignore the leading UTF-8 byte-order mark (BOM) ([311c6df](https://github.com/prantlf/jsonlint/commit/311c6df75963a5b6da3984ba85541b800d751939))
 
-# [11.6.0](https://github.com/prantlf/jsonlint/compare/v11.5.0...v11.6.0) (2022-05-04)
-
+## [11.6.0](https://github.com/prantlf/jsonlint/compare/v11.5.0...v11.6.0) (2022-05-04)
 
 ### Bug Fixes
 
 * Do not generate text diff if not needed ([0423a4b](https://github.com/prantlf/jsonlint/commit/0423a4b1fbc10cb6a201fe79e29a2b0e0101f3d0))
 
-
 ### Features
 
 * Allow setting the line count as diff context ([9b22843](https://github.com/prantlf/jsonlint/commit/9b22843a93ec47c0e18b1833618072083989b431))
 
-# [11.5.0](https://github.com/prantlf/jsonlint/compare/v11.4.0...v11.5.0) (2022-05-03)
-
+## [11.5.0](https://github.com/prantlf/jsonlint/compare/v11.4.0...v11.5.0) (2022-05-03)
 
 ### Bug Fixes
 
 * Do not print file names twice in the compact mode ([86691cc](https://github.com/prantlf/jsonlint/commit/86691cc5fea760a437cae5aff71f0acc987c4e05))
 
-
 ### Features
 
 * Add option "diff" to print the difference instead of the output ([cb3826c](https://github.com/prantlf/jsonlint/commit/cb3826c7610aae8d23623da3693e45cbf942223e))
 
-# [11.4.0](https://github.com/prantlf/jsonlint/compare/v11.3.0...v11.4.0) (2022-05-03)
-
+## [11.4.0](https://github.com/prantlf/jsonlint/compare/v11.3.0...v11.4.0) (2022-05-03)
 
 ### Features
 
 * Introduce a check that the formatted output is the same as the input ([75167f7](https://github.com/prantlf/jsonlint/commit/75167f76c4bbd13551ca7e20824cc05095fc6be0))
 
-# [11.3.0](https://github.com/prantlf/jsonlint/compare/v11.2.0...v11.3.0) (2022-05-03)
-
+## [11.3.0](https://github.com/prantlf/jsonlint/compare/v11.2.0...v11.3.0) (2022-05-03)
 
 ### Bug Fixes
 
 * Fix the regex splitting input by line breaks ([7423806](https://github.com/prantlf/jsonlint/commit/74238065643d31044990801713410041cdbb55f0))
 
-
 ### Features
 
 * Read options from configuration files ([7eebd76](https://github.com/prantlf/jsonlint/commit/7eebd765f66bcd3bcd6cde7d9c128cbacaca1285))
 
-# [11.2.0](https://github.com/prantlf/jsonlint/compare/v11.1.1...v11.2.0) (2022-05-01)
-
+## [11.2.0](https://github.com/prantlf/jsonlint/compare/v11.1.1...v11.2.0) (2022-05-01)
 
 ### Features
 
@@ -150,12 +129,11 @@
 
 ## [11.1.1](https://github.com/prantlf/jsonlint/compare/v11.1.0...v11.1.1) (2022-05-01)
 
-
 ### Bug Fixes
 
 * Retain the original last line break in the processed file ([54fd5ab](https://github.com/prantlf/jsonlint/commit/54fd5ab0349300c7bd11dfa6baf4e787e40bead9))
 
-# [11.1.0](https://github.com/prantlf/jsonlint/compare/v11.0.0...v11.1.0) (2022-05-01)
+## [11.1.0](https://github.com/prantlf/jsonlint/compare/v11.0.0...v11.1.0) (2022-05-01)
 
 ### Bug Fixes
 
@@ -165,7 +143,7 @@
 
 * Optionally ensure a line break at the end of the output ([226019e](https://github.com/prantlf/jsonlint/commit/226019eb75c675eab1dca817ff0dc42e0223d197))
 
-# [11.0.0](https://github.com/prantlf/jsonlint/compare/v10.2.0...v11.0.0) (2022-05-01)
+## [11.0.0](https://github.com/prantlf/jsonlint/compare/v10.2.0...v11.0.0) (2022-05-01)
 
 ### Bug Fixes
 
@@ -175,38 +153,38 @@
 
 * The minimum supported version has become Node.js 12 instead of the previous Node.js 6. At least `commander` needs the new version.
 
-# [10.2.0](https://github.com/prantlf/jsonlint/compare/v10.1.1...v10.2.0) (2019-12-28)
+## [10.2.0](https://github.com/prantlf/jsonlint/compare/v10.1.1...v10.2.0) (2019-12-28)
 
 ### Features
 
 * Allow trimming trailing commas in arrays and objects (JSON5) ([136ea99](https://github.com/prantlf/jsonlint/commit/136ea995bef7b0f77c2ac54b6ce7dd8572190bf8))
 * Allow unifying quotes around object keys to double or single ones (JSON5) ([6b6da17](https://github.com/prantlf/jsonlint/commit/6b6da175cfea8f71841e145a525ef124c19c2607))
 
-# [10.1.1](https://github.com/prantlf/jsonlint/compare/v10.1.0...v10.1.1) (2019-12-27)
+## [10.1.1](https://github.com/prantlf/jsonlint/compare/v10.1.0...v10.1.1) (2019-12-27)
 
 ### Bug Fixes
 
 * Restore compatibility with IE11 ([55b8a48](https://github.com/prantlf/jsonlint/commit/55b8a4816b08c5504cf7f0841d1997634a6376ea))
 
-# [10.1.0](https://github.com/prantlf/jsonlint/compare/v10.0.2...v10.1.0) (2019-12-27)
+## [10.1.0](https://github.com/prantlf/jsonlint/compare/v10.0.2...v10.1.0) (2019-12-27)
 
 ### Features
 
 * Alternatively accept number of spaces for the indent parameter ([4c25739](https://github.com/prantlf/jsonlint/commit/4c257399b77e446c198b25049fae2ca08ad174ec))
 
-# [10.0.2](https://github.com/prantlf/jsonlint/compare/v10.0.1...v10.0.2) (2019-12-27)
+## [10.0.2](https://github.com/prantlf/jsonlint/compare/v10.0.1...v10.0.2) (2019-12-27)
 
 ### Bug Fixes
 
 * Do not modify input options in the tokenize method ([7e3ac0b](https://github.com/prantlf/jsonlint/commit/7e3ac0babf873c42da1daadaee2bbe55d2644690))
 
-# [10.0.1](https://github.com/prantlf/jsonlint/compare/v10.0.0...v10.0.1) (2019-12-27)
+## [10.0.1](https://github.com/prantlf/jsonlint/compare/v10.0.0...v10.0.1) (2019-12-27)
 
 ### Bug Fixes
 
 * Pretty-printer: keep the comment after opening an object scope indented ([4fbc09d](https://github.com/prantlf/jsonlint/commit/4fbc09d402ed5442e2de77382342267e330cb908))
 
-# [10.0.0](https://github.com/prantlf/jsonlint/compare/v9.0.0...v10.0.0) (2019-12-27)
+## [10.0.0](https://github.com/prantlf/jsonlint/compare/v9.0.0...v10.0.0) (2019-12-27)
 
 ### Bug Fixes
 
@@ -225,7 +203,7 @@
 
 The option `-p (--pretty-print)` will newly prettify the raw (text) input instead of formatting the parsed JSON object.
 
-# [9.0.0](https://github.com/prantlf/jsonlint/compare/v8.0.3...v9.0.0) (2019-12-22)
+## [9.0.0](https://github.com/prantlf/jsonlint/compare/v8.0.3...v9.0.0) (2019-12-22)
 
 ### chore
 
@@ -252,7 +230,7 @@ The option `-p (--pretty-print)` will newly prettify the raw (text) input instea
 * Put only the reason of the error to the error.reason property when the custom parser is used; not the full message including the error context ([8d7f0b1](https://github.com/prantlf/jsonlint/commit/8d7f0b13b2bfe7e854c965b7266e5de1dec79229))
 * Update newline replacement regex to show correct error position on Windows ([7af364c](https://github.com/prantlf/jsonlint/commit/7af364cbafd84326f20f29adbacde1cd0f70e57a))
 
-# [8.0.0](https://github.com/prantlf/jsonlint/compare/v7.0.3...v8.0.0) (2019-06-16)
+## [8.0.0](https://github.com/prantlf/jsonlint/compare/v7.0.3...v8.0.0) (2019-06-16)
 
 ### Bug Fixes
 
@@ -286,7 +264,7 @@ The option `-p (--pretty-print)` will newly prettify the raw (text) input instea
 
 * Recognize boxed string as schema environment too ([e37b004](https://github.com/prantlf/jsonlint/commit/e37b0042376cf5beafc93bf906ee70b583f08969))
 
-# [7.0.0](https://github.com/prantlf/jsonlint/compare/v6.3.1...v7.0.0) (2019-06-02)
+## [7.0.0](https://github.com/prantlf/jsonlint/compare/v6.3.1...v7.0.0) (2019-06-02)
 
 ### Bug Fixes
 
@@ -315,7 +293,7 @@ The parser from ["Utilities to work with JSON/JSON5 documents"](/rlidwka/jju) is
 
 * Recognise the location of error occurrences in Firefox ([7c8c040](https://github.com/prantlf/jsonlint/commit/7c8c040e8f9d259bf573c04f8f6a7df15587a54a))
 
-# [6.3.0](https://github.com/prantlf/jsonlint/compare/v6.2.1...v6.3.0) (2019-05-30)
+## [6.3.0](https://github.com/prantlf/jsonlint/compare/v6.2.1...v6.3.0) (2019-05-30)
 
 ### Bug Fixes
 
@@ -332,13 +310,13 @@ The parser from ["Utilities to work with JSON/JSON5 documents"](/rlidwka/jju) is
 
 * Include source code in source maps on the on-line validator page ([31e0097](https://github.com/prantlf/jsonlint/commit/31e0097de3c2c5a30e3695d1d5b3f411dc7b6723))
 
-# [6.2.0](https://github.com/prantlf/jsonlint/compare/v6.1.0...v6.2.0) (2019-05-30)
+## [6.2.0](https://github.com/prantlf/jsonlint/compare/v6.1.0...v6.2.0) (2019-05-30)
 
 ### Features
 
 * Extract the functionality for sorting object keys to a module ([a53bd93](https://github.com/prantlf/jsonlint/commit/a53bd9392b2116b5272c77deee9423ba16b5f520))
 
-# [6.1.0](https://github.com/prantlf/jsonlint/compare/v6.0.0...v6.1.0) (2019-05-27)
+## [6.1.0](https://github.com/prantlf/jsonlint/compare/v6.0.0...v6.1.0) (2019-05-27)
 
 ### Bug Fixes
 
@@ -349,7 +327,7 @@ The parser from ["Utilities to work with JSON/JSON5 documents"](/rlidwka/jju) is
 
 * Use the native JSON parser if a limited error information is enough ([8aa9fb1](https://github.com/prantlf/jsonlint/commit/8aa9fb10d6c6f7f148d8c7816cc73d6b8385aace))
 
-# [6.0.0](https://github.com/prantlf/jsonlint/compare/v5.0.0...v6.0.0) (2019-05-26)
+## [6.0.0](https://github.com/prantlf/jsonlint/compare/v5.0.0...v6.0.0) (2019-05-26)
 
 ### Features
 
@@ -360,7 +338,7 @@ The parser from ["Utilities to work with JSON/JSON5 documents"](/rlidwka/jju) is
 
 * The object and the method do not exist any more. Pass the parameter "ignoreComments" as an object `{ ignoreComments: true }` either to the constructor of the `Parser` object, or as the second parameter to the method `parse`.
 
-# [5.0.0](https://github.com/prantlf/jsonlint/compare/v4.0.2...v5.0.0) (2019-05-26)
+## [5.0.0](https://github.com/prantlf/jsonlint/compare/v4.0.2...v5.0.0) (2019-05-26)
 
 ### Bug Fixes
 
@@ -386,7 +364,7 @@ The parser from ["Utilities to work with JSON/JSON5 documents"](/rlidwka/jju) is
 
 * Do not fail sorting objects with a property called "hasOwnProperty" ([b544ceb](https://github.com/prantlf/jsonlint/commit/b544ceb54d44e8273dd7a1d28fc7f69a527fd806))
 
-# [4.0.0](https://github.com/prantlf/jsonlint/compare/v3.0.0...v4.0.0) (2019-05-19)
+## [4.0.0](https://github.com/prantlf/jsonlint/compare/v3.0.0...v4.0.0) (2019-05-19)
 
 ### Bug Fixes
 
@@ -401,7 +379,7 @@ The parser from ["Utilities to work with JSON/JSON5 documents"](/rlidwka/jju) is
 * The formatting method is exposed not as exports.formatter.formatJson, but as exports.format.
 This module is not documented and it is unlikely, that it broke other project.
 
-# [3.0.0](https://github.com/prantlf/jsonlint/compare/v2.0.1...v3.0.0) (2019-05-18)
+## [3.0.0](https://github.com/prantlf/jsonlint/compare/v2.0.1...v3.0.0) (2019-05-18)
 
 ### Bug Fixes
 
@@ -418,7 +396,7 @@ Migrate your schemas from the JSON schema draft 03 to 04 or newer. Drafts 04, 06
 
 * Do not depend on the standard checker in the release package ([1e9c7b5](https://github.com/prantlf/jsonlint/commit/1e9c7b5b5c091332270dbe6b2203fd66644bf355))
 
-# [2.0.0](https://github.com/prantlf/jsonlint/compare/v1.7.0...v2.0.0) (2019-05-18)
+## [2.0.0](https://github.com/prantlf/jsonlint/compare/v1.7.0...v2.0.0) (2019-05-18)
 
 ### Bug Fixes
 
@@ -439,7 +417,7 @@ Migrate your schemas from the JSON schema draft 03 to 04 or newer. Drafts 04, 06
 * The options "extension" is not recognized any more.
 Use the option "extensions" with the same semantics instead.
 
-# [1.7.0](https://github.com/prantlf/jsonlint/compare/v1.6.4...v1.7.0) (2019-05-18)
+## [1.7.0](https://github.com/prantlf/jsonlint/compare/v1.6.4...v1.7.0) (2019-05-18)
 
 ### Features
 

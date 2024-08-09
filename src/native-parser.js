@@ -40,7 +40,7 @@ function upcomingInput (input, offset) {
 function getPositionContext (input, offset) {
   const past = pastInput(input, offset)
   const upcoming = upcomingInput(input, offset)
-  const pointer = new Array(past.length + 1).join('-') + '^'
+  const pointer = `${new Array(past.length + 1).join('-')}^`
   return {
     excerpt: past + upcoming,
     pointer
@@ -104,13 +104,13 @@ function getLocationOnSpiderMonkey (input, reason) {
 function getTexts (reason, input, offset, line, column) {
   const position = getPositionContext(input, offset)
   const excerpt = position.excerpt
-  let message, pointer
+  let message
+  let pointer
   if (typeof line === 'number') {
     pointer = position.pointer
-    message = 'Parse error on line ' + line + ', column ' +
-      column + ':\n' + excerpt + '\n' + pointer + '\n' + reason
+    message = `Parse error on line ${line}, column ${column}:\n${excerpt}\n${pointer}\n${reason}`
   } else {
-    message = 'Parse error in JSON input:\n' + excerpt + '\n' + reason
+    message = `Parse error in JSON input:\n${excerpt}\n${reason}`
   }
   return {
     message,
@@ -124,7 +124,9 @@ function improveNativeError (input, error) {
   const location = getLocationOnV8(input, reason) ||
     checkUnexpectedEndOnV8(input, reason) ||
     getLocationOnSpiderMonkey(input, reason)
-  let offset, line, column
+  let offset
+  let line
+  let column
   if (location) {
     offset = location.offset
     line = location.line

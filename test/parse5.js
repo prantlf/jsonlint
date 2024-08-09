@@ -1,7 +1,7 @@
 /* eslint-disable no-eval */
 
 const test = require('tehanu')(__filename)
-const assert = require('assert')
+const assert = require('node:assert')
 
 const { parseCustom: parse } = require('..')
 
@@ -179,7 +179,7 @@ test('string conversion of argument', function () {
 test('numbers', function () {
   let str = '[1]'
   for (let i = 0; i < 100000; i++) {
-    str = '[1,' + str + ']'
+    str = `[1,${str}]`
   }
   assert.throws(function () {
     parse(str)

@@ -10,9 +10,9 @@ function pathToPointer (tokens) {
   if (tokens.length === 0) {
     return ''
   }
-  return '/' + tokens
+  return `/${tokens
     .map(escapePointerToken)
-    .join('/')
+    .join('/')}`
 }
 
 function unescapePointerToken (token) {
