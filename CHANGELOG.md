@@ -1,5 +1,15 @@
 # Changes
 
+## [15.0.0](https://github.com/prantlf/jsonlint/compare/v14.1.0...v15.0.0) (2024-08-09)
+
+### Features
+
+* Optionally omit object key __proto__ and others from parsed output ([e2f8a7b](https://github.com/prantlf/jsonlint/commit/e2f8a7be3cdb78bf696ba4251e2b3053f5714c22))
+
+### BREAKING CHANGES
+
+Object key `__proto__` and other keys from `Object.prototype` are included in the parsed object by default. Earlier, no keys from `Object.prototype` were included. The new behaviour is consistent with `JSON.parse`. If you need the old behaviour, add the argument `ignore-prototype-keys` to the command line, or set the option `ignorePrototypeKeys` to `true`, when calling the `parse` method. If you don't have under control, what will happens with the parsed object, you should consider setting `ignoreProtoKey` to `true`, when calling the `parse` method, to prevent prototype pollution.
+
 ## [14.1.0](https://github.com/prantlf/jsonlint/compare/v14.0.3...v14.1.0) (2024-08-09)
 
 ### Features
