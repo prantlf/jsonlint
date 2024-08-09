@@ -1,5 +1,17 @@
 # Changes
 
+## [14.1.0](https://github.com/prantlf/jsonlint/compare/v14.0.3...v14.1.0) (2024-08-09)
+
+### Features
+
+* Assume --trailing-commas if --trim-trailing-commas is requested ([b3fb10d](https://github.com/prantlf/jsonlint/commit/b3fb10d3a9ad0f4e6f38395fe3ccff83611d69be))
+* Add options to sort object keys by locale, numerically and ignoring the letter case ([4387c4b](https://github.com/prantlf/jsonlint/commit/4387c4b7852ff1f75b533cacd0ba89a953432870))
+* Exit the process with 0 (success) if no files were found and `--succeed-with-no-files` was requested ([923f37f](https://github.com/prantlf/jsonlint/commit/923f37fd4361d80886f9bcd4787630c9b331574d))
+
+### Bug Fixes
+
+* Upgrade dependencies ([355aad5](https://github.com/prantlf/jsonlint/commit/355aad588123fd2f9e94f2f8f59c75b1c253ffd4))
+
 ## [14.0.3](https://github.com/prantlf/jsonlint/compare/v14.0.2...v14.0.3) (2023-04-27)
 
 ### Bug Fixes
