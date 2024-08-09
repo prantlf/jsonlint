@@ -21,7 +21,7 @@ This is a fork of the original project ([zaach/jsonlint](https://github.com/zaac
 * Offers pretty-printing including comment-stripping and object keys without quotes (JSON5).
 * Prefers the native JSON parser if possible to run [10x faster than the custom parser].
 * Reports errors with rich additional information. From the JSON Schema validation too.
-* Consumes configuration from both command line and [configuration files](configuration).
+* Consumes configuration from both command line and [configuration files](#configuration).
 * Implements JavaScript modules using [UMD] to work in Node.js, in a browser, everywhere.
 * Depends on up-to-date npm modules with no installation warnings.
 * Small size - 18.4 kB minified, 6.45 kB gzipped, 5.05 kB brotlied.
@@ -428,7 +428,7 @@ ${reason}`)
 
 ## License
 
-Copyright (C) 2012-2023 Zachary Carter, Ferdinand Prantl
+Copyright (C) 2012-2024 Zachary Carter, Ferdinand Prantl
 
 Licensed under the [MIT License].
 
