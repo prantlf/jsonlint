@@ -160,6 +160,7 @@ Usage: `jsonlint [options] [--] [<file, directory, pattern> ...]`
     --enforce-double-quotes      surrounds all strings with double quotes
     --enforce-single-quotes      surrounds all strings with single quotes
     --trim-trailing-commas       omit trailing commas from objects and arrays
+    --succeed-with-no-files      succeed (exit code 0) if no files were found
     -v, --version                output the version number
     -h, --help                   display help for command
 
