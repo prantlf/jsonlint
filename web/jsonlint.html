@@ -338,6 +338,7 @@
             ignoreComments: document.getElementById('comments').checked ||
                             mode === 'cjson' || mode === 'json5',
             ignoreTrailingCommas: document.getElementById('trailing-commas').checked ||
+                                  document.getElementById('trim-trailing-commas').checked ||
                                   mode === 'json5',
             allowSingleQuotedStrings: document.getElementById('single-quoted-strings').checked ||
                                       mode === 'json5',
