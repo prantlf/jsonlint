@@ -121,6 +121,12 @@ Usage: `jsonlint [options] [--] [<file, directory, pattern> ...]`
     -f, --config <file>          read options from a custom configuration file
     -F, --no-config              disable searching for configuration files
     -s, --sort-keys              sort object keys (not when prettifying)
+    --sort-keys-ignore-case      sort object keys ignoring the letter case
+    --sort-keys-locale <id>      locale identifier to sort object keys with
+                                 (or "default" for the system default)
+    --sort-keys-case-first <id>  order if only letter case is different
+                                 ("upper", "lower" and "false" are allowed)
+    --sort-keys-numeric          sort by numbers recognised in object keys
     -E, --extensions <ext...>    file extensions to process for directory walk
                                  (default: json, JSON)
     -i, --in-place               overwrite the input files
@@ -193,6 +199,10 @@ The configuration is an object with the following properties, described above, w
 | --------- | ----- |
 | patterns | |
 | sort-keys | sortKeys |
+| sort-keys-ignore-case | sortKeysIgnoreCase |
+| sort-keys-locale | sortKeysLocale |
+| sort-keys-case-first | sortKeysCaseFirst |
+| sort-keys-numeric | sortKeysNumeric |
 | extensions | |
 | in-place | inPlace |
 | diff | |

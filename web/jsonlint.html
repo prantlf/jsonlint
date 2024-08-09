@@ -134,6 +134,14 @@
               <input type="checkbox" id="sort-object-keys">
               <label for="sort-object-keys">Sort object keys</label>
             </div>
+            <div>
+              <input type="checkbox" id="sort-object-keys-nocase">
+              <label for="sort-object-keys-nocase">Sort object keys case-insensitively</label>
+            </div>
+            <div>
+              <input type="checkbox" id="sort-object-keys-numeric">
+              <label for="sort-object-keys-numeric">Sort object keys recognising numbers</label>
+            </div>
             <div style="display: none">
               <input type="checkbox" id="prune-comments">
               <label for="prune-comments">Omit comments</label>
@@ -248,7 +256,10 @@
 
       function correctFormatting (selected, other) {
         ensureOneSelected(selected, other)
-        var forFormat = ['sort-object-keys']
+        var forFormat = [
+          'sort-object-keys', 'sort-object-keys-nocase',
+          'sort-object-keys-numeric'
+        ]
         var forPrettyPrint = [
           'prune-comments', 'strip-object-keys', 'enforce-double-quotes',
           'enforce-single-quotes', 'trim-trailing-commas'
@@ -311,8 +322,21 @@
         }
 
         function formatOutput (parsed) {
+          const sortOptions = {}
+          let sort
           if (document.getElementById('sort-object-keys').checked) {
-            parsed = jsonlintSorter.sortObject(parsed)
+            sort = true
+          }
+          if (document.getElementById('sort-object-keys-nocase').checked) {
+            sortOptions.ignoreCase = true
+            sort = true
+          }
+          if (document.getElementById('sort-object-keys-numeric').checked) {
+            sortOptions.numeric = true
+            sort = true
+          }
+          if (sort) {
+            parsed = jsonlintSorter.sortObject(parsed, sortOptions)
           }
           return JSON.stringify(parsed, null, '  ')
         }
