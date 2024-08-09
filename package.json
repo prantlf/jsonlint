@@ -36,7 +36,7 @@
     "web"
   ],
   "engines": {
-    "node": ">= 14"
+    "node": ">=16.9"
   },
   "scripts": {
     "build": "npm run compile:jsonlint && rollup -c && npm run minify && npm run compile:tests",
@@ -67,7 +67,7 @@
     "@rollup/plugin-commonjs": "26.0.1",
     "@rollup/plugin-json": "6.1.0",
     "@rollup/plugin-node-resolve": "15.2.3",
-    "@types/node": "22.1.0",
+    "@types/node": "22.2.0",
     "@unixcompat/cat.js": "2.0.0",
     "@unixcompat/mv.js": "2.0.0",
     "c8": "10.1.2",

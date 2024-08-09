@@ -35,7 +35,7 @@ const unescapeMap = {
   '/': '/'
 }
 
-const ownsProperty = Object.prototype.hasOwnProperty
+const ownsProperty = Object.hasOwn
 
 const emptyObject = {}
 
@@ -323,7 +323,7 @@ function parseInternal (input, options) {
     while (position < inputLength) {
       skipWhiteSpace()
       const key = parseKey()
-      if (allowDuplicateObjectKeys === false && ownsProperty.call(result, key)) {
+      if (allowDuplicateObjectKeys === false && ownsProperty(result, key)) {
         fail(`Duplicate key: "${key}"`)
       }
       skipWhiteSpace()
