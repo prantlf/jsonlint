@@ -120,6 +120,8 @@ Usage: `jsonlint [options] [--] [<file, directory, pattern> ...]`
 
     -f, --config <file>          read options from a custom configuration file
     -F, --no-config              disable searching for configuration files
+    --ignore-proto-key           ignore occurrences of "__proto__" object key
+    --ignore-prototype-keys      ignore all keys from "Object.prototype"
     -s, --sort-keys              sort object keys (not when prettifying)
     --sort-keys-ignore-case      sort object keys ignoring the letter case
     --sort-keys-locale <id>      locale identifier to sort object keys with
@@ -199,6 +201,8 @@ The configuration is an object with the following properties, described above, w
 | Parameter | Alias |
 | --------- | ----- |
 | patterns | |
+| ignore-proto-key | ignoreProtoKey |
+| ignore-prototype-keys | ignorePrototypeKeys |
 | sort-keys | sortKeys |
 | sort-keys-ignore-case | sortKeysIgnoreCase |
 | sort-keys-locale | sortKeysLocale |
@@ -274,6 +278,8 @@ The `parse` method offers more detailed [error information](#error-handling), th
 | `ignoreTrailingCommas`     | ignores trailing commas in objects and arrays (boolean)      |
 | `allowSingleQuotedStrings` | accepts strings delimited by single-quotes too (boolean)     |
 | `allowDuplicateObjectKeys` | allows reporting duplicate object keys as an error (boolean) |
+| `ignoreProtoKey` | ignore occurrences of the `__proto__` object key (boolean) |
+| `ignorePrototypeKeys` | ignore all keys from `Object.prototype` (boolean) |
 | `mode`                     | sets multiple options according to the type of input data (string) |
 | `reviver`                  | converts object and array values (function) |
 

@@ -37,6 +37,8 @@ const unescapeMap = {
 
 const ownsProperty = Object.prototype.hasOwnProperty
 
+const emptyObject = {}
+
 function parseInternal (input, options) {
   if (typeof input !== 'string' || !(input instanceof String)) {
     input = String(input)
@@ -46,6 +48,8 @@ function parseInternal (input, options) {
   const ignoreBOM = options.ignoreBOM
   const ignoreComments = options.ignoreComments || options.mode === 'cjson' || json5
   const ignoreTrailingCommas = options.ignoreTrailingCommas || json5
+  const ignoreProtoKey = options.ignoreProtoKey
+  const ignorePrototypeKeys = options.ignorePrototypeKeys
   const allowSingleQuotedStrings = options.allowSingleQuotedStrings || json5
   const allowDuplicateObjectKeys = options.allowDuplicateObjectKeys
   const reviver = options.reviver
@@ -313,8 +317,7 @@ function parseInternal (input, options) {
   }
 
   function parseObject () {
-    const result = {}
-    const emptyObject = {}
+    let result = {}
     let isNotEmpty = false
 
     while (position < inputLength) {
@@ -346,7 +349,8 @@ function parseInternal (input, options) {
           }
         }
 
-        if (key in emptyObject || emptyObject[key] != null) {
+        if ((ignorePrototypeKeys && (key in emptyObject || emptyObject[key] != null)) ||
+            (ignoreProtoKey && key === '__proto__')) {
           // silently ignore it
         } else {
           if (reviver) {
@@ -354,7 +358,11 @@ function parseInternal (input, options) {
           }
           if (value !== undefined) {
             isNotEmpty = true
-            result[key] = value
+            if (key === '__proto__') {
+              result = Object.assign(JSON.parse(`{"__proto__":${JSON.stringify(value)}}`), result)
+            } else {
+              result[key] = value
+            }
           }
         }
 

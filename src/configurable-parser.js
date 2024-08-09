@@ -6,7 +6,8 @@ const oldNode = typeof process !== 'undefined' && process.version.startsWith('v4
 function needsCustomParser (options) {
   return options.ignoreBOM || options.ignoreComments || options.ignoreTrailingCommas ||
   options.allowSingleQuotedStrings || options.allowDuplicateObjectKeys === false ||
-  options.mode === 'cjson' || options.mode === 'json5' || isSafari || oldNode
+  options.ignoreProtoKey || options.ignorePrototypeKeys || options.mode === 'cjson' ||
+  options.mode === 'json5' || isSafari || oldNode
 }
 
 function getReviver (options) {

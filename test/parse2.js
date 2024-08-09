@@ -168,6 +168,18 @@ test('no prototype pollution', function () {
   assert.notDeepEqual(parsed, { polluted: true })
 })
 
+test('forbid __proto__ key', function () {
+  const parsed = parse('{ "constructor": true, "__proto__": { "polluted": true } }', { ignoreProtoKey: true })
+  assert.notDeepEqual(parsed, JSON.parse('{ "constructor": true, "__proto__": { "polluted": true } }'))
+  assert.strictEqual(parsed.constructor, true)
+})
+
+test('forbid prototype keys', function () {
+  const parsed = parse('{ "constructor": true, "__proto__": { "polluted": true } }', { ignorePrototypeKeys: true })
+  assert.notDeepEqual(parsed, JSON.parse('{ "constructor": true, "__proto__": { "polluted": true } }'))
+  assert.strictEqual(typeof parsed.constructor, 'function')
+})
+
 test('random numbers', function () {
   for (let i = 0; i < 100; ++i) {
     const str = '-01.e'.split('')
