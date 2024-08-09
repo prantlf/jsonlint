@@ -157,6 +157,17 @@ test('duplicate keys', function () {
   })
 })
 
+test('no duplicate key "constructor"', function () {
+  assert.deepEqual(parse('{ "constructor": 1 }'), { constructor: 1 })
+  parse('{ "constructor": 1 }', { allowDuplicateObjectKeys: false })
+})
+
+test('no prototype pollution', function () {
+  const parsed = parse('{ "__proto__": { "polluted": true } }')
+  assert.deepEqual(parsed, JSON.parse('{ "__proto__": { "polluted": true } }'))
+  assert.notDeepEqual(parsed, { polluted: true })
+})
+
 test('random numbers', function () {
   for (let i = 0; i < 100; ++i) {
     const str = '-01.e'.split('')
