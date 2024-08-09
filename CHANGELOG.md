@@ -1,5 +1,15 @@
 # Changes
 
+## [16.0.0](https://github.com/prantlf/jsonlint/compare/v15.0.0...v16.0.0) (2024-08-09)
+
+### Bug Fixes
+
+* Use Object.hasOwn instead of Object.prototype.hasOwnProperty ([06e7c0f](https://github.com/prantlf/jsonlint/commit/06e7c0f81243a58571e8a03e422a6a025b77ef33))
+
+### BREAKING CHANGES
+
+The minimum supported version of Node.js is 16.9 now.
+
 ## [15.0.0](https://github.com/prantlf/jsonlint/compare/v14.1.0...v15.0.0) (2024-08-09)
 
 ### Features
