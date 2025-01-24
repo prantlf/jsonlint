@@ -57,6 +57,7 @@ function parseInternal (input, options) {
   const rawTokens = options.rawTokens
   const tokenLocations = options.tokenLocations
   const tokenPaths = options.tokenPaths
+  const immutableString = options.immutableString
 
   const isLineTerminator = json5 ? Uni.isLineTerminator : Uni.isLineTerminatorJSON
   const isWhiteSpace = json5 ? Uni.isWhiteSpace : Uni.isWhiteSpaceJSON
@@ -573,10 +574,14 @@ function parseInternal (input, options) {
   function parseString (endChar) {
     // 7.8.4 of ES262 spec
     let result = ''
+    const startPosition = position
     while (position < inputLength) {
       let char = input[position++]
       if (char === endChar) {
-        return result
+        if (immutableString)
+          return input.substr(startPosition, position - 1)
+        else
+          return result
       }if (char === '\\') {
         if (position >= inputLength) {
           fail()
