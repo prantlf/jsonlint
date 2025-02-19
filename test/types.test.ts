@@ -71,5 +71,6 @@ test('print', () => {
   print(tokens, { enforceDoubleQuotes: true })
   print(tokens, { enforceSingleQuotes: true })
   print(tokens, { trimTrailingCommas: true })
+  print(tokens, { forceCrlf: true })
   assert.ok(true)
 })

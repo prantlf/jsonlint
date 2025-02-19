@@ -499,6 +499,11 @@ declare module '@prantlf/jsonlint/lib/printer' {
      * Remove trailing commas after the last item in objects and arrays.
      */
     trimTrailingCommas?: boolean
+
+    /**
+     * Makes sure all line breaks are CRLF.
+     */
+    forceCrlf?: boolean
   }
 
   /**
