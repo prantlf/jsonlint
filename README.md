@@ -162,6 +162,7 @@ Usage: `jsonlint [options] [--] [<file, directory, pattern> ...]`
     --enforce-double-quotes      surrounds all strings with double quotes
     --enforce-single-quotes      surrounds all strings with single quotes
     --trim-trailing-commas       omit trailing commas from objects and arrays
+    --force-crlf                 makes sure all line breaks are CRLF
     --succeed-with-no-files      succeed (exit code 0) if no files were found
     -v, --version                output the version number
     -h, --help                   display help for command
@@ -338,7 +339,7 @@ The [`print`](#pretty-printing) method accepts an object `options` as the second
 | `enforceDoubleQuotes`       | will surround all strings with double quotes            |
 | `enforceSingleQuotes`       | will surround all strings with single quotes            |
 | `trimTrailingCommas`        | will omit all trailing commas after the last object entry or array item |
-| `forceCrlf`                 | makes sure all line breaks are CRLF. |
+| `forceCrlf`                 | makes sure all line breaks are CRLF |
 
 ```js
 // Just concatenate the tokens to produce the same output as was the input.
