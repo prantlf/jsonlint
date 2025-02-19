@@ -6,8 +6,8 @@
   },
   "devDependencies": {
     "benchmark": "2.1.4",
-    "chevrotain": "10.4.2",
-    "comment-json": "4.2.3",
+    "chevrotain": "11.0.3",
+    "comment-json": "4.2.5",
     "jison": "0.4.18",
     "json-6": "1.1.4",
     "json-to-ast": "2.1.0",

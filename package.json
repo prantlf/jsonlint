@@ -60,7 +60,7 @@
     "ajv-draft-04": "1.0.0",
     "cosmiconfig": "9.0.0",
     "diff": "7.0.0",
-    "fast-glob": "3.3.2"
+    "fast-glob": "3.3.3"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
@@ -70,12 +70,12 @@
     "@types/node": "22.13.4",
     "@unixcompat/cat.js": "2.0.0",
     "@unixcompat/mv.js": "2.0.0",
-    "c8": "10.1.2",
+    "c8": "10.1.3",
     "esbuild": "0.25.0",
     "http-server": "14.1.1",
     "js-yaml": "4.1.0",
     "rollup": "4.34.8",
-    "rollup-plugin-swc-minify": "1.1.2",
+    "rollup-plugin-swc-minify": "1.2.0",
     "tehanu": "1.0.1",
     "tehanu-repo-coco": "1.0.1",
     "tehanu-teru": "1.0.1",
