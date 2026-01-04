@@ -63,7 +63,8 @@
     "ajv-keywords": "^5.1.0",
     "cosmiconfig": "9.0.0",
     "diff": "8.0.2",
-    "fast-glob": "3.3.3"
+    "fast-glob": "3.3.3",
+    "picocolors": "^1.1.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.11",

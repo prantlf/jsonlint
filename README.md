@@ -164,6 +164,7 @@ Usage: `jsonlint [options] [--] [<file, directory, pattern> ...]`
     --enforce-single-quotes      surrounds all strings with single quotes
     --trim-trailing-commas       omit trailing commas from objects and arrays
     --succeed-with-no-files      succeed (exit code 0) if no files were found
+    --[no-]color                 force or disable colourful output of the diff
     -v, --version                output the version number
     -h, --help                   display help for command
 
@@ -224,6 +225,7 @@ The configuration is an object with the following properties, described above, w
 | validate | |
 | environment | |
 | strict | |
+| color | |
 | log-files | logFiles |
 | quiet | |
 | continue | |
