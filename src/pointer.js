@@ -5,7 +5,7 @@ function escapePointerToken (token) {
     .replace(/\//g, '~1')
 }
 
-// eslint-disable-next-line no-unused-vars
+// biome-ignore lint/correctness/noUnusedVariables: concatenated with other files
 function pathToPointer (tokens) {
   if (tokens.length === 0) {
     return ''
@@ -21,7 +21,7 @@ function unescapePointerToken (token) {
     .replace(/~0/g, '~')
 }
 
-// eslint-disable-next-line no-unused-vars
+// biome-ignore lint/correctness/noUnusedVariables: concatenated with other files
 function pointerToPath (pointer) {
   if (pointer === '') {
     return []

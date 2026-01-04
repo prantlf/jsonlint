@@ -91,7 +91,7 @@ function getLocationOnSpiderMonkey (input, reason) {
   if (match) {
     const line = +match[1]
     const column = +match[2]
-    const offset = getOffset(input, line, column) // eslint-disable-line no-undef
+    const offset = getOffset(input, line, column)
     return {
       offset,
       line,
@@ -152,7 +152,7 @@ function improveNativeError (input, error) {
   return error
 }
 
-// eslint-disable-next-line no-unused-vars
+// biome-ignore lint/correctness/noUnusedVariables: concatenated with other files
 function parseNative (input, reviver) {
   try {
     return JSON.parse(input, reviver)

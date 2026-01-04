@@ -659,7 +659,7 @@ function parseInternal (input, options) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
+// biome-ignore lint/correctness/noUnusedVariables: concatenated with other files
 function parseCustom (input, options) {
   if (typeof options === 'function') {
     options = {
@@ -671,7 +671,7 @@ function parseCustom (input, options) {
   return parseInternal(input, options)
 }
 
-// eslint-disable-next-line no-unused-vars
+// biome-ignore lint/correctness/noUnusedVariables: concatenated with other files
 function tokenize (input, options) {
   if (!options) {
     options = {}

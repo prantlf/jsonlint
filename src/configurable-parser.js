@@ -18,7 +18,7 @@ function getReviver (options) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
+// biome-ignore lint/correctness/noUnusedVariables: concatenated with other files
 function parse (input, options) {
   options || (options = {})
   return needsCustomParser(options)

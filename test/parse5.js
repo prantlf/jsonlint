@@ -104,6 +104,7 @@ test('invalid mix', function () {
   testInvalid('{"x": 3')
   testInvalid('1); throw "foo"; (1')
 
+  // biome-ignore lint/correctness/noUnusedVariables: used in eval
   let x = 0
   eval('(1); x++; (1)')
   testInvalid('1); x++; (1')
