@@ -25,6 +25,8 @@ const { Parser: NearleyParser, Grammar: NearleyGrammar } = require('nearley')
 const nearleyJsonGrammar = require('./nearley/pure')
 const nearleyParser = new NearleyParser(NearleyGrammar.fromCompiled(nearleyJsonGrammar))
 const nearleyOrigin = nearleyParser.save()
+const { parse: parseMomoa } = require("@humanwhocodes/momoa");
+const parseJson = require("./ryan-grove/pure");
 
 const pkg = require('../package')
 const input = JSON.stringify(pkg, undefined, 2)
@@ -123,6 +125,18 @@ function parseMyna () {
   mynaParse(input)
 }
 
+function parseMomoaStandard () {
+  parseMomoa(input)
+}
+
+function parseMomoaExtended () {
+  parseMomoa(input, { mode: 'json5' })
+}
+
+function parseRyanGrove () {
+  parseJson(input)
+}
+
 createSuite(`Parsing JSON data ${input.length} characters long using`)
   .add('the built-in parser', parseBuiltIn)
   .add('the pure chevrotain parser', parsePureChevrotain)
@@ -146,4 +160,7 @@ createSuite(`Parsing JSON data ${input.length} characters long using`)
   .add('the JSON5 parser', parseJSON5)
   .add('the JSON6 parser', parseJSON6)
   .add('the Nearley parser', parseNearley)
+  .add('the standard Momoa parser', parseMomoaStandard)
+  .add('the extended Momoa parser', parseMomoaExtended)
+  .add('the Ryan Grove parser', parseRyanGrove)
   .start()

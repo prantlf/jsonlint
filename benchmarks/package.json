@@ -5,9 +5,10 @@
     "prepare": "jison -o jison/pure.js jison/pure.y jison/pure.l && jison -o jison/extended.js jison/extended.y jison/extended.l && pegjs pegjs/pure.pegjs && pegjs pegjs/extended.pegjs && nearleyc nearley/pure.ne -o nearley/pure.js"
   },
   "devDependencies": {
+    "@humanwhocodes/momoa": "^3.3.10",
     "benchmark": "2.1.4",
-    "chevrotain": "10.4.2",
-    "comment-json": "4.2.3",
+    "chevrotain": "11.1.0",
+    "comment-json": "4.5.1",
     "jison": "0.4.18",
     "json-6": "1.1.4",
     "json-to-ast": "2.1.0",

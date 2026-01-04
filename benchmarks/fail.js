@@ -8,6 +8,8 @@ const jisonParser = require('./jison/pure').parser
 const JSON5 = require('json5')
 const JSON6 = require('json-6')
 const { parse: parseWithComments } = require('comment-json')
+const { parse: parseMomoa } = require("@humanwhocodes/momoa");
+const parseRyanGrove = require("./ryan-grove/pure");
 
 const inputSources = [
   `{
@@ -257,6 +259,28 @@ function parseJSON6 () {
   }
 }
 
+function improveMomoaError (error) {
+  let { message, line, column, offset } = error
+  if (line === undefined) throw error
+  const cursor = `line ${line}, column ${column}`
+  const position = showPosition({ offset })
+  message = message.replace(/ \(\d+:\d+\)$/, '')
+  error.message = `Parse error on ${cursor}:\n${position}\n${message}`
+  throw error
+}
+
+function parseMomoaJson () {
+  try {
+    parseMomoa(inputSource)
+  } catch (error) {
+    improveMomoaError(error)
+  }
+}
+
+function parseRyanGroveJson () {
+  parseRyanGrove(inputSource)
+}
+
 for (const test of inputSources) {
   inputSource = test
   const formattedTest = test
@@ -273,6 +297,8 @@ for (const test of inputSources) {
     .add('the jison parser', parseJison)
     .add('the JSON5 parser', parseJSON5)
     .add('the JSON6 parser', parseJSON6)
+    .add('the Momoa parser', parseMomoaJson)
+    .add('the Ryan Grove parser', parseRyanGroveJson)
     .start()
   console.log()
 }

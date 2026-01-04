@@ -63,75 +63,73 @@ const allTokens = [
 const JsonLexer = new Lexer(allTokens)
 
 // ----------------- parser -----------------
-function JsonParserES5 () {
-  // invoke super constructor
-  Parser.call(this, allTokens)
+class JsonParserES5 extends Parser {
+  constructor() {
+    // invoke super constructor
+    super(allTokens)
 
-  // not mandatory, using <$> (or any other sign) to reduce verbosity (this. this. this. this. .......)
-  const $ = this
+    // not mandatory, using <$> (or any other sign) to reduce verbosity (this. this. this. this. .......)
+    const $ = this
 
-  this.RULE('json', function () {
-    // prettier-ignore
-    $.OR([
-      { ALT: function () { $.SUBRULE($.object) } },
-      { ALT: function () { $.SUBRULE($.array) } }
-    ])
-  })
-
-  this.RULE('object', function () {
-    $.CONSUME(LCurly)
-    $.MANY_SEP({
-      SEP: Comma,
-      DEF: function () {
-        $.SUBRULE2($.objectItem)
-      }
+    this.RULE('json', function () {
+      // prettier-ignore
+      $.OR([
+        { ALT: function () { $.SUBRULE($.object) } },
+        { ALT: function () { $.SUBRULE($.array) } }
+      ])
     })
-    $.CONSUME(RCurly)
-  })
 
-  this.RULE('objectItem', function () {
-    $.OR([
-      { ALT: function () { $.CONSUME(StringLiteral) } },
-      { ALT: function () { $.CONSUME(SingleQuotedStringLiteral) } }
-    ])
-    $.CONSUME(Colon)
-    $.SUBRULE($.value)
-  })
-
-  this.RULE('array', function () {
-    $.CONSUME(LSquare)
-    $.MANY_SEP({
-      SEP: Comma,
-      DEF: function () {
-        $.SUBRULE2($.value)
-      }
+    this.RULE('object', function () {
+      $.CONSUME(LCurly)
+      $.MANY_SEP({
+        SEP: Comma,
+        DEF: function () {
+          $.SUBRULE2($.objectItem)
+        }
+      })
+      $.CONSUME(RCurly)
     })
-    $.CONSUME(RSquare)
-  })
 
-  this.RULE('value', function () {
-    // prettier-ignore
-    $.OR([
-      { ALT: function () { $.CONSUME(StringLiteral) } },
-      { ALT: function () { $.CONSUME(SingleQuotedStringLiteral) } },
-      { ALT: function () { $.CONSUME(NumberLiteral) } },
-      { ALT: function () { $.SUBRULE($.object) } },
-      { ALT: function () { $.SUBRULE($.array) } },
-      { ALT: function () { $.CONSUME(True) } },
-      { ALT: function () { $.CONSUME(False) } },
-      { ALT: function () { $.CONSUME(Null) } }
-    ])
-  })
+    this.RULE('objectItem', function () {
+      $.OR([
+        { ALT: function () { $.CONSUME(StringLiteral) } },
+        { ALT: function () { $.CONSUME(SingleQuotedStringLiteral) } }
+      ])
+      $.CONSUME(Colon)
+      $.SUBRULE($.value)
+    })
 
-  // very important to call this after all the rules have been defined.
-  // otherwise the parser may not work correctly as it will lack information
-  // derived during the self analysis phase.
-  this.performSelfAnalysis()
+    this.RULE('array', function () {
+      $.CONSUME(LSquare)
+      $.MANY_SEP({
+        SEP: Comma,
+        DEF: function () {
+          $.SUBRULE2($.value)
+        }
+      })
+      $.CONSUME(RSquare)
+    })
+
+    this.RULE('value', function () {
+      // prettier-ignore
+      $.OR([
+        { ALT: function () { $.CONSUME(StringLiteral) } },
+        { ALT: function () { $.CONSUME(SingleQuotedStringLiteral) } },
+        { ALT: function () { $.CONSUME(NumberLiteral) } },
+        { ALT: function () { $.SUBRULE($.object) } },
+        { ALT: function () { $.SUBRULE($.array) } },
+        { ALT: function () { $.CONSUME(True) } },
+        { ALT: function () { $.CONSUME(False) } },
+        { ALT: function () { $.CONSUME(Null) } }
+      ])
+    })
+
+    // very important to call this after all the rules have been defined.
+    // otherwise the parser may not work correctly as it will lack information
+    // derived during the self analysis phase.
+    this.performSelfAnalysis()
+  }
 }
-
-// Using ES5 inheritance must be implemented using prototypes semantics.
-JsonParserES5.prototype = Object.create(Parser.prototype)
-JsonParserES5.prototype.constructor = JsonParserES5
 
 // ----------------- wrapping it all together -----------------
 
