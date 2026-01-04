@@ -177,8 +177,8 @@ for JSON Schema validation are "draft-04", "draft-06", "draft-07",
 with "json-schema-". JSON Type Definition can be selected by "rfc8927",
 "json-type-definition" or "jtd". If not specified, it will be "draft-07".
 
-If you specify schemas using the "-V" parameter, you will have to separate
-files to test with "--".
+If you specify multiple schemas, either separate them by comma (,) or
+use the "-V" parameter multiple times.
 
 ### Configuration
 
