@@ -425,6 +425,13 @@ declare module '@prantlf/jsonlint/lib/validator' {
      *   'json-type-definition' | 'jtd' | 'rfc8927'`
      */
     environment?: Environment
+
+    /**
+     * Enable or disable the strict schema validation mode.
+     *
+     * The default is `true`. You may need to set it to `false` to ignore some schema extensions.
+     */
+    strict?: boolean
   }
 
   /**

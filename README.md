@@ -157,6 +157,7 @@ Usage: `jsonlint [options] [--] [<file, directory, pattern> ...]`
     -P, --pretty-print-invalid   force pretty-printing even for invalid input
     -r, --trailing-newline       ensure a line break at the end of the output
     -R, --no-trailing-newline    ensure no line break at the end of the output
+    --no-strict                  disable the strict schema validation mode
     --prune-comments             omit comments from the prettified output
     --strip-object-keys          strip quotes from object keys if possible
     --enforce-double-quotes      surrounds all strings with double quotes
@@ -222,6 +223,7 @@ The configuration is an object with the following properties, described above, w
 | duplicate-keys | duplicateKeys |
 | validate | |
 | environment | |
+| strict | |
 | log-files | logFiles |
 | quiet | |
 | continue | |
@@ -312,6 +314,12 @@ If you use external definitions in multiple schemas, you have to pass an array o
 
 ```js
 const validate = compile(['string with main schema', 'string with a sub-schema'])
+```
+
+The schema is parsed in the *strict mode* by default. It'll fail with unknown schema keywords, string formats, conflicting property definitions, union types etc. You may need to relax the schema compilation by disabling the strict mode under circumstances:
+
+```js
+const validate = compile('string with JSON Schema', { environment: 'draft-2020-12', strict: false })
 ```
 
 ### Pretty-Printing
