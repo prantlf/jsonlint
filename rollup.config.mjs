@@ -12,5 +12,8 @@ export default {
     sourcemap: true,
     plugins: [minify()]
   },
-  plugins: [nodeResolve({ browser: true }), commonjs(), json()]
+  plugins: [nodeResolve({
+    preferBuiltins: false,
+    browser: true
+  }), commonjs(), json()]
 }

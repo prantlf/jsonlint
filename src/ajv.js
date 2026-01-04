@@ -6,4 +6,8 @@ import Ajv2020 from 'ajv/dist/2020'
 
 import Schema06 from 'ajv/dist/refs/json-schema-draft-06.json'
 
-export { Ajv04, Ajv07, AjvJTD, Ajv2019, Ajv2020, Schema06 }
+import Keywords from 'ajv-keywords'
+import Formats from 'ajv-formats'
+import Formats2019 from 'ajv-formats-draft2019'
+
+export { Ajv04, Ajv07, AjvJTD, Ajv2019, Ajv2020, Schema06, Keywords, Formats, Formats2019 }
