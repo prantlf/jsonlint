@@ -36,7 +36,7 @@
     "web"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22.2"
   },
   "scripts": {
     "build": "npm run compile:jsonlint && rollup -c && npm run minify && npm run compile:tests",
@@ -63,7 +63,6 @@
     "ajv-keywords": "^5.1.0",
     "cosmiconfig": "9.0.0",
     "diff": "8.0.2",
-    "fast-glob": "3.3.3",
     "picocolors": "^1.1.1"
   },
   "devDependencies": {
