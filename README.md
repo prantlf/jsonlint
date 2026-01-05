@@ -373,6 +373,32 @@ print(tokens, {
 })
 ```
 
+Pretty-printing can be also used to preserve the contents of string literal in the output. For example, the following input:
+
+```json
+{ "pattern": "^(?:\\\\x[0-9A-F]{2}|[\u0020-\u007E])+$" }
+```
+
+will be validated and printed out by default:
+
+```json
+{
+  "pattern": "^(?:\\\\x[0-9A-F]{2}|[ -~])+$"
+}
+```
+
+As you see, the escape Unicode sequences were replaced by the corresponding UTF-8 characters. While this saves space and is arguably more readable, you may have a coding standard which requires to represent some characters always by the escaped Unicode sequences. Yu can achieve it by enabling pretty-printing, which preserves the string literals in the input form. Apart from the programmatic way above, it's possible on the command line too:
+
+    jsonlint -p pattern.json
+
+resulting in the following output:
+
+```json
+{
+  "pattern": "^(?:\\\\x[0-9A-F]{2}|[\u0020-\u007E])+$"
+}
+```
+
 ### Tokenizing
 
 The method `tokenize` has the same prototype as the method [`parse`](#module-interface), but returns an array of tokens instead of the JSON object.
