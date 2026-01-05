@@ -1,5 +1,19 @@
 # Changes
 
+## [16.1.0](https://github.com/prantlf/jsonlint/compare/v16.0.0...v16.1.0) (2026-01-05)
+
+### Features
+
+* Upgrade dependencies ([3dedeec](https://github.com/prantlf/jsonlint/commit/3dedeeca3dcb605476efe630010fb66a359f2169))
+* Add ajv-formats and ajv-keywords plugins to support the latest JSON Schema drafts ([63a3b3b](https://github.com/prantlf/jsonlint/commit/63a3b3b6dd5a83d39060cdb5439dc87e75cdc650))
+* Allow disabling strict mode of schema compilation ([0d605b6](https://github.com/prantlf/jsonlint/commit/0d605b6693e81bb4ebd8e6a2234b7507aa81c7fb))
+* Print colourful JSON diff ([f9e43de](https://github.com/prantlf/jsonlint/commit/f9e43de638e42cb99fbca3c7e2c6b67522292ca1))
+* Ability to force crlf ([ca7fa7f](https://github.com/prantlf/jsonlint/commit/ca7fa7f87f044d4b4e70291e901430ce67d9ae5a))
+
+### Bug Fixes
+
+* Fix schema validation instructions ([ffa29c3](https://github.com/prantlf/jsonlint/commit/ffa29c3e05fba89c840b57deddfe8e7e8348f0b1))
+
 ## [16.0.0](https://github.com/prantlf/jsonlint/compare/v15.0.0...v16.0.0) (2024-08-09)
 
 ### Bug Fixes
