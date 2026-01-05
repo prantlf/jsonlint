@@ -508,7 +508,12 @@ declare module '@prantlf/jsonlint/lib/printer' {
     trimTrailingCommas?: boolean
 
     /**
-     * Makes sure all line breaks are CRLF.
+     * If set to `false`, will insert a line break between empty `{}` and `[]`.
+     */
+    compactEmptyObjects?: boolean
+
+    /**
+     * Make sure all line breaks are CRLF.
      */
     forceCrlf?: boolean
   }

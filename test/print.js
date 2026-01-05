@@ -155,3 +155,32 @@ test('trim trailing commas', function () {
   const output = print(stringTokens, { trimTrailingCommas: true })
   assert.equal(output, '{/* String parameter */"key":\'value\'}')
 })
+
+const emptyObjectTokens = [
+  { type: 'symbol', raw: '{', value: '{' },
+  { type: 'whitespace', raw: '\n' },
+  { type: 'literal', raw: '"object"', value: 'object' },
+  { type: 'symbol', raw: ':', value: ':' },
+  { type: 'whitespace', raw: ' ' },
+  { type: 'symbol', raw: '{', value: '{' },
+  { type: 'symbol', raw: '}', value: '}' },
+  { type: 'symbol', raw: ',', value: ',' },
+  { type: 'whitespace', raw: '\n' },
+  { type: 'literal', raw: '"array"', value: 'array' },
+  { type: 'symbol', raw: ':', value: ':' },
+  { type: 'whitespace', raw: ' ' },
+  { type: 'symbol', raw: '[', value: '[' },
+  { type: 'symbol', raw: ']', value: ']' },
+  { type: 'whitespace', raw: '\n' },
+  { type: 'symbol', raw: '}', value: '}' }
+]
+
+test('keeps compact empty objects and arrays by default', function () {
+  const output = print(emptyObjectTokens, { indent: 2 })
+  assert.equal(output, '{\n  "object": {},\n  "array": []\n}')
+})
+
+test('inserts extra line break into empty objects', function () {
+  const output = print(emptyObjectTokens, { indent: 2, compactEmptyObjects: false })
+  assert.equal(output, '{\n  "object": {\n  },\n  "array": [\n  ]\n}')
+})
