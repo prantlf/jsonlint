@@ -1,5 +1,30 @@
 # Changes
 
+## [17.0.0](https://github.com/prantlf/jsonlint/compare/v16.1.0...v17.0.0) (2026-01-05)
+
+### Features
+
+* Control line break in empty {} and [] ([a0ef54b](https://github.com/prantlf/jsonlint/commit/a0ef54b25cc17b845242bf508713f8dd60d2ad21))
+
+### Refactoring
+
+* Load native Node.js packages with node: prefix ([09fbaf1](https://github.com/prantlf/jsonlint/commit/09fbaf1b7e2e331089222c1ca2c85e98dd282fcf))
+* Replace fast-glob with node:glob ([a87f19f](https://github.com/prantlf/jsonlint/commit/a87f19f2c5ebe469c1f048c6e2e06ecea0096a94))
+
+### BREAKING CHANGES
+
+Pretty-printing will not insert a line break between
+empty `{}` and `[]` by default. Although this will probably be the
+desired output of all users, it might break some use cases, which
+dependend on the extra line break. It can be achieved again by setting
+the new option `--no-compact-empty-objects` (`compactEmptyObjects`: `false`).
+
+The minimum supported version of Node.js is 22 from now on.
+Also, any file path supplied on the command line is considered a glob
+pattern. It shouldn't break anything though.
+
+The minimum supported version of Node.js is 18 from now on.
+
 ## [16.1.0](https://github.com/prantlf/jsonlint/compare/v16.0.0...v16.1.0) (2026-01-05)
 
 ### Features
