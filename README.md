@@ -163,6 +163,7 @@ Usage: `jsonlint [options] [--] [<file, directory, pattern> ...]`
     --enforce-double-quotes      surrounds all strings with double quotes
     --enforce-single-quotes      surrounds all strings with single quotes
     --trim-trailing-commas       omit trailing commas from objects and arrays
+    --force-crlf                 makes sure all line breaks are CRLF
     --succeed-with-no-files      succeed (exit code 0) if no files were found
     --[no-]color                 force or disable colourful output of the diff
     -v, --version                output the version number
@@ -237,6 +238,7 @@ The configuration is an object with the following properties, described above, w
 | enforce-double-quotes | enforceDoubleQuotes |
 | enforce-single-quotes | enforceSingleQuotes |
 | trim-trailing-commas | trimTrailingCommas |
+| force-crlf | forceCrlf |
 
 The parameter `config` will be ignored in configuration files. The extra parameter `patterns` can be set to an array of strings with paths or patterns instead of putting them to the command line.
 
@@ -347,6 +349,7 @@ The [`print`](#pretty-printing) method accepts an object `options` as the second
 | `enforceDoubleQuotes`       | will surround all strings with double quotes            |
 | `enforceSingleQuotes`       | will surround all strings with single quotes            |
 | `trimTrailingCommas`        | will omit all trailing commas after the last object entry or array item |
+| `forceCrlf`                 | makes sure all line breaks are CRLF |
 
 ```js
 // Just concatenate the tokens to produce the same output as was the input.
@@ -371,6 +374,8 @@ print(tokens, {
   enforceDoubleQuotes: true,
   trimTrailingCommas: true
 })
+// Same as `print(tokens, {})`, but uses \r\n for line breaks.
+print(tokens, { forceCrlf: true })
 ```
 
 Pretty-printing can be also used to preserve the contents of string literal in the output. For example, the following input:
