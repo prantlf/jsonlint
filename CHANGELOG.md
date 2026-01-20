@@ -1,5 +1,11 @@
 # Changes
 
+## [17.0.1](https://github.com/prantlf/jsonlint/compare/v17.0.0...v17.0.1) (2026-01-20)
+
+### Bug Fixes
+
+* Upgrade dependencies ([afd41a8](https://github.com/prantlf/jsonlint/commit/afd41a87f1baa2c459e2f9027f147914ee124225))
+
 ## [17.0.0](https://github.com/prantlf/jsonlint/compare/v16.1.0...v17.0.0) (2026-01-05)
 
 ### Features
