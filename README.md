@@ -34,6 +34,8 @@ Integration to the favourite task loaders for JSON file validation is provided b
 * [`Gulp`] - see [`@prantlf/gulp-jsonlint`]
 * [`Rollup`] - see [`rollup-plugin-jsonlint`]
 
+For CI/CD pipelines, [MegaLinter](https://megalinter.io/) - an open-source linters aggregator - runs `jsonlint` on JSON files [out of the box](https://megalinter.io/latest/descriptors/json_jsonlint/).
+
 ## Synopsis
 
 Check syntax of JSON files:
